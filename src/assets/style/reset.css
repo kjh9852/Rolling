@@ -24,10 +24,9 @@
   padding: 0;
   list-style: none;
   text-decoration: none;
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
-    'Malgun Gothic', 'Apple Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    sans-serif;
+  font-family: Pretendard, 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR',
+    NanumGothic, 'Malgun Gothic', 'Segoe UI', 'Apple SD Gothic Neo',
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
 
 html {
