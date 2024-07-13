@@ -69,7 +69,7 @@ figcaption {
 
 /* a 링크 초기화 */
 a {
-   #222;
+  color: #222;
   text-decoration: none;
 }
 /* 폰트 스타일 초기화 */
@@ -133,31 +133,31 @@ input::-webkit-inner-spin-button {
   --purple800: #6e0ad1;
   --purple900: #5603a7;
 
-  --beige100: #FFF0D6;
-  --beige200: #FFE2AD;
-  --beige300: #FFC583;
-  --beige400: #FFAE65;
-  --beige500: #FF8832;
+  --beige100: #fff0d6;
+  --beige200: #ffe2ad;
+  --beige300: #ffc583;
+  --beige400: #ffae65;
+  --beige500: #ff8832;
 
-  --blue100: #E2F5FF;
-  --blue200: #B1E4FF;
-  --blue300: #7CD2FF;
-  --blue400: #34B9FF;
-  --blue500: #00A2FE;
+  --blue100: #e2f5ff;
+  --blue200: #b1e4ff;
+  --blue300: #7cd2ff;
+  --blue400: #34b9ff;
+  --blue500: #00a2fe;
 
-  --green100: #E4FBDC;
-  --green200: #D0F5C3;
-  --green300: #9BE282;
-  --green400: #60CF37;
-  --green500: #2BA600;
+  --green100: #e4fbdc;
+  --green200: #d0f5c3;
+  --green300: #9be282;
+  --green400: #60cf37;
+  --green500: #2ba600;
 
-  --gary100: #F6F6F6;
-  --gary200: #EEEEEE;
-  --gary300: #CCCCCC;
+  --gary100: #f6f6f6;
+  --gary200: #eeeeee;
+  --gary300: #cccccc;
   --gary400: #999999;
   --gary500: #555555;
-  --gary600: #4A4A4A;
-  --gary700: #3A3A3A;
-  --gary800: #2B2B2B;
+  --gary600: #4a4a4a;
+  --gary700: #3a3a3a;
+  --gary800: #2b2b2b;
   --gary900: #181818;
 }
