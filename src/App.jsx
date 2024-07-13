@@ -1,15 +1,15 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import RootLayout from './router/RootLayout';
-import LandingPage from './pages/LandingPage';
-import ListPage from './pages/ListPage';
-import PostPage from './pages/PostPage';
-import PostEditPage from './pages/PostEditPage';
-import AddMessagePage from './pages/AddMessagePage';
-import PostDetailPage from './pages/PostDetailPage';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./router/RootLayout";
+import LandingPage from "./pages/LandingPage";
+import ListPage from "./pages/ListPage";
+import PostPage from "./pages/PostPage";
+import PostEditPage from "./pages/PostEditPage";
+import AddMessagePage from "./pages/AddMessagePage";
+import PostDetailPage from "./pages/PostDetailPage";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <RootLayout />,
     children: [
       {
@@ -17,23 +17,23 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        path: 'list',
+        path: "list",
         element: <ListPage />,
       },
       {
-        path: 'post',
+        path: "post",
         element: <PostPage />,
       },
       {
-        path: 'post/:id',
+        path: "post/:id",
         element: <PostDetailPage />,
       },
       {
-        path: 'post/:id/edit',
+        path: "post/:id/edit",
         element: <PostEditPage />,
       },
       {
-        path: 'post/:id/message',
+        path: "post/:id/message",
         element: <AddMessagePage />,
       },
     ],
