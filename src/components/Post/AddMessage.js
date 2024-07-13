@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Select from "../Select/Select";
 
 function AddMessage() {
 
@@ -45,6 +46,7 @@ function AddMessage() {
             </InputContainer>
             <InputContainer>
                 <Title>상대와의 관계</Title>
+                <Select></Select>
             </InputContainer>
             <InputContainer>
                 <Title>내용을 입력해 주세요</Title>
