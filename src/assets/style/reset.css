@@ -26,7 +26,7 @@
   text-decoration: none;
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
     'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR',
-    'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Malgun Gothic', 'Apple Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     sans-serif;
 }
 
@@ -69,7 +69,7 @@ figcaption {
 
 /* a 링크 초기화 */
 a {
-  color: #222;
+   #222;
   text-decoration: none;
 }
 /* 폰트 스타일 초기화 */
@@ -115,4 +115,49 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --error: #dc3a3a;
+  --surface: #f6f8ff;
+
+  --purple100: #f8f0ff;
+  --purple200: #ecd9ff;
+  --purple300: #dcb9ff;
+  --purple400: #c894fd;
+  --purple500: #ab57ff;
+  --purple600: #9935ff;
+  --purple700: #861dee;
+  --purple800: #6e0ad1;
+  --purple900: #5603a7;
+
+  --beige100: #FFF0D6;
+  --beige200: #FFE2AD;
+  --beige300: #FFC583;
+  --beige400: #FFAE65;
+  --beige500: #FF8832;
+
+  --blue100: #E2F5FF;
+  --blue200: #B1E4FF;
+  --blue300: #7CD2FF;
+  --blue400: #34B9FF;
+  --blue500: #00A2FE;
+
+  --green100: #E4FBDC;
+  --green200: #D0F5C3;
+  --green300: #9BE282;
+  --green400: #60CF37;
+  --green500: #2BA600;
+
+  --gary100: #F6F6F6;
+  --gary200: #EEEEEE;
+  --gary300: #CCCCCC;
+  --gary400: #999999;
+  --gary500: #555555;
+  --gary600: #4A4A4A;
+  --gary700: #3A3A3A;
+  --gary800: #2B2B2B;
+  --gary900: #181818;
 }
