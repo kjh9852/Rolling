@@ -2,21 +2,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logoImg from '../assets/image/logo.png';
 
-export default function Header() {
-  return (
-    <HeaderContainer>
-      <Navigation>
-        <div>
-          <Link to="/">
-            <img src={logoImg} alt="롤링 로고" />
-          </Link>
-        </div>
-        <Link to="/">롤링 페이퍼 만들기</Link>
-      </Navigation>
-    </HeaderContainer>
-  );
-}
-
 const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
@@ -41,3 +26,18 @@ const Navigation = styled.nav`
     padding: 0 16px;
   }
 `;
+
+export default function Header() {
+  return (
+    <HeaderContainer>
+      <Navigation>
+        <div>
+          <Link to="/">
+            <img src={logoImg} alt="롤링 로고" />
+          </Link>
+        </div>
+        <Link to="/">롤링 페이퍼 만들기</Link>
+      </Navigation>
+    </HeaderContainer>
+  );
+}

@@ -12,6 +12,7 @@ const UserInfo = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `;
+
 export default function UserHeader() {
   return (
     <UserContainer>
