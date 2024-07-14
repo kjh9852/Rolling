@@ -18,7 +18,13 @@ export default function Header() {
 }
 
 const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   border-bottom: 1px solid #ededed;
+  background: var(--white);
 `;
 
 const Navigation = styled.nav`
@@ -28,10 +34,10 @@ const Navigation = styled.nav`
   max-width: 1200px;
   height: 65px;
   margin: 0 auto;
-  @media (max-width: 768px) {
+  @media (max-width: 1248px) {
     padding: 0 24px;
   }
-  @media (max-width: 360px) {
+  @media (max-width: 640px) {
     padding: 0 16px;
   }
 `;
