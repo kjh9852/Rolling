@@ -11,7 +11,7 @@ function Select() {
     align-items: center;
     width: 320px;
     height: 50px;
-    border: 1px solid #CCCCCC;
+    border: 1px solid var(--gray300);
     padding: 12px 16px;
     border-radius: 8px;
     box-sizing: border-box;
@@ -33,9 +33,9 @@ function Select() {
     position: absolute;
     margin-top: 95px;
     width: 318px;
-    border: 1px solid #CCCCCC;
+    border: 1px solid var(--gray300);
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: var(--white);
 
 `;
 
@@ -45,7 +45,7 @@ function Select() {
     font-weight: 400;
     
     &:hover {
-        background-color: #F6F6F6;
+        background-color: var(--gray100);
         cursor: pointer;
     }
 `;
@@ -67,8 +67,7 @@ function Select() {
         <>
             <Select onClick={toggleOptions}>
                 <Selected>{selectedOption}</Selected>
-
-                <Image src={arrowDown}></Image>
+                <Image src={isOpen ? arrowTop : arrowDown}></Image>
             </Select>
 
             {isOpen && <Options>
