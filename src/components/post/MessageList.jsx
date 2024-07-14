@@ -4,6 +4,7 @@ import Card from '../common/Card';
 const UserName = styled.article``;
 const CreateDate = styled.div``;
 const ListCard = styled(Card)``;
+// 데이터 받아 온 후 추가예정
 
 export default function MessageList({ userName }) {
   return (
