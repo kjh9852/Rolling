@@ -91,6 +91,7 @@ const StartButton = styled.button`
   justify-content: center;
   align-items: center;
   padding: 14px 60px;
+  margin-bottom: 174px;
   width: 280px;
   height: 56px;
   background-color: var(--purple600);
