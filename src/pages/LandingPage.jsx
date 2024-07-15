@@ -1,3 +1,5 @@
+import Section from '../components/common/Section';
+
 export default function LandingPage() {
-  return <h1>LandingPage</h1>;
+  return <Section>LandingPage</Section>;
 }
