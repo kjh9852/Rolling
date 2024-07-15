@@ -10,6 +10,7 @@ const HeaderContainer = styled.header`
   width: 100%;
   border-bottom: 1px solid #ededed;
   background: var(--white);
+  z-index: 1000;
 `;
 
 const Navigation = styled.nav`
@@ -32,11 +33,11 @@ export default function Header() {
     <HeaderContainer>
       <Navigation>
         <div>
-          <Link to="/">
-            <img src={logoImg} alt="롤링 로고" />
+          <Link to='/'>
+            <img src={logoImg} alt='롤링 로고' />
           </Link>
         </div>
-        <Link to="/">롤링 페이퍼 만들기</Link>
+        <Link to='/'>롤링 페이퍼 만들기</Link>
       </Navigation>
     </HeaderContainer>
   );
