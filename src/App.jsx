@@ -10,7 +10,7 @@ import PostDetailPage from './pages/PostDetailPage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <RootLayout />,
     children: [
       {
@@ -18,14 +18,15 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        path: 'list',
+        path: "list",
         element: <ListPage />,
       },
       {
-        path: 'post',
+        path: "post",
         element: <PostPage />,
       },
       {
+
         path: 'post/:id',
         element: <UserLayout />,
         children: [
@@ -38,9 +39,10 @@ const router = createBrowserRouter([
             element: <PostEditPage />,
           },
         ],
+
       },
       {
-        path: 'post/:id/message',
+        path: "post/:id/message",
         element: <AddMessagePage />,
       },
     ],
