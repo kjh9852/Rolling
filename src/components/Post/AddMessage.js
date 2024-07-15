@@ -4,6 +4,7 @@ import Select from "../Select/Select";
 import Section from "../common/Section";
 import NameInput from "../Input/NameInput";
 import ContentArea from "../TextArea/ContentArea";
+import ProfileImageList from "../ProfileImageList/ProfileImageList";
 import { getProfileImage } from "../../util/api";
 
 const Container = styled.form`
@@ -26,22 +27,6 @@ display: flex;
 gap: 32px;
 `;
 
-const ImageContainer = styled.div`
-display: flex;
-flex-direction: column;
-gap:12px;
-`;
-
-const ImageLabel = styled.label`
-font-size: 16px;
-font-weight: 400;
-color: var(--gray500);
-`;
-
-const Images = styled.div`
-display: flex;
-`;
-
 const Title = styled.label`
 font-size: 24px;
 font-weight:700;
@@ -62,10 +47,6 @@ function AddMessage() {
         handleLoad();
     }, []);
 
-    useEffect(() => {
-        console.log(profileItem);
-    }, [profileItem])
-
     return (
         <Section>
             <Container>
@@ -76,16 +57,7 @@ function AddMessage() {
                 <InputContainer>
                     <Title>프로필 이미지</Title>
                     <InputImageContainer>
-                        <img src={profileItem[0]} alt="프로필 이미지" />
-                        <ImageContainer>
-                            <ImageLabel>프로필 이미지를 선택해주세요!</ImageLabel>
-                            <Images>
-                                {profileItem.map((profile, index) => (
-                                    <img key={index} src={profile} />
-                                ))
-                                }
-                            </Images>
-                        </ImageContainer>
+                        <ProfileImageList items={profileItem}></ProfileImageList>
                     </InputImageContainer>
                 </InputContainer>
                 <InputContainer>
