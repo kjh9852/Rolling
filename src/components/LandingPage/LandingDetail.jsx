@@ -103,6 +103,7 @@ const StartButton = styled.button`
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--purple700);
