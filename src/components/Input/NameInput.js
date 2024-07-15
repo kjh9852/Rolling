@@ -11,10 +11,10 @@ font-weight:400;
 line-height:26px;
     `;
 
-function NameInput({ placeholder }) {
+function NameInput({ placeholder, onChange }) {
 
     return (
-        <Input id="name" name="name" type="text" placeholder={placeholder} />
+        <Input id="name" name="name" type="text" placeholder={placeholder} onChange={onChange} />
     )
 
 }

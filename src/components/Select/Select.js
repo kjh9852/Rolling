@@ -47,14 +47,14 @@ font-weight: 400;
 }
 `;
 
-function Select({ options, initialSelected }) {
+function Select({ options }) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(options[0]);
 
 
     const toggleOptions = () => {
-        setIsOpen(!isOpen);
+        setIsOpen((prevIsOpen) => !prevIsOpen);
     };
 
     const handleOptionClick = (option) => {

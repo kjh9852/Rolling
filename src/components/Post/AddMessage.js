@@ -37,7 +37,11 @@ function AddMessage() {
     const fontOptions = ['Noto Sans', '폰트2'];
 
     const [profileItem, setProfileItem] = useState([]);
+    const [name, setName] = useState('');
 
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+    };
     const handleLoad = async () => {
         const { imageUrls } = await getProfileImage();
         setProfileItem(imageUrls);
@@ -52,7 +56,7 @@ function AddMessage() {
             <Container>
                 <InputContainer>
                     <Title>From.</Title>
-                    <NameInput placeholder="이름을 입력해주세요."></NameInput>
+                    <NameInput placeholder="이름을 입력해주세요." onChange={handleNameChange} />
                 </InputContainer>
                 <InputContainer>
                     <Title>프로필 이미지</Title>

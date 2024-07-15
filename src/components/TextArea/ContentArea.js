@@ -1,41 +1,65 @@
-import styled from "styled-components";
+import React, {
+    useMemo,
+    useState,
+    useRef
+} from 'react';
+import ReactQuill from 'react-quill';
 
-const Content = styled.div`
-width: 720px;
-height: 260px;
-`;
+import 'react-quill/dist/quill.snow.css';
 
-const ContentMenu = styled.div`
-width: 720px;
-height: 49px;
-background-color: var(--gray300);
-border-top-left-radius: 8px;
-border-top-right-radius: 8px;
-`;
+const formats = [
+    'font',
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'align',
+    'color',
+    'background',
+    'size',
+    'h1',
+];
 
-const ContentTextArea = styled.textarea`
-width: 720px;
-height: 211px;
-border: 1px solid var(--gray300);
-border-top: none;
-resize: none;
-border-bottom-left-radius: 8px;
-border-bottom-right-radius: 8px;
-`;
 function ContentArea() {
+
+
+    const quillRef = useRef(null);
+    const [values, setValues] = useState();
+
+    const modules = useMemo(() => {
+        return {
+            toolbar: {
+                container: [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ align: [] }],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    [
+                        {
+                            color: [],
+                        },
+                        { background: [] },
+                    ],
+                ],
+            },
+        };
+    }, []);
+
     return (
-        <Content>
-            <ContentMenu>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-
-            </ContentMenu>
-            <ContentTextArea></ContentTextArea>
-        </Content>
+        <ReactQuill
+            ref={quillRef}
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            onChange={setValues}
+            style={{ width: '100%', height: '200px', marginBottom: '50px' }}
+        />
     )
-
 }
 
 export default ContentArea;
