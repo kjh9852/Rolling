@@ -150,13 +150,13 @@ input::-webkit-inner-spin-button {
   --green400: #60cf37;
   --green500: #2ba600;
 
-  --gary100: #f6f6f6;
-  --gary200: #eeeeee;
-  --gary300: #cccccc;
-  --gary400: #999999;
-  --gary500: #555555;
-  --gary600: #4a4a4a;
-  --gary700: #3a3a3a;
-  --gary800: #2b2b2b;
-  --gary900: #181818;
+  --gray100: #f6f6f6;
+  --gray200: #eeeeee;
+  --gray300: #cccccc;
+  --gray400: #999999;
+  --gray500: #555555;
+  --gray600: #4a4a4a;
+  --gray700: #3a3a3a;
+  --gray800: #2b2b2b;
+  --gray900: #181818;
 }
