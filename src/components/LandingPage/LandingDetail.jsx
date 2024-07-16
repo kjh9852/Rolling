@@ -123,7 +123,7 @@ export default function LandingDetail() {
         <IntroSection>
           <PointBox>Point. 01</PointBox>
           <Title>
-            누구나 손쉽게,온라인
+            누구나 손쉽게, 온라인
             <br />
             롤링 페이퍼를 만들 수 있어요
           </Title>
