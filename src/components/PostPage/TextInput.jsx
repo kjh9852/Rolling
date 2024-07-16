@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Wrap = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ const TextInput = ({ label, placeholder, value, onChange }) => {
     <Wrap>
       <Label>{label}</Label>
       <Input
-        type="text"
+        type='text'
         placeholder={placeholder}
         value={value}
         onChange={onChange}

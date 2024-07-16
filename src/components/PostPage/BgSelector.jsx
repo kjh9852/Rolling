@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import ColorOption from "./ColorOption";
-import ImageOption from "./ImageOption";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import ColorOption from './ColorOption';
+import ImageOption from './ImageOption';
 
 const BgWrap = styled.div`
   width: 100%;
@@ -24,11 +24,11 @@ const Description = styled.p`
 `;
 
 const TabButton = styled.button`
-  background: ${({ active }) => (active ? "var(--white)" : "var(--gray100)")};
+  background: ${({ active }) => (active ? 'var(--white)' : 'var(--gray100)')};
   border: 2px solid
-    ${({ active }) => (active ? "var(--purple700)" : "var(--gray100)")};
-  color: ${({ active }) => (active ? "var(--purple700)" : "var(--gray900)")};
-  font-weight: ${({ active }) => (active ? "700" : "400")};
+    ${({ active }) => (active ? 'var(--purple700)' : 'var(--gray100)')};
+  color: ${({ active }) => (active ? 'var(--purple700)' : 'var(--gray900)')};
+  font-weight: ${({ active }) => (active ? '700' : '400')};
   width: 120px;
   padding: 10px 20px;
   margin: 0 5px;
@@ -47,14 +47,14 @@ const OptionsWrapper = styled.div`
 `;
 
 const BgSelector = () => {
-  const [checkedTab, setCheckedTab] = useState("color");
-  const [selectedColor, setSelectedColor] = useState("var(--beige200)");
+  const [checkedTab, setCheckedTab] = useState('color');
+  const [selectedColor, setSelectedColor] = useState('var(--beige200)');
 
   const colors = [
-    "var(--beige200)",
-    "var(--purple200)",
-    "var(--blue200)",
-    "var(--green200)",
+    'var(--beige200)',
+    'var(--purple200)',
+    'var(--blue200)',
+    'var(--green200)',
   ];
 
   return (
@@ -63,20 +63,20 @@ const BgSelector = () => {
       <Description>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</Description>
       <TabWrap>
         <TabButton
-          active={checkedTab === "color"}
-          onClick={() => setCheckedTab("color")}
+          active={checkedTab === 'color'}
+          onClick={() => setCheckedTab('color')}
         >
           컬러
         </TabButton>
         <TabButton
-          active={checkedTab === "image"}
-          onClick={() => setCheckedTab("image")}
+          active={checkedTab === 'image'}
+          onClick={() => setCheckedTab('image')}
         >
           이미지
         </TabButton>
       </TabWrap>
       <OptionsWrapper>
-        {checkedTab === "color" &&
+        {checkedTab === 'color' &&
           colors.map((color, index) => (
             <ColorOption
               key={index}
@@ -85,7 +85,7 @@ const BgSelector = () => {
               onClick={() => setSelectedColor(color)}
             />
           ))}
-        {checkedTab === "image" && <ImageOption />}
+        {checkedTab === 'image' && <ImageOption />}
       </OptionsWrapper>
     </BgWrap>
   );
