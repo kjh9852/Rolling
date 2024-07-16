@@ -67,7 +67,7 @@ const PointBox = styled.div`
   line-height: 20px;
 `;
 
-const Title = styled.div`
+const Title = styled.h2`
   margin-top: 16px;
   margin-bottom: 8px;
   font-weight: 700;
@@ -77,7 +77,7 @@ const Title = styled.div`
   color: var(--gray900);
 `;
 
-const SubTitle = styled.div`
+const SubTitle = styled.h3`
   font-weight: 400;
   font-size: 18px;
   line-height: 28px;
@@ -86,9 +86,6 @@ const SubTitle = styled.div`
 `;
 
 const StartButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 14px 60px;
   margin-bottom: 174px;
   width: 280px;
@@ -99,9 +96,7 @@ const StartButton = styled.button`
   letter-spacing: -0.01em;
   color: var(--white);
   border-radius: 12px;
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: background-color 0.3s ease;
   cursor: pointer;
 
   &:hover {
