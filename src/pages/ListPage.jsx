@@ -1,3 +1,5 @@
+import ListDetail from '../components/ListPage/ListDetail';
+
 export default function ListPage() {
-  return <h1>ListPage</h1>;
+  return <ListDetail />;
 }
