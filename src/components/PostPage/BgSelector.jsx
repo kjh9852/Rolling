@@ -49,6 +49,7 @@ const OptionsWrapper = styled.div`
 const BgSelector = () => {
   const [checkedTab, setCheckedTab] = useState('color');
   const [selectedColor, setSelectedColor] = useState('var(--beige200)');
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const colors = [
     'var(--beige200)',
@@ -57,6 +58,10 @@ const BgSelector = () => {
     'var(--green200)',
   ];
 
+  const handleTabClick = (tab) => {
+    setCheckedTab(tab);
+  };
+
   return (
     <BgWrap>
       <Title>배경화면을 선택해 주세요.</Title>
@@ -64,13 +69,13 @@ const BgSelector = () => {
       <TabWrap>
         <TabButton
           active={checkedTab === 'color'}
-          onClick={() => setCheckedTab('color')}
+          onClick={() => handleTabClick('color')}
         >
           컬러
         </TabButton>
         <TabButton
           active={checkedTab === 'image'}
-          onClick={() => setCheckedTab('image')}
+          onClick={() => handleTabClick('image')}
         >
           이미지
         </TabButton>
@@ -85,7 +90,12 @@ const BgSelector = () => {
               onClick={() => setSelectedColor(color)}
             />
           ))}
-        {checkedTab === 'image' && <ImageOption />}
+        {checkedTab === 'image' && (
+          <ImageOption
+            selectedImage={selectedImage}
+            onSelect={setSelectedImage}
+          />
+        )}
       </OptionsWrapper>
     </BgWrap>
   );

@@ -18,7 +18,7 @@ const CheckingMark = styled.div`
   display: ${(props) => (props.selected ? 'block' : 'none')};
   width: 44px;
   height: 44px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--gray500);
   border-radius: 50%;
   position: absolute;
   top: 62px;
