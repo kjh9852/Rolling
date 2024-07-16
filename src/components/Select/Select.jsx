@@ -46,7 +46,7 @@ const Option = styled.li`
   }
 `;
 
-function Select({ options }) {
+function Select({ options, type, onRelationShipSelect, onFontSelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
@@ -57,6 +57,12 @@ function Select({ options }) {
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
+
+    if (type === 'relationship') {
+      onRelationShipSelect(option);
+    } else if (type === 'font') {
+      onFontSelect(option);
+    }
   };
 
   return (

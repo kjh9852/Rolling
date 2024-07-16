@@ -32,13 +32,27 @@ const Title = styled.label`
   font-weight: 700;
 `;
 
+const SubmitButton = styled.button`
+  width: 720px;
+  height: 56px;
+  background-color: var(--purple600);
+  border-radius: 12px;
+  font-size: 18px;
+  color: var(--white);
+`;
+
 function AddMessage() {
-  const relationshipOptions = ['지인', '친구', '동료', '가족'];
+  const relationShipOptions = ['지인', '친구', '동료', '가족'];
   const fontOptions = ['Noto Sans', '폰트2'];
 
   const [profileItem, setProfileItem] = useState([]);
   const [name, setName] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(
+    'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png'
+  );
+  const [relationShip, setRelationShip] = useState(relationShipOptions[0]);
+  const [font, setFont] = useState(fontOptions[0]);
+  const [content, setContent] = useState('');
 
   const handleLoad = async () => {
     const { imageUrls } = await getProfileImage();
@@ -49,18 +63,24 @@ function AddMessage() {
     setName(e.target.value);
   };
 
-  const handleImageSelect = (src) => {
-    console.log('Selected image URL:', src); // 선택한 이미지 받아오기
-    setImage(src);
-  };
-
   useEffect(() => {
     handleLoad();
   }, []);
 
   useEffect(() => {
-    console.log(name);
-  }, [name]); // 삭제 예정 데이터확인 NameInput
+    console.log(
+      'name :',
+      name,
+      'content :',
+      content,
+      'image :',
+      image,
+      'relationShip :',
+      relationShip,
+      'font :',
+      font
+    );
+  }, [name, content, image, relationShip, font]); // 삭제 예정 데이터확인 NameInput
 
   return (
     <Section>
@@ -78,23 +98,33 @@ function AddMessage() {
           <InputImageContainer>
             <ProfileImageList
               items={profileItem}
-              onImageSelect={handleImageSelect}
+              onImageSelect={setImage}
             ></ProfileImageList>
           </InputImageContainer>
         </InputContainer>
         <InputContainer>
           <Title>상대와의 관계</Title>
-          <Select options={relationshipOptions} />
+          <Select
+            options={relationShipOptions}
+            type='relationship'
+            onRelationShipSelect={setRelationShip}
+            onFontSelect={() => {}}
+          />
         </InputContainer>
         <InputContainer>
           <Title>내용을 입력해 주세요</Title>
-          <ContentArea></ContentArea>
+          <ContentArea onChange={setContent} value={content} />
         </InputContainer>
         <InputContainer>
           <Title>폰트 선택</Title>
-          <Select options={fontOptions} />
+          <Select
+            options={fontOptions}
+            type='font'
+            onRelationShipSelect={() => {}}
+            onFontSelect={setFont}
+          />
         </InputContainer>
-        <button>생성하기</button>
+        <SubmitButton type='submit'>생성하기</SubmitButton>
       </Container>
     </Section>
   );

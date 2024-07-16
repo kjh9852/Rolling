@@ -42,7 +42,7 @@ function ProfileImageList({ items, onImageSelect }) {
 
   const handleImageSelect = (src) => {
     setSelectedSrc(src);
-    onImageSelect(src); // 콜백
+    onImageSelect(src);
   };
 
   useEffect(() => {

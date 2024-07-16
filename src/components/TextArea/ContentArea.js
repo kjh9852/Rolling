@@ -1,6 +1,5 @@
 import React, {
     useMemo,
-    useState,
     useRef
 } from 'react';
 import ReactQuill from 'react-quill';
@@ -26,12 +25,12 @@ const formats = [
     'h1',
 ];
 
-function ContentArea() {
-
+function ContentArea({ onChange, value }) {
 
     const quillRef = useRef(null);
-    const [values, setValues] = useState();
-
+    const handleChange = (e) => {
+        onChange(e);
+    }
     const modules = useMemo(() => {
         return {
             toolbar: {
@@ -56,7 +55,8 @@ function ContentArea() {
             theme="snow"
             modules={modules}
             formats={formats}
-            onChange={setValues}
+            onChange={handleChange}
+            value={value}
             style={{ width: '100%', height: '200px', marginBottom: '50px' }}
         />
     )
