@@ -1,117 +1,85 @@
-import styled from 'styled-components';
-import Select from '../Select/Select';
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import Select from "../Select/Select";
+import Section from "../common/Section";
+import NameInput from "../Input/NameInput";
+import ContentArea from "../TextArea/ContentArea";
+import ProfileImageList from "../ProfileImageList/ProfileImageList";
+import { getProfileImage } from "../../util/api";
+
+const Container = styled.form`
+display:flex;
+flex-direction: column;
+align-items: center;
+gap:50px;
+padding-top: 112px;
+`;
+
+const InputContainer = styled.div`
+display:flex;
+width: 720px; 
+flex-direction: column;
+gap:12px;
+`;
+
+const InputImageContainer = styled.div`
+display: flex;
+gap: 32px;
+`;
+
+const Title = styled.label`
+font-size: 24px;
+font-weight:700;
+`;
 
 function AddMessage() {
-  const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
-    padding-top: 112px;
-  `;
+    const relationshipOptions = ['지인', '친구', '동료', '가족'];
+    const fontOptions = ['Noto Sans', '폰트2'];
 
-  const InputContainer = styled.div`
-    display: flex;
-    width: 720px;
-    flex-direction: column;
-    gap: 12px;
-  `;
+    const [profileItem, setProfileItem] = useState([]);
+    const [name, setName] = useState('');
 
-  const InputImageContainer = styled.div`
-    display: flex;
-    gap: 32px;
-  `;
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+    };
+    const handleLoad = async () => {
+        const { imageUrls } = await getProfileImage();
+        setProfileItem(imageUrls);
+    }
 
-  const ImageCantainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  `;
+    useEffect(() => {
+        handleLoad();
+    }, []);
 
-  const ImageLabel = styled.label`
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--gray500);
-  `;
-
-  const Title = styled.label`
-    font-size: 24px;
-    font-weight: 700;
-  `;
-
-  const Input = styled.input`
-    width: 720px;
-    height: 50px;
-    border: 1px solid var(--gray300);
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 26px;
-  `;
-
-  const Content = styled.div`
-    width: 720px;
-    height: 260px;
-  `;
-
-  const ContentMunu = styled.div`
-    width: 720px;
-    height: 49px;
-    background-color: var(--gray300);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  `;
-
-  const ContentTextArea = styled.textarea`
-    width: 720px;
-    height: 211px;
-    border: 1px solid var(--gray300);
-    border-top: none;
-    resize: none;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-  `;
-
-  return (
-    <Container>
-      <InputContainer>
-        <Title>From.</Title>
-        <Input
-          id='name'
-          name='name'
-          type='text'
-          placeholder='이름을 입력해주세요.'
-        ></Input>
-      </InputContainer>
-      <InputContainer>
-        <Title>프로필 이미지</Title>
-        <InputImageContainer>
-          <img src='' alt='프로필 이미지' />
-          <ImageCantainer>
-            <ImageLabel>프로필 이미지를 선택해주세요!</ImageLabel>
-            <img src='' alt='프로필 이미지' />
-          </ImageCantainer>
-        </InputImageContainer>
-      </InputContainer>
-      <InputContainer>
-        <Title>상대와의 관계</Title>
-        <Select></Select>
-      </InputContainer>
-      <InputContainer>
-        <Title>내용을 입력해 주세요</Title>
-        <Content>
-          <ContentMunu></ContentMunu>
-          <ContentTextArea></ContentTextArea>
-        </Content>
-      </InputContainer>
-      <InputContainer>
-        <Title>폰트 선택</Title>
-        <Select></Select>
-      </InputContainer>
-      <button>생성하기</button>
-    </Container>
-  );
+    return (
+        <Section>
+            <Container>
+                <InputContainer>
+                    <Title>From.</Title>
+                    <NameInput placeholder="이름을 입력해주세요." onChange={handleNameChange} />
+                </InputContainer>
+                <InputContainer>
+                    <Title>프로필 이미지</Title>
+                    <InputImageContainer>
+                        <ProfileImageList items={profileItem}></ProfileImageList>
+                    </InputImageContainer>
+                </InputContainer>
+                <InputContainer>
+                    <Title>상대와의 관계</Title>
+                    <Select options={relationshipOptions} />
+                </InputContainer>
+                <InputContainer>
+                    <Title>내용을 입력해 주세요</Title>
+                    <ContentArea></ContentArea>
+                </InputContainer>
+                <InputContainer>
+                    <Title>폰트 선택</Title>
+                    <Select options={fontOptions} />
+                </InputContainer>
+                <button>생성하기</button>
+            </Container >
+        </Section>
+    )
 }
 
 export default AddMessage;
