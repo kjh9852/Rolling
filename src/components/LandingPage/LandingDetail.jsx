@@ -3,6 +3,12 @@ import Section from '../common/Section';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
 
+const LandingSection = styled(Section)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const Card1 = styled.div`
   width: 100%;
   height: 324px;
@@ -112,7 +118,7 @@ const StartButton = styled.button`
 
 export default function LandingDetail() {
   return (
-    <Section>
+    <LandingSection>
       <Card1>
         <IntroSection>
           <PointBox>Point. 01</PointBox>
@@ -138,6 +144,6 @@ export default function LandingDetail() {
         </IntroSection>
       </Card2>
       <StartButton>구경해보기</StartButton>
-    </Section>
+    </LandingSection>
   );
 }
