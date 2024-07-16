@@ -10,6 +10,7 @@ const HeaderContainer = styled.header`
   width: 100%;
   border-bottom: 1px solid #ededed;
   background: var(--white);
+  z-index: 1000;
 `;
 
 const Navigation = styled.nav`
