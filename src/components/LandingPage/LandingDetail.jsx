@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import '../../assets/style/reset.css';
 import Section from '../common/Section';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
