@@ -8,6 +8,7 @@ const PageWrap = styled.div`
   padding-top: 60px;
   max-width: 720px;
   margin: 0 auto;
+  margin-top: 60px;
 `;
 
 const AddPost = () => {
