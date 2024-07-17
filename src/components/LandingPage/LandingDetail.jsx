@@ -120,7 +120,7 @@ export default function LandingDetail() {
         <IntroSection>
           <PointBox>Point. 01</PointBox>
           <Title>
-            누구나 손쉽게,온라인
+            누구나 손쉽게, 온라인
             <br />
             롤링 페이퍼를 만들 수 있어요
           </Title>
@@ -140,7 +140,7 @@ export default function LandingDetail() {
           <SubTitle>롤링 페이퍼에 이모지를 추가할 수 있어요.</SubTitle>
         </IntroSection>
       </Card2>
-      <StartButton to='/list'>구경해보기</StartButton>
+      <StartButton>구경해보기</StartButton>
     </LandingSection>
   );
 }
