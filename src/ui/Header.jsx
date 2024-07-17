@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import OutlineBtn from '../components/common/OutlineBtn';
 import styled from 'styled-components';
 import logoImg from '../assets/image/logo.png';
 
@@ -29,6 +31,21 @@ const Navigation = styled.nav`
 `;
 
 export default function Header() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const excludedPaths = ['/', '/list'];
+
+  if (isMobile && !excludedPaths.includes(location.pathname)) {
+    return null;
+  }
+
   return (
     <HeaderContainer>
       <Navigation>
@@ -37,7 +54,7 @@ export default function Header() {
             <img src={logoImg} alt='롤링 로고' />
           </Link>
         </div>
-        <Link to='/'>롤링 페이퍼 만들기</Link>
+        <OutlineButton to='/post'>롤링 페이퍼 만들기</OutlineButton>
       </Navigation>
     </HeaderContainer>
   );

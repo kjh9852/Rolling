@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Section from '../common/Section';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
+import PrimaryButton from '../common/PrimaryButton';
 
 const LandingSection = styled(Section)`
   display: flex;
@@ -91,20 +92,16 @@ const SubTitle = styled.h3`
   color: var(--gray500);
 `;
 
-const StartButton = styled.button`
+const StartButton = styled(PrimaryButton)`
   padding: 14px 60px;
-  margin-bottom: 174px;
-  width: 280px;
-  height: 56px;
-  background-color: var(--purple600);
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: -0.01em;
-  color: var(--white);
-  border-radius: 12px;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-
+  line-height: 2.8rem;
+  font-size: 1.8rem;
+  transition: all.3s ease;
+  span {
+    display: flex;
+    justify-content: center;
+    width: 160px;
+  }
   &:hover {
     background-color: var(--purple700);
   }
@@ -143,7 +140,7 @@ export default function LandingDetail() {
           <SubTitle>롤링 페이퍼에 이모지를 추가할 수 있어요.</SubTitle>
         </IntroSection>
       </Card2>
-      <StartButton>구경해보기</StartButton>
+      <StartButton to='/list'>구경해보기</StartButton>
     </LandingSection>
   );
 }
