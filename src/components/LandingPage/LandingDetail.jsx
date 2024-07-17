@@ -140,7 +140,7 @@ export default function LandingDetail() {
           <SubTitle>롤링 페이퍼에 이모지를 추가할 수 있어요.</SubTitle>
         </IntroSection>
       </Card2>
-      <StartButton>구경해보기</StartButton>
+      <StartButton to='/list'>구경해보기</StartButton>
     </LandingSection>
   );
 }

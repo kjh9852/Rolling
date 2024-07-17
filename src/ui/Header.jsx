@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import OutlineBtn from '../components/common/OutlineBtn';
+import OutlineButton from '../components/common/OutlineButton';
 import styled from 'styled-components';
 import logoImg from '../assets/image/logo.png';
 
@@ -54,7 +54,7 @@ export default function Header() {
             <img src={logoImg} alt='롤링 로고' />
           </Link>
         </div>
-        <OutlineBtn to='/post'>롤링 페이퍼 만들기</OutlineBtn>
+        <OutlineButton to='/post'>롤링 페이퍼 만들기</OutlineButton>
       </Navigation>
     </HeaderContainer>
   );
