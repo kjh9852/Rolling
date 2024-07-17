@@ -71,11 +71,6 @@ const BgSelector = () => {
   const handleTabClick = (tab, event) => {
     event.preventDefault();
     setCheckedTab(tab);
-    if (tab === 'color') {
-      setSelectedImage(null);
-    } else {
-      setSelectedColor(null);
-    }
   };
 
   return (
@@ -103,14 +98,18 @@ const BgSelector = () => {
               key={index}
               color={`var(--${color}200)`}
               selected={selectedColor === color}
-              onClick={() => setSelectedColor(color)}
+              onClick={() => {
+                setSelectedColor(color);
+              }}
             />
           ))}
         {checkedTab === 'image' && (
           <ImageOption
             images={images}
             selectedImage={selectedImage}
-            onSelect={setSelectedImage}
+            onSelect={(image) => {
+              setSelectedImage(image);
+            }}
           />
         )}
       </OptionsWrapper>
