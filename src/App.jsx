@@ -3,14 +3,14 @@ import RootLayout from './router/RootLayout';
 import UserLayout from './router/UserLayout';
 import LandingPage from './pages/LandingPage';
 import ListPage from './pages/ListPage';
-import PostPage from './pages/PostPage';
+import AddPostPage from './pages/AddPostPage';
 import PostEditPage from './pages/PostEditPage';
 import AddMessagePage from './pages/AddMessagePage';
 import PostDetailPage from './pages/PostDetailPage';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     children: [
       {
@@ -18,15 +18,14 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        path: "list",
+        path: 'list',
         element: <ListPage />,
       },
       {
-        path: "post",
-        element: <PostPage />,
+        path: 'post',
+        element: <AddPostPage />,
       },
       {
-
         path: 'post/:id',
         element: <UserLayout />,
         children: [
@@ -39,10 +38,9 @@ const router = createBrowserRouter([
             element: <PostEditPage />,
           },
         ],
-
       },
       {
-        path: "post/:id/message",
+        path: 'post/:id/message',
         element: <AddMessagePage />,
       },
     ],
