@@ -3,11 +3,22 @@ import TextInput from './TextInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
 import styled from 'styled-components';
+import PrimaryButton from '../common/PrimaryButton';
 
 const PageWrap = styled.div`
   padding-top: 60px;
   max-width: 720px;
   margin: 0 auto;
+`;
+
+const CreateBtn = styled(PrimaryButton)`
+  padding: 14px 280px;
+  span {
+    display: flex;
+    justify-content: center;
+    width: 160px;
+    font-size: 1.8rem;
+  }
 `;
 
 const PostEditPage = () => {
@@ -26,7 +37,7 @@ const PostEditPage = () => {
         onChange={(e) => setValueName(e.target.value)}
       />
       <BgSelector />
-      <SubmitButton onClick={handleSubmit} />
+      <CreateBtn onClick={handleSubmit}>생성하기</CreateBtn>
     </PageWrap>
   );
 };
