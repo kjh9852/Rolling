@@ -10,25 +10,28 @@ const PageWrap = styled.div`
   margin: 0 auto;
 `;
 
-const PostEditPage = () => {
+const AddPost = () => {
   const [valueName, setValueName] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log('생성');
   };
 
   return (
-    <PageWrap>
-      <TextInput
-        label='To.'
-        placeholder='받는 사람 이름을 입력해 주세요'
-        value={valueName}
-        onChange={(e) => setValueName(e.target.value)}
-      />
-      <BgSelector />
-      <SubmitButton onClick={handleSubmit} />
-    </PageWrap>
+    <form onSubmit={handleSubmit}>
+      <PageWrap>
+        <TextInput
+          label='To.'
+          placeholder='받는 사람 이름을 입력해 주세요'
+          value={valueName}
+          onChange={(e) => setValueName(e.target.value)}
+        />
+        <BgSelector />
+        <SubmitButton />
+      </PageWrap>
+    </form>
   );
 };
 
-export default PostEditPage;
+export default AddPost;
