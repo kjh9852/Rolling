@@ -9,13 +9,15 @@ export async function getProfileImage() {
 export async function getUserMessage() {}
 
 export async function getRecipients() {
-  const response = await fetch(`${BASE_URL}/recipients`);
+  const response = await fetch(`${BASE_URL}/recipients/`);
   const body = await response.json();
   return body.results;
 }
 
 export async function getRecipientMessage(recipientId) {
-  const response = await fetch(`${BASE_URL}/recipients/${recipientId}/message`);
+  const response = await fetch(
+    `${BASE_URL}/recipients/${recipientId}/messages/`
+  );
   const body = await response.json();
   return body.results;
 }
