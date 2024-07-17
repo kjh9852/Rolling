@@ -1,4 +1,4 @@
-import PostDetail from '../components/Post/PostDetail';
+import PostDetail from '../components/PostDetail/PostDetail';
 
 export default function PostDetailPage() {
   return <PostDetail />;
