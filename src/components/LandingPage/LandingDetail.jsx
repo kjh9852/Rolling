@@ -94,6 +94,7 @@ const SubTitle = styled.h3`
 
 const StartButton = styled(PrimaryButton)`
   padding: 14px 60px;
+  margin-bottom: 174px;
   line-height: 2.8rem;
   font-size: 1.8rem;
   transition: all.3s ease;
