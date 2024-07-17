@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Section from '../common/Section';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
+import { Link } from 'react-router-dom';
+import ListPage from '../../pages/ListPage';
 
 const LandingSection = styled(Section)`
   display: flex;
@@ -123,7 +125,7 @@ export default function LandingDetail() {
         <IntroSection>
           <PointBox>Point. 01</PointBox>
           <Title>
-            누구나 손쉽게,온라인
+            누구나 손쉽게, 온라인
             <br />
             롤링 페이퍼를 만들 수 있어요
           </Title>
@@ -143,7 +145,9 @@ export default function LandingDetail() {
           <SubTitle>롤링 페이퍼에 이모지를 추가할 수 있어요.</SubTitle>
         </IntroSection>
       </Card2>
-      <StartButton>구경해보기</StartButton>
+      <Link to='/list'>
+        <StartButton>구경해보기</StartButton>
+      </Link>
     </LandingSection>
   );
 }
