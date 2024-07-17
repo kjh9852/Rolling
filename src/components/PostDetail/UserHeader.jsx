@@ -180,7 +180,7 @@ export default function UserHeader() {
             ))}
             {userData.messageCount > 3 && (
               <OverUser>
-                {userData.messageCount > 6
+                {userData.messageCount >= 9
                   ? '+6'
                   : `+${userData.messageCount - 3}`}
               </OverUser>

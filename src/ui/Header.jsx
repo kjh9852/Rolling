@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import OutlineBtn from '../components/common/OutlineBtn';
+import OutlineButton from '../components/common/OutlineButton';
 import styled from 'styled-components';
 import logoImg from '../assets/image/logo.png';
 
