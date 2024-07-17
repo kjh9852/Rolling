@@ -49,10 +49,13 @@ const OptionsWrapper = styled.div`
   gap: 10px;
 `;
 
-const BgSelector = () => {
+const BgSelector = ({
+  selectedColor,
+  setSelectedColor,
+  selectedImage,
+  setSelectedImage,
+}) => {
   const [checkedTab, setCheckedTab] = useState('color');
-  const [selectedColor, setSelectedColor] = useState('beige');
-  const [selectedImage, setSelectedImage] = useState(null);
   const [images, setImages] = useState([]);
   const colors = ['beige', 'purple', 'blue', 'green'];
 
@@ -66,7 +69,7 @@ const BgSelector = () => {
         }
       })
       .catch((error) => console.error('Error:', error));
-  }, [selectedImage]);
+  }, [selectedImage, setSelectedImage]);
 
   const handleTabClick = (tab, event) => {
     event.preventDefault();
@@ -98,18 +101,14 @@ const BgSelector = () => {
               key={index}
               color={`var(--${color}200)`}
               selected={selectedColor === color}
-              onClick={() => {
-                setSelectedColor(color);
-              }}
+              onClick={() => setSelectedColor(color)}
             />
           ))}
         {checkedTab === 'image' && (
           <ImageOption
             images={images}
             selectedImage={selectedImage}
-            onSelect={(image) => {
-              setSelectedImage(image);
-            }}
+            onSelect={setSelectedImage}
           />
         )}
       </OptionsWrapper>
