@@ -53,15 +53,28 @@ const BgSelector = () => {
   const [checkedTab, setCheckedTab] = useState('color');
   const [selectedColor, setSelectedColor] = useState('beige');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [images, setImages] = useState([]);
   const colors = ['beige', 'purple', 'blue', 'green'];
+
+  useEffect(() => {
+    fetch('https://rolling-api.vercel.app/background-images/')
+      .then((response) => response.json())
+      .then((data) => {
+        setImages(data.imageUrls);
+        if (data.imageUrls.length > 0 && !selectedImage) {
+          setSelectedImage(data.imageUrls[0]);
+        }
+      })
+      .catch((error) => console.error('Error:', error));
+  }, [selectedImage]);
 
   const handleTabClick = (tab, event) => {
     event.preventDefault();
     setCheckedTab(tab);
     if (tab === 'color') {
-      setSelectedImage(null); // 이미지 선택 해제
+      setSelectedImage(null);
     } else {
-      setSelectedColor(null); // 컬러 선택 해제
+      setSelectedColor(null);
     }
   };
 
@@ -95,6 +108,7 @@ const BgSelector = () => {
           ))}
         {checkedTab === 'image' && (
           <ImageOption
+            images={images}
             selectedImage={selectedImage}
             onSelect={setSelectedImage}
           />

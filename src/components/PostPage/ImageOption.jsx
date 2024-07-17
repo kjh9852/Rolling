@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ImageWrap = styled.div`
@@ -44,21 +44,7 @@ const CheckingMark = styled.div`
   }
 `;
 
-const ImageOption = ({ selectedImage, onSelect }) => {
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    fetch('https://rolling-api.vercel.app/background-images/')
-      .then((response) => response.json())
-      .then((data) => {
-        setImages(data.imageUrls);
-        if (data.imageUrls.length > 0 && !selectedImage) {
-          onSelect(data.imageUrls[0]);
-        }
-      })
-      .catch((error) => console.error('Error:', error));
-  }, [onSelect, selectedImage]);
-
+const ImageOption = ({ images, selectedImage, onSelect }) => {
   return (
     <ImageWrap>
       {images.map((image, index) => (
