@@ -4,6 +4,7 @@ import TextInput from './TextInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
 import styled from 'styled-components';
+import PrimaryButton from '../common/PrimaryButton';
 
 const PageWrap = styled.div`
   padding-top: 60px;
@@ -12,7 +13,9 @@ const PageWrap = styled.div`
   margin-top: 60px;
 `;
 
+
 const AddPost = () => {
+
   const [valueName, setValueName] = useState('');
   const [selectedColor, setSelectedColor] = useState('beige');
   const [selectedImage, setSelectedImage] = useState(null);
@@ -27,6 +30,7 @@ const AddPost = () => {
 
   return (
     <PageWrap>
+
       <form onSubmit={handleSubmit}>
         <TextInput
           label='To.'
@@ -42,6 +46,7 @@ const AddPost = () => {
         />
         <SubmitButton />
       </form>
+
     </PageWrap>
   );
 };
