@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import OutlineButton from '../common/OutlineButton';
-import EmojiCount from '../common/EmojiCount';
+import UserActionComponent from './UserActionComponent';
 import MessageCount from '../common/MessageCount';
-import EmojiPicker from 'emoji-picker-react';
 import styled from 'styled-components';
-import emojiAddIcon from '../../assets/image/emoji_add_icon.png';
-import shareIcon from '../../assets/image/share_icon.png';
 import './emoji.css';
 
 const UserContainer = styled.div`
@@ -38,41 +34,30 @@ const UserName = styled.h2`
 const UserAction = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 57px;
   height: 36px;
 `;
 
-const EmojiContainer = styled.div`
-  height: 100%;
-`;
-
-const EmojiBtn = styled(OutlineButton)`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  gap: 4px;
-  font-size: 1.6rem;
-  font-weight: 500;
-`;
-
-const ShareBtn = styled(OutlineButton)`
-  height: 100%;
-`;
-const ListContainer = styled.ul`
-  display: flex;
-  gap: 8px;
-`;
-
 const CountContainer = styled.ul`
+  position: relative;
   display: flex;
   align-items: center;
+  ::before {
+    position: absolute;
+    content: '';
+    width: 1px;
+    height: 28px;
+    top: 2px;
+    right: -29px;
+    background: #ededed;
+  }
   span {
     margin-left: 11px;
     font-size: 1.8rem;
   }
 `;
 
-const OverUser = styled.li`
+const TotalUser = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,7 +71,7 @@ const OverUser = styled.li`
 `;
 
 export default function UserHeader() {
-  const { id } = useParams();
+  const { postId } = useParams();
   const [userData, setUserData] = useState([]);
   const [userProfile, setUserProfile] = useState([]);
   const [showEmoji, setShowEmoji] = useState(false);
@@ -96,12 +81,13 @@ export default function UserHeader() {
   const fetchUserData = async () => {
     try {
       const response = await fetch(
-        `https://rolling-api.vercel.app/8-8/recipients/${id}/`
+        `https://rolling-api.vercel.app/8-8/recipients/${postId}/`
       );
       if (!response.ok) {
         throw new Error('데이터 불러오기 실패');
       }
       const { recentMessages, ...post } = await response.json();
+      console.log(post);
       setUserData(post);
       setUserProfile(recentMessages);
     } catch (error) {
@@ -112,7 +98,7 @@ export default function UserHeader() {
   const fetchEmojiCount = async (e) => {
     try {
       const response = await fetch(
-        `https://rolling-api.vercel.app/8-8/recipients/${id}/reactions/?limit=6`
+        `https://rolling-api.vercel.app/8-8/recipients/${postId}/reactions/?limit=8`
       );
       if (!response.ok) {
         throw new Error('데이터 불러오기 실패');
@@ -128,7 +114,7 @@ export default function UserHeader() {
     const newReaction = e.unified;
     try {
       const response = await fetch(
-        `https://rolling-api.vercel.app/8-8/recipients/${id}/reactions/`,
+        `https://rolling-api.vercel.app/8-8/recipients/${postId}/reactions/`,
         {
           method: 'POST',
           headers: {
@@ -163,12 +149,13 @@ export default function UserHeader() {
     setShowEmoji((prevOpen) => !prevOpen);
   };
 
-  const maxShowEmoji = userEmoji.slice(0, 3);
+  const AllWriter =
+    userData.messageCount >= 9 ? '+6' : `+${userData.messageCount - 3}`;
 
   return (
     <UserContainer>
       <UserInfo>
-        <UserName>{`To.${userData.name}`}</UserName>
+        <UserName>{`To. ${userData.name}`}</UserName>
         <UserAction>
           <CountContainer>
             {userProfile.map((img) => (
@@ -178,43 +165,17 @@ export default function UserHeader() {
                 sender={img.sender}
               />
             ))}
-            {userData.messageCount > 3 && (
-              <OverUser>
-                {userData.messageCount >= 9
-                  ? '+6'
-                  : `+${userData.messageCount - 3}`}
-              </OverUser>
-            )}
+            {userData.messageCount > 3 && <TotalUser>{AllWriter}</TotalUser>}
             <span>
               <b>{userData.messageCount}</b>명이 작성했어요!
             </span>
           </CountContainer>
-          <ListContainer>
-            {maxShowEmoji.map((list) => (
-              <EmojiCount
-                key={list.id}
-                emojiCode={list.emoji}
-                emojiCount={list.count}
-              />
-            ))}
-          </ListContainer>
-          <EmojiContainer>
-            <EmojiBtn
-              onClick={handleEmojiOpen}
-              haveImg={true}
-              imgSrc={emojiAddIcon}
-            >
-              추가
-            </EmojiBtn>
-            <EmojiPicker
-              lazyLoad={true}
-              open={showEmoji}
-              onEmojiClick={handleEmojiClick}
-              height={393}
-              width={307}
-            />
-          </EmojiContainer>
-          <ShareBtn haveImg={true} imgSrc={shareIcon} />
+          <UserActionComponent
+            actionEmoji={userEmoji}
+            showEmoji={showEmoji}
+            handleEmojiOpen={handleEmojiOpen}
+            handleEmojiClick={handleEmojiClick}
+          />
         </UserAction>
       </UserInfo>
     </UserContainer>
