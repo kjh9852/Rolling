@@ -6,28 +6,37 @@ const CardBase = styled.div`
   border-radius: 16px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   background-color: var(--surface);
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    height: 440px;
+    flex-direction: column;
+  }
+  @media (max-width: 768px) {
+    height: 362px;
+  }
 `;
 
 const Card1 = styled(CardBase)`
-  align-items: flex-start;
+  justify-content: space-between;
   margin-top: 125px;
   margin-bottom: 30px;
-  padding: 60px 0px 60px 60px;
+  padding: 60px 40px 60px 60px;
 `;
 
 const Card2 = styled(CardBase)`
-  align-items: center;
-  padding: 60px 192px 60px 0px;
+  justify-content: flex-start;
+  padding: 60px 60px 60px 0px;
   margin-bottom: 48px;
 `;
 
 const CardImg = styled.div`
   background-size: cover;
   background-position: center;
-  width: 720px;
-  height: 204px;
+  width: 640px;
+  height: 162px;
 `;
 
 export { Card1, Card2, CardImg };

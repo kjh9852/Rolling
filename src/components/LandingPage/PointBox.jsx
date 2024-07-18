@@ -14,6 +14,8 @@ const PointBox = styled.div`
   font-weight: 700;
   letter-spacing: -0.005em;
   line-height: 20px;
+  position: absolute;
+  top: -48px;
 `;
 
 export default PointBox;
