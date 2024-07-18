@@ -4,17 +4,10 @@ import { Card1, Card2, CardImg } from './Card';
 import IntroSection from './IntroSection';
 import PointBox from './PointBox';
 import Title from './Title';
+import SubTitle from './SubTitle';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
 import PrimaryButton from '../common/PrimaryButton';
-
-const SubTitle = styled.h3`
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: -0.01em;
-  color: var(--gray500);
-`;
 
 const StartButton = styled(PrimaryButton)`
   padding: 14px 60px;
