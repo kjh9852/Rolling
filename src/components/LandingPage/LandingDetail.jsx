@@ -1,14 +1,8 @@
+import LandingSection from './LandingSection';
 import styled from 'styled-components';
-import Section from '../common/Section';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
 import PrimaryButton from '../common/PrimaryButton';
-
-const LandingSection = styled(Section)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const Card1 = styled.div`
   width: 100%;
