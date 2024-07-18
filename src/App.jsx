@@ -6,7 +6,9 @@ import ListPage from './pages/ListPage';
 import AddPostPage from './pages/AddPostPage';
 import PostEditPage from './pages/PostEditPage';
 import AddMessagePage from './pages/AddMessagePage';
-import PostDetailPage from './pages/PostDetailPage';
+import PostDetailPage, {
+  loader as loaderUserData,
+} from './pages/PostDetailPage';
 import MessageDetailPage, {
   loader as messageDetailLoader,
 } from './pages/MessageDetailPage';
@@ -24,13 +26,14 @@ const router = createBrowserRouter([
         path: 'list',
         element: <ListPage />,
       },
-      // {
-      //   path: 'post',
-      //   element: <PostPage />,
-      // },
+      {
+        path: 'post',
+        element: <AddPostPage />,
+      },
       {
         path: 'post/:postId',
         element: <PostDetailPage />,
+        loader: loaderUserData,
         children: [
           {
             path: 'edit',
