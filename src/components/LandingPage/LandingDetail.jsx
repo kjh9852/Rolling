@@ -3,19 +3,10 @@ import styled from 'styled-components';
 import { Card1, Card2, CardImg } from './Card';
 import IntroSection from './IntroSection';
 import PointBox from './PointBox';
+import Title from './Title';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
 import PrimaryButton from '../common/PrimaryButton';
-
-const Title = styled.h2`
-  margin-top: 16px;
-  margin-bottom: 8px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 36px;
-  letter-spacing: -0.01em;
-  color: var(--gray900);
-`;
 
 const SubTitle = styled.h3`
   font-weight: 400;
