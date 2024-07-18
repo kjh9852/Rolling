@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextInput from './TextInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
@@ -9,37 +10,45 @@ const PageWrap = styled.div`
   padding-top: 60px;
   max-width: 720px;
   margin: 0 auto;
+  margin-top: 60px;
 `;
 
-const CreateBtn = styled(PrimaryButton)`
-  padding: 14px 280px;
-  span {
-    display: flex;
-    justify-content: center;
-    width: 160px;
-    font-size: 1.8rem;
-  }
-`;
 
-const PostEditPage = () => {
+const AddPost = () => {
+
   const [valueName, setValueName] = useState('');
+  const [selectedColor, setSelectedColor] = useState('beige');
+  const [selectedImage, setSelectedImage] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
-    console.log('생성');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newId = Date.now(); //임시
+    console.log('생성', { valueName, selectedColor, selectedImage });
+    navigate(`/post/${newId}`);
   };
 
   return (
     <PageWrap>
-      <TextInput
-        label='To.'
-        placeholder='받는 사람 이름을 입력해 주세요'
-        value={valueName}
-        onChange={(e) => setValueName(e.target.value)}
-      />
-      <BgSelector />
-      <CreateBtn onClick={handleSubmit}>생성하기</CreateBtn>
+
+      <form onSubmit={handleSubmit}>
+        <TextInput
+          label='To.'
+          placeholder='받는 사람 이름을 입력해 주세요'
+          value={valueName}
+          onChange={(e) => setValueName(e.target.value)}
+        />
+        <BgSelector
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
+          selectedImage={selectedImage}
+          setSelectedImage={setSelectedImage}
+        />
+        <SubmitButton />
+      </form>
+
     </PageWrap>
   );
 };
 
-export default PostEditPage;
+export default AddPost;

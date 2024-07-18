@@ -17,8 +17,8 @@ const Button = styled.button`
   }
 `;
 
-const SubmitButton = ({ onClick }) => {
-  return <Button onClick={onClick}>생성하기</Button>;
+const SubmitButton = () => {
+  return <Button type='submit'>생성하기</Button>;
 };
 
 export default SubmitButton;
