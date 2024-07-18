@@ -4,7 +4,7 @@ import { useState } from 'react';
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 720px;
+  width: 100%;
 `;
 
 const ErrorMessage = styled.span`

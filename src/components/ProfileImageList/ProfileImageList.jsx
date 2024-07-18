@@ -28,6 +28,7 @@ const ImageLabel = styled.label`
 
 const Images = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
 `;
 
