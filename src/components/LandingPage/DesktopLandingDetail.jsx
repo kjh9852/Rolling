@@ -1,6 +1,6 @@
 import React from 'react';
 import LandingSection from './LandingSection';
-import { Card1, Card2, CardImg } from './Card';
+import { Card1, Card2, CardImg1, CardImg2 } from './Card';
 import IntroSection from './IntroSection';
 import PointBox from './PointBox';
 import Title from './Title';
@@ -22,10 +22,10 @@ export default function DesktopLandingDetail() {
           </Title>
           <SubTitle>로그인 없이 자유롭게 만들어요.</SubTitle>
         </IntroSection>
-        <CardImg style={{ backgroundImage: `url(${cardImg1})` }} />
+        <CardImg1 style={{ backgroundImage: `url(${cardImg1})` }} />
       </Card1>
       <Card2>
-        <CardImg style={{ backgroundImage: `url(${cardImg2})` }} />
+        <CardImg2 style={{ backgroundImage: `url(${cardImg2})` }} />
         <IntroSection>
           <PointBox>Point. 02</PointBox>
           <Title>

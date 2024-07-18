@@ -21,6 +21,16 @@ const StartButton = styled(PrimaryButton)`
   &:focus {
     background-color: var(--purple800);
   }
+  @media (min-width: 769px) and (max-width: 1023px) {
+    width: 100%;
+    margin-top: 72px;
+    margin-bottom: 24px;
+
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 768px) {
+  }
 `;
 
 export default StartButton;
