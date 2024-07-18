@@ -5,6 +5,7 @@ import NameInput from '../Input/NameInput';
 import ContentArea from '../TextArea/ContentArea';
 import ProfileImageList from '../ProfileImageList/ProfileImageList';
 import { getProfileImage } from '../../util/api';
+import { PostRecipientMessage } from '../../util/api';
 
 const Container = styled.form`
   display: flex;
@@ -78,20 +79,18 @@ function AddMessage() {
     setName(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      'name :',
-      name,
-      'content :',
-      content,
-      'image :',
-      image,
-      'relationShip :',
-      relationShip,
-      'font :',
-      font
-    );
+    const formData = new FormData();
+    formData.append('team', '8-8');
+    formData.append('recipientId', 8430);
+    formData.append('sender', name);
+    formData.append('profileImageURL', image);
+    formData.append('relationship', relationShip);
+    formData.append('content', '안녕하세요');
+    formData.append('font', font);
+
+    await PostRecipientMessage({ formData, recipient_id: 8430 });
   };
 
   useEffect(() => {

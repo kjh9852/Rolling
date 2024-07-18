@@ -33,3 +33,19 @@ export async function getRecipientMessage(recipientId) {
   const body = await response.json();
   return body.results;
 }
+
+
+export async function PostRecipientMessage({ formData, recipient_id }) {
+  const response = await fetch(`${BASE_URL}}/${TEAM}/recipients/${recipient_id}/messages/`,
+    {
+      method: 'POST',
+      body: formData,
+      headers: { 'Content-Type': 'application/json', },
+    });
+
+  if (!response.ok) {
+    throw new Error('데이터를 보내는데 오류가 발생했습니다.');
+  }
+  const body = await response.json();
+  return body;
+}
