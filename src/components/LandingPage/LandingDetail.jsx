@@ -1,51 +1,9 @@
 import LandingSection from './LandingSection';
 import styled from 'styled-components';
+import { Card1, Card2, CardImg } from './Card';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
 import PrimaryButton from '../common/PrimaryButton';
-
-const Card1 = styled.div`
-  width: 100%;
-  height: 324px;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 125px;
-  margin-bottom: 30px;
-  padding: 60px 0px 60px 60px;
-  background-color: var(--surface);
-`;
-
-const Card2 = styled.div`
-  width: 100%;
-  height: 324px;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 60px 192px 60px 0px;
-  background-color: var(--surface);
-  margin-bottom: 48px;
-`;
-
-const CardImg1 = styled.div`
-  background-image: url(${cardImg1});
-  background-size: cover;
-  background-position: center;
-  width: 720px;
-  height: 204px;
-`;
-
-const CardImg2 = styled.div`
-  background-image: url(${cardImg2});
-  background-size: cover;
-  background-position: center;
-  width: 720px;
-  height: 204px;
-`;
 
 const IntroSection = styled.div`
   display: flex;
@@ -121,10 +79,10 @@ export default function LandingDetail() {
           </Title>
           <SubTitle>로그인 없이 자유롭게 만들어요.</SubTitle>
         </IntroSection>
-        <CardImg1 />
+        <CardImg style={{ backgroundImage: `url(${cardImg1})` }} />
       </Card1>
       <Card2>
-        <CardImg2 />
+        <CardImg style={{ backgroundImage: `url(${cardImg2})` }} />
         <IntroSection>
           <PointBox>Point. 02</PointBox>
           <Title>
