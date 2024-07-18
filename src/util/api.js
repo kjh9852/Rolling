@@ -1,9 +1,25 @@
-const BASE_URL = 'https://rolling-api.vercel.app';
+const BASE_URL = 'https://rolling-api.vercel.app/8-8';
 
 export async function getProfileImage() {
-  const response = await fetch(`${BASE_URL}/profile-images/`);
+  const response = await fetch(
+    `https://rolling-api.vercel.app/profile-images/`
+  );
   const body = await response.json();
   return body;
 }
 
 export async function getUserMessage() {}
+
+export async function getRecipients() {
+  const response = await fetch(`${BASE_URL}/recipients/`);
+  const body = await response.json();
+  return body.results;
+}
+
+export async function getRecipientMessage(recipientId) {
+  const response = await fetch(
+    `${BASE_URL}/recipients/${recipientId}/messages/`
+  );
+  const body = await response.json();
+  return body.results;
+}
