@@ -1,14 +1,10 @@
 import LandingSection from './LandingSection';
 import styled from 'styled-components';
 import { Card1, Card2, CardImg } from './Card';
+import IntroSection from './IntroSection';
 import cardImg1 from '../../assets/image/cardImg1.png';
 import cardImg2 from '../../assets/image/cardImg2.png';
 import PrimaryButton from '../common/PrimaryButton';
-
-const IntroSection = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const PointBox = styled.div`
   padding: 6px 12px;
