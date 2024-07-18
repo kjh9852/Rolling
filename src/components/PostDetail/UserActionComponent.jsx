@@ -44,7 +44,6 @@ const AllReaction = styled.ul`
   grid-template-columns: repeat(4, 1fr);
   padding: 2.4rem;
   transform: translate(-28rem, 16px);
-  width: 312px;
   border: 1px solid #b6b6b6;
   border-radius: 8px;
   gap: 10px 8px;
@@ -84,7 +83,7 @@ const ShareBtn = styled(OutlineButton)`
   height: 100%;
 `;
 
-export default function UserActionComponent({ actionEmoji }) {
+export default function UserActionComponent({ actionEmoji, topReaction }) {
   const navigate = useNavigate();
   const { postId } = useParams();
   const [openReaction, setOpenReaction] = useState(false);
@@ -123,11 +122,10 @@ export default function UserActionComponent({ actionEmoji }) {
     }
   };
 
-  const maxShowEmoji = actionEmoji.results.slice(0, 3);
   return (
     <ActionContainer>
       <ListContainer>
-        {maxShowEmoji.map((list) => (
+        {topReaction.map((list) => (
           <EmojiBadge
             key={list.id}
             emojiCode={list.emoji}

@@ -90,7 +90,10 @@ export default function UserHeader({ userData, userReaction }) {
               <b>{userData.messageCount}</b>명이 작성했어요!
             </span>
           </CountContainer>
-          <UserActionComponent actionEmoji={userReaction} />
+          <UserActionComponent
+            topReaction={userData.topReactions}
+            actionEmoji={userReaction}
+          />
         </UserAction>
       </UserInfo>
     </UserContainer>
