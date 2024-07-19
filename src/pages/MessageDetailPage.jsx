@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import styled from 'styled-components';
 import Badge from '../components/common/Badge';
 import Card from '../components/common/Card';
@@ -57,10 +57,10 @@ const Content = styled.div`
     border-radius: 12px 12px 12px 12px;
   }
   &::-webkit-scrollbar-track {
-    background: #eeeeee;
+    background: #ffffff;
   }
   &::-webkit-scrollbar-thumb:hover {
-    background-color: #a0a0a5;
+    background-color: #9797a0;
   }
 `;
 
