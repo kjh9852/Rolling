@@ -26,6 +26,7 @@ const router = createBrowserRouter([
         path: 'list',
         element: <ListPage />,
       },
+
       {
         path: 'post',
         element: <AddPostPage />,
