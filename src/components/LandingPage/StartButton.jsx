@@ -25,13 +25,15 @@ const StartButton = styled(PrimaryButton)`
     width: 100%;
     margin-top: 72px;
     margin-bottom: 24px;
-
     display: flex;
     justify-content: center;
   }
   @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
     padding: 14px 80px;
-    margin: 24px;
+    margin: 24px 0px;
   }
 `;
 
