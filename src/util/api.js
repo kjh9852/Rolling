@@ -9,9 +9,9 @@ export async function getProfileImage() {
   return body;
 }
 
-export async function getUserMessage(id, limit = 5) {
+export async function getUserMessage({ id, offset }) {
   const response = await fetch(
-    `${BASE_URL}/${TEAM}/recipients/${id}/messages/?limit=${limit}`
+    `${BASE_URL}/${TEAM}/recipients/${id}/messages/?limit=5&offset=${offset}`
   );
   if (!response.ok) {
     throw new Error('데이터를 불러오는 중 오류가 발생했습니다.');
