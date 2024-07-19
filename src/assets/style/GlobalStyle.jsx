@@ -119,14 +119,15 @@ input::-webkit-inner-spin-button {
 
 /* 스크롤 디자인 */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-	background: var(--purple400);
+	background: var(--purple100);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--purple300);
-  border-radius: 12px 12px 12px 12px;
+  border-radius: 12px;   
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--purple400)

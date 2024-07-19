@@ -7,6 +7,7 @@ const StartButton = styled(PrimaryButton)`
   line-height: 2.8rem;
   font-size: 1.8rem;
   transition: all.3s ease;
+  white-space: nowrap;
   span {
     display: flex;
     justify-content: center;
