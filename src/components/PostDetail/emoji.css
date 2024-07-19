@@ -1,7 +1,7 @@
 .EmojiPickerReact {
   position: absolute !important;
-  top: 6rem;
-  right: 19rem;
+  top: 4rem;
+  right: 1rem;
   --epr-emoji-size: 24px !important;
   --epr-emoji-gap: 10px;
   --epr-bg-color: #000;

@@ -1,12 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import GlobalStyle from './assets/style/GlobalStyle';
 import RootLayout from './router/RootLayout';
-import UserLayout from './router/UserLayout';
 import LandingPage from './pages/LandingPage';
 import ListPage from './pages/ListPage';
 import AddPostPage from './pages/AddPostPage';
 import PostEditPage from './pages/PostEditPage';
 import AddMessagePage from './pages/AddMessagePage';
-import PostDetailPage from './pages/PostDetailPage';
+import PostDetailPage, {
+  loader as loaderUserData,
+} from './pages/PostDetailPage';
+import MessageDetailPage, {
+  loader as messageDetailLoader,
+} from './pages/MessageDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -21,26 +26,28 @@ const router = createBrowserRouter([
         path: 'list',
         element: <ListPage />,
       },
-      // {
-      //   path: 'post',
-      //   element: <PostPage />,
-      // },
       {
-        path: 'post/:id',
-        element: <UserLayout />,
+        path: 'post',
+        element: <AddPostPage />,
+      },
+      {
+        path: 'post/:postId',
+        element: <PostDetailPage />,
+        loader: loaderUserData,
         children: [
-          {
-            index: true,
-            element: <PostDetailPage />,
-          },
           {
             path: 'edit',
             element: <PostEditPage />,
           },
+          {
+            path: 'message/:messageId',
+            element: <MessageDetailPage />,
+            loader: messageDetailLoader,
+          },
         ],
       },
       {
-        path: 'post/:id/message',
+        path: 'post/:postId/message',
         element: <AddMessagePage />,
       },
     ],
@@ -48,7 +55,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
