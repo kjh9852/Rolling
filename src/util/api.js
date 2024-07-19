@@ -35,12 +35,21 @@ export async function getRecipientMessage(recipientId) {
 }
 
 
-export async function PostRecipientMessage({ formData, recipient_id }) {
-  const response = await fetch(`${BASE_URL}}/${TEAM}/recipients/${recipient_id}/messages/`,
+export async function PostRecipientMessage({ id, name, image, relationShip, content, font }) {
+  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${id}/messages/`,
     {
       method: 'POST',
-      body: formData,
       headers: { 'Content-Type': 'application/json', },
+      body: JSON.stringify({
+        team: '8-8',
+        recipient_id: id,
+        sender: name,
+        profileImageURL: image,
+        relationship: relationShip,
+        content: content,
+        font: font,
+      }),
+
     });
 
   if (!response.ok) {

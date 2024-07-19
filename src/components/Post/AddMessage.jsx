@@ -4,8 +4,10 @@ import Select from '../Select/Select';
 import NameInput from '../Input/NameInput';
 import ContentArea from '../TextArea/ContentArea';
 import ProfileImageList from '../ProfileImageList/ProfileImageList';
+import PrimaryButton from '../common/PrimaryButton';
 import { getProfileImage } from '../../util/api';
 import { PostRecipientMessage } from '../../util/api';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Container = styled.form`
   display: flex;
@@ -42,17 +44,19 @@ const Title = styled.label`
   font-weight: 700;
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled(PrimaryButton)`
   width: 100%;
   height: 56px;
-  background-color: ${({ active }) =>
-    active ? '  var(--purple600)' : 'var(--gray300)'};
   border-radius: 12px;
   font-size: 18px;
-  color: var(--white);
+  &:disabled {
+    background: var(--gray300);
+  }
 `;
 
 function AddMessage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const relationShipOptions = ['지인', '친구', '동료', '가족'];
   const fontOptions = [
     'Noto Sans',
@@ -81,16 +85,16 @@ function AddMessage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('team', '8-8');
-    formData.append('recipientId', 8430);
-    formData.append('sender', name);
-    formData.append('profileImageURL', image);
-    formData.append('relationship', relationShip);
-    formData.append('content', '안녕하세요');
-    formData.append('font', font);
 
-    await PostRecipientMessage({ formData, recipient_id: 8430 });
+    await PostRecipientMessage({
+      id,
+      name,
+      image,
+      relationShip,
+      content,
+      font,
+    });
+    navigate(`/post/${id}`);
   };
 
   useEffect(() => {
@@ -139,9 +143,9 @@ function AddMessage() {
         />
       </InputContainer>
       <SubmitButton
+        className={'AddMessageCommit'}
         type='submit'
-        active={name && content}
-        disabled={name && content ? false : true}
+        disabled={name && content && content !== '<p><br></p>' ? false : true}
       >
         생성하기
       </SubmitButton>

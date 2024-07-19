@@ -30,7 +30,7 @@ const Images = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  @media (max-width: 640px) {
+  @media (max-width: 575px) {
     gap: 2px;
   }
 `;
@@ -39,7 +39,7 @@ const ImageChoose = styled.img`
   width: 56px;
   height: 56px;
   border-radius: 100px;
-  @media (max-width: 640px) {
+  @media (max-width: 575px) {
     width: 40px;
     height: 40px;
   }
