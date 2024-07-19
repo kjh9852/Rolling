@@ -10,6 +10,7 @@ const UserContainer = styled.div`
   width: 100%;
   height: 68px;
   background: var(--white);
+  box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
   z-index: 10;
   @media (max-width: 768px) {
     top: 0px;
@@ -40,18 +41,18 @@ const CountContainer = styled.ul`
   position: relative;
   display: flex;
   align-items: center;
+  span {
+    margin-left: 11px;
+    font-size: 1.8rem;
+  }
   ::before {
     position: absolute;
     content: '';
     width: 1px;
     height: 28px;
-    top: 2px;
+    top: -4px;
     right: -29px;
     background: #ededed;
-  }
-  span {
-    margin-left: 11px;
-    font-size: 1.8rem;
   }
 `;
 
@@ -86,9 +87,13 @@ export default function UserHeader({ userData, userReaction }) {
               />
             ))}
             {userData.messageCount > 3 && <TotalUser>{AllWriter}</TotalUser>}
-            <span>
-              <b>{userData.messageCount}</b>명이 작성했어요!
-            </span>
+            {userData.messageCount > 0 ? (
+              <span>
+                <b>{userData.messageCount}</b>명이 작성했어요!
+              </span>
+            ) : (
+              <span>메세지를 남겨보세요!</span>
+            )}
           </CountContainer>
           <UserActionComponent
             topReaction={userData.topReactions}
