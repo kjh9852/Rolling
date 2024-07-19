@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TextInput from './TextInput';
+import NameInput from './NameInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
 import styled from 'styled-components';
@@ -9,6 +9,13 @@ const PageWrap = styled.div`
   padding-top: 60px;
   max-width: 720px;
   margin: 0 auto;
+  margin-top: 60px;
+`;
+
+const To = styled.h2`
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
 `;
 
 const AddPost = () => {
@@ -16,31 +23,22 @@ const AddPost = () => {
   const [selectedColor, setSelectedColor] = useState('beige');
   const [selectedImage, setSelectedImage] = useState(null);
   const [checkedTab, setCheckedTab] = useState('color');
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    setIsSubmitDisabled(valueName.trim() === '');
+  }, [valueName]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let postData = {
-      name: valueName,
-    };
-
-    if (checkedTab === 'color' && selectedColor) {
-      postData.backgroundColor = selectedColor;
-    } else if (checkedTab === 'image' && selectedImage) {
-      postData.backgroundImage = selectedImage;
-    }
-
-    console.log('생성', postData);
-    const newId = Date.now(); // 임시
-    navigate(`/post/${newId}`);
   };
 
   return (
     <PageWrap>
       <form onSubmit={handleSubmit}>
-        <TextInput
-          label='To.'
+        <To>To.</To>
+        <NameInput
           placeholder='받는 사람 이름을 입력해 주세요'
           value={valueName}
           onChange={(e) => setValueName(e.target.value)}
@@ -53,7 +51,7 @@ const AddPost = () => {
           checkedTab={checkedTab}
           setCheckedTab={setCheckedTab}
         />
-        <SubmitButton />
+        <SubmitButton disabled={isSubmitDisabled} />
       </form>
     </PageWrap>
   );
