@@ -12,6 +12,7 @@ const BackDrop = styled.div`
 `;
 
 const Dialog = styled.dialog`
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -21,7 +22,7 @@ const Dialog = styled.dialog`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   padding: 0;
   overflow: hidden;
-  z-index: 21;
+  z-index: 20;
 `;
 
 export default function Modal({ children, ...props }) {

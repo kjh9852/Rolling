@@ -10,7 +10,7 @@ export default function PostDetailPage() {
       <Suspense fallback={<p>Loading...</p>}>
         <UserHeader userData={recipientsData} userReaction={reactionData} />
       </Suspense>
-      <Suspense>
+      <Suspense fallback={<p>Loading...</p>}>
         <PostDetail userData={recipientsData} />
       </Suspense>
       <Outlet />
