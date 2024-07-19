@@ -34,10 +34,10 @@ const Card1 = styled(CardBase)`
   }
   @media (max-width: 768px) {
     flex-direction: column;
+    justify-content: flex-start;
     height: 352px;
     padding: 68px 24px 24px 24px;
     margin-bottom: 24px;
-    justify-content: center;
     overflow: hidden;
   }
 `;
@@ -52,10 +52,10 @@ const Card2 = styled(CardBase)`
   }
   @media (max-width: 768px) {
     flex-direction: column;
+    justify-content: flex-start;
     height: 362px;
     margin-bottom: 37px;
     padding: 68px 24px 24px 24px;
-    justify-content: center;
     overflow: hidden;
   }
 `;
