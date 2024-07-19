@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card1, Card2, CardImg1, CardImg2 } from './Card';
+import { Card1, Card2, CardImg1, CardImg2 } from './Cards';
 import IntroSection from './IntroSection';
 import PointBox from './PointBox';
 import Title from './Title';
