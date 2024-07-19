@@ -4,6 +4,7 @@ import NameInput from './NameInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
 import styled from 'styled-components';
+import { RecipientMessageForm } from '../../util/api';
 
 const PageWrap = styled.div`
   padding-top: 60px;
@@ -32,6 +33,26 @@ const AddPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let postData = {
+      name: valueName,
+      backgroundColor: selectedColor, // 항상 기본값 설정
+      backgroundImageURL: null,
+    };
+
+    if (checkedTab === 'image' && selectedImage) {
+      postData.backgroundImageURL = selectedImage;
+      // 이미지를 선택했을 때도 backgroundColor를 null로 설정하지 않음
+    }
+
+    try {
+      const response = await RecipientMessageForm(postData);
+      console.log('생성 완료:', response);
+      navigate(`/post/${response.id}`);
+    } catch (error) {
+      console.error('데이터를 보내는 중 오류가 발생했습니다.', error);
+      alert('데이터를 보내는 중 오류가 발생했습니다.');
+    }
   };
 
   return (
