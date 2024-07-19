@@ -12,7 +12,6 @@ const BackDrop = styled.div`
 `;
 
 const Dialog = styled.dialog`
-  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -32,8 +31,9 @@ export default function Modal({ children, ...props }) {
   };
 
   return (
-    <BackDrop onClick={handleCloseModal}>
+    <>
+      <BackDrop onClick={handleCloseModal} />
       <Dialog open>{children}</Dialog>
-    </BackDrop>
+    </>
   );
 }
