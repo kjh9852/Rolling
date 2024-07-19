@@ -32,8 +32,9 @@ export default function Modal({ children, ...props }) {
   };
 
   return (
-    <BackDrop onClick={handleCloseModal}>
+    <>
+      <BackDrop onClick={handleCloseModal}> </BackDrop>
       <Dialog open>{children}</Dialog>
-    </BackDrop>
+    </>
   );
 }
