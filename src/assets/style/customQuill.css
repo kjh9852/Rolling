@@ -28,16 +28,25 @@
 .quill.readMessage .ql-editor ul {
   padding-left: 0;
 }
-
+/* 
 .quill.readMessage .ql-editor ol li:not(.ql-direction-rtl),
 .quill.readMessage .ql-editor ul li:not(.ql-direction-rtl) {
   padding-left: 0;
-}
+} */
 
 .quill.readMessage .ql-editor > * {
   cursor: pointer;
 }
 
-.ql-editor {
-  font-family: 'pretendard';
+.quill.readMessage.Noto .ql-editor > p {
+  font-family: 'Noto Sans';
+}
+.quill.readMessage.나눔손글씨 .ql-editor > p {
+  font-family: '나눔손글씨 손편지체';
+}
+.quill.readMessage.나눔명조 .ql-editor > p {
+  font-family: '나눔명조';
+}
+.quill.readMessage.Pretendard .ql-editor > p {
+  font-family: 'Pretendard';
 }
