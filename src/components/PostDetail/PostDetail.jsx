@@ -1,13 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Card from '../common/Card';
 import MessageList from './MessageList';
 import Section from '../common/Section';
+import LoadingSpinner from '../../ui/LoadingSpinner';
+import { getUserMessage } from '../../util/api';
+import BACKGROUND_COLOR from '../../util/backgroundColor';
+
+const DetailSection = styled(Section)`
+  max-width: 100%;
+  margin-top: 13.3rem;
+  background: ${({ background }) => background || 'transparent'};
+  background-image: ${({ backgroundImage }) => backgroundImage || 'none'};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  @media (max-width: 768px) {
+    margin-top: 8.4rem;
+    padding-bottom: 20rem;
+  }
+`;
 
 const Container = styled.div`
   max-width: 1200px;
   height: 100%;
+  padding-bottom: 5rem;
   margin: 0 auto;
   @media (max-width: 1248px) {
     padding: 0 24px;
@@ -17,22 +36,13 @@ const Container = styled.div`
   }
 `;
 
-const DetailSection = styled(Section)`
-  max-width: 100%;
-  margin-top: 13.3rem;
-  background: var(--custom-bg-color);
-
-  @media (max-width: 768px) {
-    margin-top: 8.4rem;
-  }
-`;
-
 const FlexContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 2.4rem;
   padding-top: 11.3rem;
-  padding-bottom: 24.6rem;
+  padding-bottom: 5rem;
   @media (max-width: 960px) {
     grid-template-columns: repeat(2, 1fr);
     padding-top: 9.3rem;
@@ -78,44 +88,87 @@ const LinkMessage = styled(Card)`
       background: var(--gray700);
     }
     transform: scale(1.05);
+    box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
   }
 `;
 
-export default function PostDetail() {
+export default function PostDetail({ userData }) {
+  const { postId } = useParams();
+  const [loading, setLoading] = useState(false);
   const [postMessage, setPostMessage] = useState([]);
-  const { id } = useParams();
+  const [hasMore, setHasMore] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const observerRef = useRef();
 
-  const fetchUserData = async () => {
+  const fetchUserMessage = async () => {
+    setLoading(true);
     try {
-      const response = await fetch(
-        `https://rolling-api.vercel.app/8-8/recipients/${id}/messages/?limit=5`
-      );
-      if (!response.ok) {
-        throw new Error('데이터 불러오기 실패');
+      const messages = await getUserMessage({ id: postId, offset });
+      const { results, next } = messages;
+      setPostMessage((prevList) => [...prevList, ...results]);
+      if (next === null) {
+        setHasMore(false);
       }
-      const { results } = await response.json();
-      console.log(results);
-      setPostMessage(results);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
+  const handleObserver = (entries) => {
+    const target = entries[0];
+    if (target.isIntersecting && hasMore) {
+      setLoading(true);
+      setTimeout(() => {
+        setOffset((prev) => prev + 5);
+      }, [700]);
     }
   };
 
   useEffect(() => {
-    fetchUserData();
-  }, []);
+    const option = {
+      threshold: 1,
+    };
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+    return () => {
+      if (observerRef.current) {
+        observer.disconnect(observerRef.current);
+      }
+    };
+  }, [loading]);
+
+  useEffect(() => {
+    fetchUserMessage();
+  }, [offset]);
+
+  const userBackground = BACKGROUND_COLOR.find(
+    (list) => list.type === userData.backgroundColor
+  );
+
+  const userImageBackground = userData.backgroundImageURL;
+
+  const backgroundStyle = userImageBackground
+    ? { backgroundImage: `url(${userImageBackground})` }
+    : { background: `var(${userBackground.background})` };
 
   return (
-    <DetailSection>
+    <DetailSection
+      background={backgroundStyle.background}
+      backgroundImage={backgroundStyle.backgroundImage}
+    >
       <Container>
         <FlexContainer>
           <Link to='message'>
             <LinkMessage>
-              <div></div>
+              <div />
             </LinkMessage>
           </Link>
           {postMessage.map((list) => (
             <MessageList
+              id={list.id}
               key={list.id}
               sender={list.sender}
               relationship={list.relationship}
@@ -126,6 +179,7 @@ export default function PostDetail() {
             />
           ))}
         </FlexContainer>
+        {!loading ? <div ref={observerRef}></div> : <LoadingSpinner />}
       </Container>
     </DetailSection>
   );
