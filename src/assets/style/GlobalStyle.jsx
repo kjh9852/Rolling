@@ -119,8 +119,8 @@ input::-webkit-inner-spin-button {
 
 /* 스크롤 디자인 */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
 	background: var(--purple100);
