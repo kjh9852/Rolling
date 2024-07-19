@@ -4,8 +4,21 @@ import styled from 'styled-components';
 import Card from '../common/Card';
 import MessageList from './MessageList';
 import Section from '../common/Section';
+import { getUserMessage } from '../../util/api';
+
+const DetailSection = styled(Section)`
+  overflow-y: auto;
+  max-width: 100%;
+  margin-top: 13.3rem;
+  background: var(--custom-bg-color);
+
+  @media (max-width: 768px) {
+    margin-top: 8.4rem;
+  }
+`;
 
 const Container = styled.div`
+  overflow-y: auto;
   max-width: 1200px;
   height: 100%;
   margin: 0 auto;
@@ -14,16 +27,6 @@ const Container = styled.div`
   }
   @media (max-width: 640px) {
     padding: 0 20px;
-  }
-`;
-
-const DetailSection = styled(Section)`
-  max-width: 100%;
-  margin-top: 13.3rem;
-  background: var(--custom-bg-color);
-
-  @media (max-width: 768px) {
-    margin-top: 8.4rem;
   }
 `;
 
@@ -83,26 +86,18 @@ const LinkMessage = styled(Card)`
 
 export default function PostDetail() {
   const [postMessage, setPostMessage] = useState([]);
-  const { id } = useParams();
+  const { postId } = useParams();
 
-  const fetchUserData = async () => {
+  const fetchUserMessage = async () => {
     try {
-      const response = await fetch(
-        `https://rolling-api.vercel.app/8-8/recipients/${id}/messages/?limit=5`
-      );
-      if (!response.ok) {
-        throw new Error('데이터 불러오기 실패');
-      }
-      const { results } = await response.json();
-      console.log(results);
+      const messages = await getUserMessage(postId);
+      const { results } = messages;
       setPostMessage(results);
-    } catch (error) {
-      console.log(error.message);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
-    fetchUserData();
+    fetchUserMessage();
   }, []);
 
   return (
@@ -111,11 +106,12 @@ export default function PostDetail() {
         <FlexContainer>
           <Link to='message'>
             <LinkMessage>
-              <div></div>
+              <div />
             </LinkMessage>
           </Link>
           {postMessage.map((list) => (
             <MessageList
+              id={list.id}
               key={list.id}
               sender={list.sender}
               relationship={list.relationship}
