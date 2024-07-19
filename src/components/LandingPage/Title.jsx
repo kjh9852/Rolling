@@ -8,7 +8,10 @@ const Title = styled.h2`
   line-height: 36px;
   letter-spacing: -0.01em;
   color: var(--gray900);
-  white-space: nowrap;
+  @media (max-width: 768px) {
+    font-size: 18px;
+    line-height: 28px;
+  }
 `;
 
 export default Title;

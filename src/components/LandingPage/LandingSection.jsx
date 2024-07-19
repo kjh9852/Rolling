@@ -10,7 +10,7 @@ const LandingSection = styled(Section)`
     padding: 0 24px;
   }
 
-  @media (max-width: 360px) {
+  @media (max-width: 768px) {
     padding: 0 20px;
   }
 `;

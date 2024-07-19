@@ -30,6 +30,8 @@ const StartButton = styled(PrimaryButton)`
     justify-content: center;
   }
   @media (max-width: 768px) {
+    padding: 14px 80px;
+    margin: 24px;
   }
 `;
 

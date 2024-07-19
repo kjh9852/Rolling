@@ -6,8 +6,6 @@ const PointBox = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--purple600);
-  width: 82px;
-  height: 32px;
   border-radius: 50px;
   font-size: 14px;
   color: var(--white);
@@ -16,6 +14,11 @@ const PointBox = styled.div`
   line-height: 20px;
   position: absolute;
   top: -48px;
+
+  @media (max-width: 768px) {
+    padding: 4px 12px;
+    top: -44px;
+  }
 `;
 
 export default PointBox;
