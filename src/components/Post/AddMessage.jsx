@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Select from '../Select/Select';
 import NameInput from '../Input/NameInput';
 import ContentArea from '../TextArea/ContentArea';
 import ProfileImageList from '../ProfileImageList/ProfileImageList';
 import { getProfileImage } from '../../util/api';
+import Tiptap from '../TextArea/TipTap';
 
 const Container = styled.form`
   display: flex;
@@ -80,23 +81,34 @@ function AddMessage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      'name :',
-      name,
-      'content :',
-      content,
-      'image :',
-      image,
-      'relationShip :',
-      relationShip,
-      'font :',
-      font
-    );
+    // console.log(
+    //   'name :',
+    //   name,
+    //   'content :',
+    //   content,
+    //   'image :',
+    //   image,
+    //   'relationShip :',
+    //   relationShip,
+    //   'font :',
+    //   font
+    // );
   };
 
   useEffect(() => {
     handleLoad();
   }, []);
+
+  const editorRef = useRef();
+
+  const getContent = () => {
+    if (editorRef.current) {
+      console.log(editorRef.current.getHTML());
+      console.log(editorRef.current.getText());
+    } else {
+      console.log('Editor is not initialized');
+    }
+  };
 
   return (
     <Container onSubmit={handleSubmit}>
@@ -129,6 +141,12 @@ function AddMessage() {
       <InputContainer>
         <Title>내용을 입력해 주세요</Title>
         <ContentArea onChange={setContent} value={content} />
+        {/* <>
+          <Tiptap editorRef={editorRef} content={content} isEditable />
+          <button type='button' onClick={getContent}>
+            내용 가져오기
+          </button>
+        </> */}
       </InputContainer>
       <InputContainer>
         <Title>폰트 선택</Title>

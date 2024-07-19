@@ -14,3 +14,30 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+.quill.readMessage {
+  flex: 1 0;
+}
+
+.quill.readMessage .ql-editor {
+  padding: 16px 0 0 0;
+  font-size: 16px;
+}
+
+.quill.readMessage .ql-editor ol,
+.quill.readMessage .ql-editor ul {
+  padding-left: 0;
+}
+
+.quill.readMessage .ql-editor ol li:not(.ql-direction-rtl),
+.quill.readMessage .ql-editor ul li:not(.ql-direction-rtl) {
+  padding-left: 0;
+}
+
+.quill.readMessage .ql-editor > * {
+  cursor: pointer;
+}
+
+.ql-editor {
+  font-family: 'pretendard';
+}
