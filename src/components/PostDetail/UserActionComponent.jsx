@@ -38,12 +38,13 @@ const ArrowBtnContainer = styled.div`
     }
   }
 `;
-const AllReaction = styled.ul`
+
+const AllReactionContainer = styled.ul`
   position: absolute;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding: 2.4rem;
-  transform: translate(-28rem, 16px);
+  transform: translate(-28rem, 5px);
   border: 1px solid #b6b6b6;
   border-radius: 8px;
   gap: 10px 8px;
@@ -137,7 +138,7 @@ export default function UserActionComponent({ actionEmoji, topReaction }) {
             <img src={arrowIcon} alt='활성화 버튼' />
           </button>
           {openReaction && (
-            <AllReaction>
+            <AllReactionContainer>
               {actionEmoji.results.map((list) => (
                 <EmojiBadge
                   key={list.id}
@@ -145,7 +146,7 @@ export default function UserActionComponent({ actionEmoji, topReaction }) {
                   emojiCount={list.count}
                 />
               ))}
-            </AllReaction>
+            </AllReactionContainer>
           )}
         </ArrowBtnContainer>
       </ListContainer>
