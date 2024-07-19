@@ -4,33 +4,40 @@ import TextInput from './TextInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
 import styled from 'styled-components';
-import PrimaryButton from '../common/PrimaryButton';
 
 const PageWrap = styled.div`
   padding-top: 60px;
   max-width: 720px;
   margin: 0 auto;
-  margin-top: 60px;
 `;
 
-
 const AddPost = () => {
-
   const [valueName, setValueName] = useState('');
   const [selectedColor, setSelectedColor] = useState('beige');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [checkedTab, setCheckedTab] = useState('color');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newId = Date.now(); //임시
-    console.log('생성', { valueName, selectedColor, selectedImage });
+
+    let postData = {
+      name: valueName,
+    };
+
+    if (checkedTab === 'color' && selectedColor) {
+      postData.backgroundColor = selectedColor;
+    } else if (checkedTab === 'image' && selectedImage) {
+      postData.backgroundImage = selectedImage;
+    }
+
+    console.log('생성', postData);
+    const newId = Date.now(); // 임시
     navigate(`/post/${newId}`);
   };
 
   return (
     <PageWrap>
-
       <form onSubmit={handleSubmit}>
         <TextInput
           label='To.'
@@ -43,10 +50,11 @@ const AddPost = () => {
           setSelectedColor={setSelectedColor}
           selectedImage={selectedImage}
           setSelectedImage={setSelectedImage}
+          checkedTab={checkedTab}
+          setCheckedTab={setCheckedTab}
         />
         <SubmitButton />
       </form>
-
     </PageWrap>
   );
 };

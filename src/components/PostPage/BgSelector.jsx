@@ -54,8 +54,9 @@ const BgSelector = ({
   setSelectedColor,
   selectedImage,
   setSelectedImage,
+  checkedTab,
+  setCheckedTab,
 }) => {
-  const [checkedTab, setCheckedTab] = useState('color');
   const [images, setImages] = useState([]);
   const colors = ['beige', 'purple', 'blue', 'green'];
 
