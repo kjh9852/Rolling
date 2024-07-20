@@ -16,8 +16,8 @@ const RecipientName = styled.div`
   font-size: 24px;
   line-height: 36px;
   letter-spacing: -0.01em;
-  color: ${({ hasBackgroundImage }) =>
-    hasBackgroundImage ? 'var(--white)' : 'var(--gray900)'};
+  color: ${({ $hasBackgroundImage }) =>
+    $hasBackgroundImage ? 'var(--white)' : 'var(--gray900)'};
   flex: none;
   order: 0;
   align-self: stretch;
@@ -30,8 +30,8 @@ const MessageCount = styled.div`
   font-size: 16px;
   line-height: 26px;
   letter-spacing: -0.01em;
-  color: ${({ hasBackgroundImage }) =>
-    hasBackgroundImage ? 'var(--gray200)' : 'var(--gray700)'};
+  color: ${({ $hasBackgroundImage }) =>
+    $hasBackgroundImage ? 'var(--gray200)' : 'var(--gray700)'};
   flex: none;
   order: 2;
   flex-grow: 0;
@@ -106,10 +106,10 @@ const CardContent = ({
 
   return (
     <CardContentContainer>
-      <RecipientName hasBackgroundImage={!!backgroundImageURL}>
+      <RecipientName $hasBackgroundImage={!!backgroundImageURL}>
         To. {recipientName}
       </RecipientName>
-      <MessageCount hasBackgroundImage={!!backgroundImageURL}>
+      <MessageCount $hasBackgroundImage={!!backgroundImageURL}>
         <span>{messageCount}</span>명이 작성했어요!
       </MessageCount>
       <ProfileImagesContainer>
