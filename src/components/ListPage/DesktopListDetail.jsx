@@ -18,9 +18,9 @@ export default function DesktopListDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchRecipients(offset, setMessages) {
+    async function fetchRecipients(offset, setMessages, sortBy) {
       try {
-        const response = await getRecipients(offset, itemsPerPage);
+        const response = await getRecipients(offset, itemsPerPage, sortBy);
         const recipientsData = response.results;
         const total = response.count;
         setTotalItems(total);
@@ -37,13 +37,13 @@ export default function DesktopListDetail() {
       }
     }
 
-    fetchRecipients(currentTopOffset, setTopMessages);
+    fetchRecipients(currentTopOffset, setTopMessages, 'messageCount');
   }, [currentTopOffset]);
 
   useEffect(() => {
-    async function fetchRecipients(offset, setMessages) {
+    async function fetchRecipients(offset, setMessages, sortBy) {
       try {
-        const response = await getRecipients(offset, itemsPerPage);
+        const response = await getRecipients(offset, itemsPerPage, sortBy);
         const recipientsData = response.results;
         const total = response.count;
         setTotalItems(total);
@@ -60,7 +60,7 @@ export default function DesktopListDetail() {
       }
     }
 
-    fetchRecipients(currentBottomOffset, setBottomMessages);
+    fetchRecipients(currentBottomOffset, setBottomMessages, 'createdAt');
   }, [currentBottomOffset]);
 
   const handlePrevTopClick = () => {
@@ -104,6 +104,7 @@ export default function DesktopListDetail() {
             totalItems={totalItems}
             itemsPerPage={itemsPerPage}
             handleCardClick={handleCardClick}
+            sortBy='messageCount'
           />
         </LeftAlign>
         <LeftAlign>
@@ -116,6 +117,7 @@ export default function DesktopListDetail() {
             totalItems={totalItems}
             itemsPerPage={itemsPerPage}
             handleCardClick={handleCardClick}
+            sortBy='createdAt'
           />
         </LeftAlign>
       </Container>

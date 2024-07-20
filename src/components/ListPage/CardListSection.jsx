@@ -13,18 +13,18 @@ const CardListWrapper = styled.div`
   height: 260px;
 `;
 
-const CardListSection = ({ title, handleCardClick }) => {
+const CardListSection = ({ title, handleCardClick, sortBy }) => {
   const [messages, setMessages] = useState([]);
   const [currentOffset, setCurrentOffset] = useState(0);
 
   useEffect(() => {
     const fetchRecipients = async () => {
-      const data = await getRecipients();
+      const data = await getRecipients(0, 1000, sortBy);
       setMessages(data.results);
     };
 
     fetchRecipients();
-  }, []);
+  }, [sortBy]);
 
   const handlePrevClick = () => {
     if (currentOffset > 0) {

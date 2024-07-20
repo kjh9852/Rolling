@@ -20,11 +20,30 @@ export async function getUserMessage({ id, offset }) {
   return data;
 }
 
-export async function getRecipients(offset = 0, limit = 1000) {
+// getRecipients 함수: 데이터를 가져오고 정렬하는 함수
+// - 기본적으로 createdAt을 기준으로 정렬
+// - sortBy 매개변수에 따라 messageCount를 기준으로 정렬 가능
+export async function getRecipients(
+  offset = 0,
+  limit = 1000,
+  sortBy = 'createdAt'
+) {
   const response = await fetch(
     `${BASE_URL}/${TEAM}/recipients/?offset=${offset}&limit=${limit}`
   );
   const body = await response.json();
+
+  if (sortBy === 'messageCount') {
+    body.results.sort(
+      (a, b) =>
+        b.messageCount - a.messageCount ||
+        b.reactionCount - a.reactionCount ||
+        new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  } else {
+    body.results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  }
+
   return body;
 }
 
