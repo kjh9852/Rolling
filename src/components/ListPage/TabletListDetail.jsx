@@ -9,17 +9,21 @@ import { getRecipients, getRecipientMessage } from '../../util/api';
 import LeftAlign from './LeftAlign';
 import styled from 'styled-components';
 
+const PaddingBox = styled.div`
+  width: 100%;
+  padding: 0px 20px;
+`;
+
 export default function TabletListDetail() {
   const [topMessages, setTopMessages] = useState([]);
   const [bottomMessages, setBottomMessages] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
-  const itemsPerPage = 4;
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchRecipients(offset, setMessages, sortBy) {
+    async function fetchRecipients(setMessages, sortBy) {
       try {
-        const response = await getRecipients(offset, itemsPerPage, sortBy);
+        const response = await getRecipients(0, 1000, sortBy); // 모든 데이터를 한 번에 불러옴
         const recipientsData = response.results;
         const total = response.count;
         setTotalItems(total);
@@ -40,9 +44,9 @@ export default function TabletListDetail() {
   }, []);
 
   useEffect(() => {
-    async function fetchRecipients(offset, setMessages, sortBy) {
+    async function fetchRecipients(setMessages, sortBy) {
       try {
-        const response = await getRecipients(offset, itemsPerPage, sortBy);
+        const response = await getRecipients(0, 1000, sortBy); // 모든 데이터를 한 번에 불러옴
         const recipientsData = response.results;
         const total = response.count;
         setTotalItems(total);
@@ -65,11 +69,6 @@ export default function TabletListDetail() {
   const handleCardClick = (id) => {
     navigate(`/post/${id}`);
   };
-
-  const PaddingBox = styled.div`
-    width: 100%;
-    padding: 0px 20px;
-  `;
 
   return (
     <ListSection>
