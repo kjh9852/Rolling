@@ -1,6 +1,16 @@
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Card from '../common/Card';
+import Badge from '../common/Badge';
+import RELATION from '../../util/relation';
 
+const MessageCard = styled(Card)`
+  transition: all.3s ease;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
+  }
+`;
 const ListContainer = styled.article`
   display: flex;
   flex-direction: column;
@@ -21,7 +31,9 @@ const UserProfile = styled.img`
 const UserBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   h2 {
+    margin-bottom: 6px;
     font-size: 2rem;
   }
 `;
@@ -31,6 +43,7 @@ const Content = styled.p`
   padding-top: 16px;
   font-family: ${(props) => props.font};
 `;
+
 const CreateDate = styled.div`
   p {
     font-size: 1.2rem;
@@ -38,10 +51,8 @@ const CreateDate = styled.div`
   }
 `;
 
-const ListCard = styled(Card)``;
-// 데이터 받아 온 후 추가예정
-
 export default function MessageList({
+  id,
   sender,
   relationship,
   content,
@@ -49,24 +60,35 @@ export default function MessageList({
   profileImageURL,
   font,
 }) {
+  const findRelationShip = RELATION.find((list) => list.type === relationship);
+
+  const spanStyle = {
+    '--background': findRelationShip && `var(${findRelationShip.background})`,
+    '--color': findRelationShip && `var(${findRelationShip.color})`,
+  };
+
+  const convertDate = createdAt.split('T')[0];
+
   return (
-    <ListCard>
-      <ListContainer>
-        <UserInfo>
-          <UserProfile src={profileImageURL} alt={sender} />
-          <UserBox>
-            <h2>
-              From.
-              <strong>{sender}</strong>
-            </h2>
-            <span>{relationship}</span>
-          </UserBox>
-        </UserInfo>
-        <Content font={font}>{content}</Content>
-        <CreateDate>
-          <p>{createdAt}</p>
-        </CreateDate>
-      </ListContainer>
-    </ListCard>
+    <MessageCard>
+      <Link to={`message/${id}`}>
+        <ListContainer>
+          <UserInfo>
+            <UserProfile src={profileImageURL} alt={sender} />
+            <UserBox>
+              <h2>
+                From.
+                <strong>{sender}</strong>
+              </h2>
+              <Badge style={spanStyle}>{relationship}</Badge>
+            </UserBox>
+          </UserInfo>
+          <Content font={font}>{content}</Content>
+          <CreateDate>
+            <p>{convertDate}</p>
+          </CreateDate>
+        </ListContainer>
+      </Link>
+    </MessageCard>
   );
 }

@@ -1,18 +1,19 @@
-@charset "uft-8";
+import { createGlobalStyle } from 'styled-components';
 
+const GlobalStyle = createGlobalStyle`
 /* font */
 @font-face {
-  font-family: "Pretendard";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-    format("woff");
+  font-family: 'Pretendard';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Pretendard";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
-    format("woff");
+  font-family: 'Pretendard';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
+    format('woff');
   font-weight: 700;
   font-style: normal;
 }
@@ -24,9 +25,9 @@
   padding: 0;
   list-style: none;
   text-decoration: none;
-  font-family: Pretendard, "Apple SD Gothic Neo", Roboto, "Noto Sans KR",
-    NanumGothic, "Malgun Gothic", "Segoe UI", "Apple SD Gothic Neo",
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: Pretendard, 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR',
+    NanumGothic, 'Malgun Gothic', 'Segoe UI', 'Apple SD Gothic Neo',
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
 
 html {
@@ -116,6 +117,22 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+/* 스크롤 디자인 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+	background: var(--purple100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--purple300);
+  border-radius: 12px;   
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple400)
+}
+
 :root {
   --white: #ffffff;
   --black: #000000;
@@ -160,3 +177,6 @@ input::-webkit-inner-spin-button {
   --gray800: #2b2b2b;
   --gray900: #181818;
 }
+`;
+
+export default GlobalStyle;
