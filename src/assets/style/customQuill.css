@@ -43,6 +43,7 @@
 }
 .quill.readMessage.나눔손글씨 .ql-editor > p {
   font-family: '나눔손글씨 손편지체';
+  font-size: 28px;
 }
 .quill.readMessage.나눔명조 .ql-editor > p {
   font-family: '나눔명조';
