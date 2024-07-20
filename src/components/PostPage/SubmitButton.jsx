@@ -12,6 +12,15 @@ const AddPostCommit = styled(PrimaryButton)`
     background-color: var(--gray300);
     cursor: not-allowed;
   }
+
+  @media (max-width: 1248px) {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px); // 좌우 여백 24px씩
+    max-width: 720px;
+  }
 `;
 
 const SubmitButton = ({ children, disabled, ...props }) => {
