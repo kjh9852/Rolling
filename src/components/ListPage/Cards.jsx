@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import Overlay from './Overlay';
 
@@ -111,15 +110,4 @@ const Card = ({ backgroundColor, backgroundImageURL, children, ...props }) => (
   </CardContainer>
 );
 
-const CardListWrapper = styled.div`
-  position: relative;
-  width: 1160px;
-  overflow: visible;
-`;
-
-const CardList = styled.div`
-  display: flex;
-  gap: 20px;
-`;
-
-export { Card, CardListWrapper, CardList };
+export { Card };

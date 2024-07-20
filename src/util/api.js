@@ -20,7 +20,7 @@ export async function getUserMessage({ id, offset }) {
   return data;
 }
 
-export async function getRecipients(offset = 0, limit = 8) {
+export async function getRecipients(offset = 0, limit = 1000) {
   const response = await fetch(
     `${BASE_URL}/${TEAM}/recipients/?offset=${offset}&limit=${limit}`
   );

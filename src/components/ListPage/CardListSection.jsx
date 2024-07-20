@@ -1,18 +1,42 @@
-import React from 'react';
-import { Card, CardListWrapper, CardList } from './Cards';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Card } from './Cards';
 import { PrevButton, NextButton } from './NavigationButton';
 import CardContent from './CardContent';
 import CardReactions from './CardReactions';
+import AnimatedCardList from './AnimatedCardList';
+import { getRecipients } from '../../util/api';
 
-const CardListSection = ({
-  title,
-  messages,
-  currentOffset,
-  handlePrevClick,
-  handleNextClick,
-  handleCardClick,
-  totalItems,
-}) => {
+const CardListWrapper = styled.div`
+  position: relative;
+  width: 1160px;
+`;
+
+const CardListSection = ({ title, handleCardClick }) => {
+  const [messages, setMessages] = useState([]);
+  const [currentOffset, setCurrentOffset] = useState(0);
+
+  useEffect(() => {
+    const fetchRecipients = async () => {
+      const data = await getRecipients();
+      setMessages(data.results);
+    };
+
+    fetchRecipients();
+  }, []);
+
+  const handlePrevClick = () => {
+    if (currentOffset > 0) {
+      setCurrentOffset(currentOffset - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentOffset < Math.floor(messages.length / 4)) {
+      setCurrentOffset(currentOffset + 1);
+    }
+  };
+
   return (
     <div>
       <h2>{title}</h2>
@@ -22,8 +46,8 @@ const CardListSection = ({
           disabled={currentOffset === 0}
           isNext={false}
         />
-        <CardList>
-          {messages.slice(0, 4).map((recipient) => (
+        <AnimatedCardList
+          cards={messages.map((recipient) => (
             <Card
               key={recipient.id}
               onClick={() => handleCardClick(recipient.id)}
@@ -39,10 +63,11 @@ const CardListSection = ({
               <CardReactions reactions={recipient.topReactions} />
             </Card>
           ))}
-        </CardList>
+          currentOffset={currentOffset}
+        />
         <NextButton
           onClick={handleNextClick}
-          disabled={currentOffset + 4 >= totalItems}
+          disabled={currentOffset >= Math.floor(messages.length / 4)}
           isNext={true}
         />
       </CardListWrapper>
