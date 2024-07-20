@@ -20,12 +20,16 @@ const specialShapeStyles = css`
       &::before {
         content: '';
         position: absolute;
+        width: 336px;
         height: 169px;
         left: 133px;
         right: -194px;
         top: 124px;
         background: rgba(220, 185, 255, 0.4);
         border-radius: 90.5px;
+        @media (max-width: 768px) {
+          left: 100.6px;
+        }
       }
     `}
   ${({ $backgroundColor, $backgroundImageURL }) =>
@@ -35,12 +39,16 @@ const specialShapeStyles = css`
       &::before {
         content: '';
         position: absolute;
+        width: 332px;
         height: 318px;
         left: 154px;
         right: -211px;
         top: 124px;
         background: rgba(255, 211, 130, 0.7);
         border-radius: 51px;
+        @media (max-width: 768px) {
+          left: 100.6px;
+        }
       }
     `}
   ${({ $backgroundColor, $backgroundImageURL }) =>
@@ -58,6 +66,11 @@ const specialShapeStyles = css`
         clip-path: path(
           'M74.4299 16.6978C88.1712 -5.00283 119.829 -5.00284 133.57 16.6978L202.482 125.526C217.239 148.829 200.495 179.25 172.912 179.25H35.0878C7.5049 179.25 -9.23877 148.829 5.51768 125.526L74.4299 16.6978Z'
         );
+        @media (max-width: 768px) {
+          width: 107.4px;
+          height: 142px;
+          left: 100.6px;
+        }
       }
     `}
   ${({ $backgroundColor, $backgroundImageURL }) =>
@@ -67,12 +80,16 @@ const specialShapeStyles = css`
       &::before {
         content: '';
         position: absolute;
+        width: 336px;
         height: 169px;
         left: 133px;
         right: -194px;
         top: 124px;
         background: rgba(155, 226, 130, 0.3);
         border-radius: 90.5px;
+        @media (max-width: 768px) {
+          left: 100.6px;
+        }
       }
     `}
 `;
@@ -97,6 +114,11 @@ const CardContainer = styled.div`
   overflow: hidden;
   cursor: pointer;
   ${specialShapeStyles}
+  @media (max-width: 768px) {
+    width: 208px;
+    height: 232px;
+    padding: 30px 22px 20px 24px;
+  }
 `;
 
 const Card = ({ backgroundColor, backgroundImageURL, children, ...props }) => (

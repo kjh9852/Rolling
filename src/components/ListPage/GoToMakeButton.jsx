@@ -22,6 +22,18 @@ const GoToMakeButton = styled(PrimaryButton)`
   &:focus {
     background-color: var(--purple800);
   }
+  @media (min-width: 769px) and (max-width: 1023px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 132px 0 24px 0;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 32px 0px 24px;
+  }
 `;
 
 export default GoToMakeButton;

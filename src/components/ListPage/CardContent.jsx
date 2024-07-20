@@ -9,6 +9,9 @@ const CardContentContainer = styled.div`
   gap: 12px;
   position: relative;
   z-index: 4;
+  @media (max-width: 768px) {
+    margin-bottom: 33px;
+  }
 `;
 
 const RecipientName = styled.div`
@@ -22,6 +25,11 @@ const RecipientName = styled.div`
   order: 0;
   align-self: stretch;
   flex-grow: 0;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    line-height: 28px;
+  }
 `;
 
 const MessageCount = styled.div`
@@ -35,12 +43,22 @@ const MessageCount = styled.div`
   flex: none;
   order: 2;
   flex-grow: 0;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.005em;
+  }
   span {
     font-size: 16px;
     font-weight: 700;
     line-height: 26px;
     letter-spacing: -0.01em;
     text-align: left;
+    @media (max-width: 768px) {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.005em;
+    }
   }
 `;
 

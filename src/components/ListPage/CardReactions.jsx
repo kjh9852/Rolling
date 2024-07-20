@@ -9,17 +9,27 @@ const ReactionsContainer = styled.div`
   margin-top: 16px;
   position: relative;
   z-index: 3;
+  @media (max-width: 768px) {
+    gap: 4px;
+  }
 `;
 
 const CustomEmojiBadge = styled(EmojiBadge)`
   justify-content: center;
   gap: 4px;
+  @media (max-width: 768px) {
+    gap: 6px;
+    padding: 6px 8px;
+  }
 `;
 
 const Line = styled.div`
   width: 227px;
   height: 1px;
   background: rgba(0, 0, 0, 0.12);
+  @media (max-width: 768px) {
+    width: 162px;
+  }
 `;
 
 const CardReactions = ({ reactions }) => {

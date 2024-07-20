@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Card } from './Cards';
-import { PrevButton, NextButton } from './NavigationButton';
 import CardContent from './CardContent';
 import CardReactions from './CardReactions';
 import AnimatedCardList from './AnimatedCardList';
@@ -11,11 +10,17 @@ const CardListWrapper = styled.div`
   position: relative;
   width: 1160px;
   height: 260px;
+  @media (min-width: 769px) and (max-width: 1023px) {
+    width: 100vw;
+  }
+  @media (max-width: 768px) {
+    width: 100vw;
+    margin-bottom: 34px;
+  }
 `;
 
-const CardListSection = ({ title, handleCardClick, sortBy }) => {
+const SlideCardListSection = ({ title, handleCardClick, sortBy }) => {
   const [messages, setMessages] = useState([]);
-  const [currentOffset, setCurrentOffset] = useState(0);
 
   useEffect(() => {
     const fetchRecipients = async () => {
@@ -26,27 +31,10 @@ const CardListSection = ({ title, handleCardClick, sortBy }) => {
     fetchRecipients();
   }, [sortBy]);
 
-  const handlePrevClick = () => {
-    if (currentOffset > 0) {
-      setCurrentOffset(currentOffset - 1);
-    }
-  };
-
-  const handleNextClick = () => {
-    if (currentOffset < Math.floor(messages.length / 4)) {
-      setCurrentOffset(currentOffset + 1);
-    }
-  };
-
   return (
-    <>
+    <div>
       <h2>{title}</h2>
       <CardListWrapper>
-        <PrevButton
-          onClick={handlePrevClick}
-          disabled={currentOffset === 0}
-          isNext={false}
-        />
         <AnimatedCardList
           cards={messages.map((recipient) => (
             <Card
@@ -64,16 +52,10 @@ const CardListSection = ({ title, handleCardClick, sortBy }) => {
               <CardReactions reactions={recipient.topReactions} />
             </Card>
           ))}
-          currentOffset={currentOffset}
-        />
-        <NextButton
-          onClick={handleNextClick}
-          disabled={currentOffset >= Math.floor(messages.length / 4)}
-          isNext={true}
         />
       </CardListWrapper>
-    </>
+    </div>
   );
 };
 
-export default CardListSection;
+export default SlideCardListSection;
