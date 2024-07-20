@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Card from '../common/Card';
 import Badge from '../common/Badge';
 import RELATION from '../../util/relation';
+import ReactQuill from 'react-quill';
 
 const MessageCard = styled(Card)`
   transition: all.3s ease;
@@ -83,7 +84,12 @@ export default function MessageList({
               <Badge style={spanStyle}>{relationship}</Badge>
             </UserBox>
           </UserInfo>
-          <Content font={font}>{content}</Content>
+          <ReactQuill
+            readOnly={true}
+            theme='bubble'
+            value={content}
+            className={`readMessage ${font}`}
+          />
           <CreateDate>
             <p>{convertDate}</p>
           </CreateDate>
