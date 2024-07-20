@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import MessageContainer from './MessageContainer';
 import Card from '../common/Card';
@@ -8,6 +8,7 @@ import OutlineButton from '../common/OutlineButton';
 import RELATION from '../../util/relation';
 import ReactQuill from 'react-quill';
 import deleteIcon from '../../assets/image/deleted.png';
+
 const SectionContainer = styled(Card)`
   transition: all.3s ease;
   ${({ isEdit }) =>
