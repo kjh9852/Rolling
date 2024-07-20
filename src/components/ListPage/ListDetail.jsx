@@ -6,6 +6,7 @@ import Title from './Title';
 import CardListSection from './CardListSection';
 import GoToMakeButton from './GoToMakeButton';
 import { getRecipients, getRecipientMessage } from '../../util/api';
+import LeftAlign from './LeftAlign';
 
 export default function ListDetail() {
   const [topMessages, setTopMessages] = useState([]);
@@ -93,26 +94,30 @@ export default function ListDetail() {
   return (
     <ListSection>
       <Container>
-        <Title>인기 롤링 페이퍼 🔥</Title>
-        <CardListSection
-          messages={topMessages}
-          handlePrevClick={handlePrevTopClick}
-          handleNextClick={handleNextTopClick}
-          currentOffset={currentTopOffset}
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          handleCardClick={handleCardClick}
-        />
-        <Title>최근에 만든 롤링 페이퍼 ⭐️️</Title>
-        <CardListSection
-          messages={bottomMessages}
-          handlePrevClick={handlePrevBottomClick}
-          handleNextClick={handleNextBottomClick}
-          currentOffset={currentBottomOffset}
-          totalItems={totalItems}
-          itemsPerPage={itemsPerPage}
-          handleCardClick={handleCardClick}
-        />
+        <LeftAlign>
+          <Title>인기 롤링 페이퍼 🔥</Title>
+          <CardListSection
+            messages={topMessages}
+            handlePrevClick={handlePrevTopClick}
+            handleNextClick={handleNextTopClick}
+            currentOffset={currentTopOffset}
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            handleCardClick={handleCardClick}
+          />
+        </LeftAlign>
+        <LeftAlign>
+          <Title>최근에 만든 롤링 페이퍼 ⭐️️</Title>
+          <CardListSection
+            messages={bottomMessages}
+            handlePrevClick={handlePrevBottomClick}
+            handleNextClick={handleNextBottomClick}
+            currentOffset={currentBottomOffset}
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            handleCardClick={handleCardClick}
+          />
+        </LeftAlign>
       </Container>
       <GoToMakeButton to='/post'>나도 만들어보기</GoToMakeButton>
     </ListSection>
