@@ -105,6 +105,12 @@ const EditButton = styled(PrimaryButton)`
   border-radius: 6px;
 `;
 
+const ConfirmButton = styled(PrimaryButton)`
+  margin-left: 1.2rem;
+  padding: 7px 16px;
+  font-size: 1.6rem;
+  border-radius: 6px;
+`;
 export default function PostDetail({ userData }) {
   const { postId } = useParams();
   const [loading, setLoading] = useState(false);
@@ -163,6 +169,10 @@ export default function PostDetail({ userData }) {
     }
   };
 
+  const handleCompleteEdit = async () => {
+    navigate('./');
+  };
+
   const handleObserver = (entries) => {
     const target = entries[0];
     if (target.isIntersecting && hasMore) {
@@ -208,19 +218,24 @@ export default function PostDetail({ userData }) {
       backgroundImage={backgroundStyle.backgroundImage}
     >
       <Container>
-        <EditButtonContainer>
-          {!isEdit ? (
+        {!isEdit ? (
+          <EditButtonContainer>
             <EditButton to='edit'>편집하기</EditButton>
-          ) : (
+          </EditButtonContainer>
+        ) : (
+          <EditButtonContainer>
             <EditButton onClick={handleDeleteUser}>삭제하기</EditButton>
-          )}
-        </EditButtonContainer>
+            <ConfirmButton onClick={handleCompleteEdit}>완료</ConfirmButton>
+          </EditButtonContainer>
+        )}
         <GridContainer>
-          <Link to='message'>
-            <LinkMessage>
-              <div />
-            </LinkMessage>
-          </Link>
+          {!isEdit && (
+            <Link to='message'>
+              <LinkMessage>
+                <div />
+              </LinkMessage>
+            </Link>
+          )}
           {postMessage.map((list) => (
             <MessageList
               id={list.id}
