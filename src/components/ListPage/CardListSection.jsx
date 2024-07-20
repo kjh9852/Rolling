@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, CardReactions, CardListWrapper, CardList } from './Cards';
+import { Card, CardListWrapper, CardList } from './Cards';
 import { PrevButton, NextButton } from './NavigationButton';
 import CardContent from './CardContent';
+import CardReactions from './CardReactions';
 
 const CardListSection = ({
   title,

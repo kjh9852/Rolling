@@ -111,27 +111,6 @@ const Card = ({ backgroundColor, backgroundImageURL, children, ...props }) => (
   </CardContainer>
 );
 
-const CardReactions = ({ reactions }) => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '10px',
-        marginTop: '10px',
-        fontSize: '14px',
-      }}
-    >
-      {reactions &&
-        reactions.map((reaction) => (
-          <span key={reaction.emoji}>
-            {String.fromCodePoint(parseInt(reaction.emoji, 16))}{' '}
-            {reaction.count}
-          </span>
-        ))}
-    </div>
-  );
-};
-
 const CardListWrapper = styled.div`
   position: relative;
   width: 1160px;
@@ -143,4 +122,4 @@ const CardList = styled.div`
   gap: 20px;
 `;
 
-export { Card, CardReactions, CardListWrapper, CardList };
+export { Card, CardListWrapper, CardList };

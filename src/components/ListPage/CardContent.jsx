@@ -4,8 +4,9 @@ import { getRecipientProfileImages } from '../../util/api';
 
 const CardContentContainer = styled.div`
   display: flex;
+  margin-bottom: 43px;
   flex-direction: column;
-  gap: 5px;
+  gap: 12px;
 `;
 
 const RecipientName = styled.div`
@@ -41,29 +42,45 @@ const MessageCount = styled.div`
 
 const ProfileImagesContainer = styled.div`
   display: flex;
-  margin-top: 8px;
-  img {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    margin-left: -8px;
+  height: 28px;
+  div {
+    width: 28px;
+    height: 28px;
+    background: var(--white);
+    border: 1.5px solid var(--white);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px -6px;
+
     &:first-child {
       margin-left: 0;
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
     }
   }
 `;
 
 const ExtraProfiles = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: white;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: -8px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px 6px;
+  background: var(--white);
+  border-radius: 30px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+
+  font-weight: 400;
   font-size: 12px;
-  font-weight: bold;
+  letter-spacing: -0.005em;
+  color: var(--gray500);
 `;
 
 const CardContent = ({ recipientId, recipientName, messageCount }) => {
@@ -86,7 +103,9 @@ const CardContent = ({ recipientId, recipientName, messageCount }) => {
       </MessageCount>
       <ProfileImagesContainer>
         {profileImages.slice(0, 3).map((url, index) => (
-          <img key={index} src={url} alt='Profile' />
+          <div key={index}>
+            <img src={url} alt='Profile' />
+          </div>
         ))}
         {profileImages.length > 3 && (
           <ExtraProfiles>+{profileImages.length - 3}</ExtraProfiles>
