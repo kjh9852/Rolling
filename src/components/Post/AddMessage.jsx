@@ -55,12 +55,12 @@ const SubmitButton = styled(PrimaryButton)`
 `;
 
 function AddMessage() {
-  const { id } = useParams();
+  const { postId } = useParams();
   const navigate = useNavigate();
   const relationShipOptions = ['지인', '친구', '동료', '가족'];
   const fontOptions = [
     'Noto Sans',
-    'pretendard',
+    'Pretendard',
     '나눔명조',
     '나눔손글씨 손편지체',
   ];
@@ -87,14 +87,14 @@ function AddMessage() {
     e.preventDefault();
 
     await PostRecipientMessage({
-      id,
+      postId,
       name,
       image,
       relationShip,
       content,
       font,
     });
-    navigate(`/post/${id}`);
+    navigate(`/post/${postId}`);
   };
 
   useEffect(() => {

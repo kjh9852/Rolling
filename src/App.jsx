@@ -6,6 +6,7 @@ import ListPage from './pages/ListPage';
 import AddPostPage from './pages/AddPostPage';
 import PostEditPage from './pages/PostEditPage';
 import AddMessagePage from './pages/AddMessagePage';
+import NotFoundPage from './components/PostPage/NotFoundPage';
 import PostDetailPage, {
   loader as loaderUserData,
 } from './pages/PostDetailPage';
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: 'post/:postId/message',
         element: <AddMessagePage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },

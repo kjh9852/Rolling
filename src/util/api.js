@@ -34,14 +34,14 @@ export async function getRecipientMessage(recipientId) {
   return body.results;
 }
 
-export async function PostRecipientMessage({ id, name, image, relationShip, content, font }) {
-  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${id}/messages/`,
+export async function PostRecipientMessage({ postId, name, image, relationShip, content, font }) {
+  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${postId}/messages/`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', },
       body: JSON.stringify({
         team: '8-8',
-        recipient_id: id,
+        recipient_id: postId,
         sender: name,
         profileImageURL: image,
         relationship: relationShip,
