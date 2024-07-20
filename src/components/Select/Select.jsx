@@ -27,6 +27,7 @@ const Selected = styled.div`
 
 const Options = styled.ul`
   position: absolute;
+  overflow: hidden;
   margin-top: 95px;
   width: 318px;
   border: 1px solid var(--gray300);

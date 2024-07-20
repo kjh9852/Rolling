@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Badge from '../components/common/Badge';
 import Card from '../components/common/Card';
 import Modal from '../ui/Modal';
 import RELATION from '../util/relation';
+import PrimaryButton from '../components/common/PrimaryButton';
 
 const ModalCard = styled(Card)`
   width: 600px;
@@ -71,14 +72,36 @@ const CreateDate = styled.div`
   }
 `;
 
+const BtnContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CheckBtn = styled(PrimaryButton)`
+  width: 90px;
+  margin-top: 2.4rem;
+  padding: 7px 15px;
+  border-radius: 6px;
+  span {
+    font-size: 1.6rem;
+  }
+`;
+
 export default function MessageDetailPage() {
+  const data = useLoaderData();
+  const navigate = useNavigate();
+
+  const closeBtn = () => {
+    navigate('..');
+  };
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, []);
-  const data = useLoaderData();
 
   const findRelationShip = RELATION.find(
     (list) => list.type === data.relationship
@@ -110,6 +133,9 @@ export default function MessageDetailPage() {
           <Content font={data.font}>
             <p>{data.content}</p>
           </Content>
+          <BtnContainer>
+            <CheckBtn onClick={closeBtn}>확인</CheckBtn>
+          </BtnContainer>
         </ListContainer>
       </ModalCard>
     </Modal>

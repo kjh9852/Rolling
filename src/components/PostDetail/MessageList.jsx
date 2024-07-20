@@ -3,7 +3,15 @@ import styled from 'styled-components';
 import Card from '../common/Card';
 import Badge from '../common/Badge';
 import RELATION from '../../util/relation';
+import ReactQuill from 'react-quill';
 
+const MessageCard = styled(Card)`
+  transition: all.3s ease;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
+  }
+`;
 const ListContainer = styled.article`
   display: flex;
   flex-direction: column;
@@ -63,7 +71,7 @@ export default function MessageList({
   const convertDate = createdAt.split('T')[0];
 
   return (
-    <Card>
+    <MessageCard>
       <Link to={`message/${id}`}>
         <ListContainer>
           <UserInfo>
@@ -76,12 +84,17 @@ export default function MessageList({
               <Badge style={spanStyle}>{relationship}</Badge>
             </UserBox>
           </UserInfo>
-          <Content font={font}>{content}</Content>
+          <ReactQuill
+            readOnly={true}
+            theme='bubble'
+            value={content}
+            className={`readMessage ${font}`}
+          />
           <CreateDate>
             <p>{convertDate}</p>
           </CreateDate>
         </ListContainer>
       </Link>
-    </Card>
+    </MessageCard>
   );
 }
