@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TextInput from './TextInput';
+import NameInput from './NameInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
 import styled from 'styled-components';
-import PrimaryButton from '../common/PrimaryButton';
+import { RecipientMessageForm } from '../../util/api';
 
 const PageWrap = styled.div`
   padding-top: 60px;
@@ -13,27 +13,53 @@ const PageWrap = styled.div`
   margin-top: 60px;
 `;
 
+const To = styled.h2`
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+`;
 
 const AddPost = () => {
-
   const [valueName, setValueName] = useState('');
   const [selectedColor, setSelectedColor] = useState('beige');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [checkedTab, setCheckedTab] = useState('color');
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    setIsSubmitDisabled(valueName.trim() === '');
+  }, [valueName]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newId = Date.now(); //임시
-    console.log('생성', { valueName, selectedColor, selectedImage });
-    navigate(`/post/${newId}`);
+
+    let postData = {
+      name: valueName,
+      backgroundColor: selectedColor, // 항상 기본값 설정
+      backgroundImageURL: null,
+    };
+
+    if (checkedTab === 'image' && selectedImage) {
+      postData.backgroundImageURL = selectedImage;
+      // 이미지를 선택했을 때도 backgroundColor를 null로 설정하지 않음
+    }
+
+    try {
+      const response = await RecipientMessageForm(postData);
+      console.log('생성 완료:', response);
+      navigate(`/post/${response.id}`);
+    } catch (error) {
+      console.error('데이터를 보내는 중 오류가 발생했습니다.', error);
+      alert('데이터를 보내는 중 오류가 발생했습니다.');
+    }
   };
 
   return (
     <PageWrap>
-
       <form onSubmit={handleSubmit}>
-        <TextInput
-          label='To.'
+        <To>To.</To>
+        <NameInput
           placeholder='받는 사람 이름을 입력해 주세요'
           value={valueName}
           onChange={(e) => setValueName(e.target.value)}
@@ -43,10 +69,11 @@ const AddPost = () => {
           setSelectedColor={setSelectedColor}
           selectedImage={selectedImage}
           setSelectedImage={setSelectedImage}
+          checkedTab={checkedTab}
+          setCheckedTab={setCheckedTab}
         />
-        <SubmitButton />
+        <SubmitButton disabled={isSubmitDisabled} />
       </form>
-
     </PageWrap>
   );
 };

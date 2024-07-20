@@ -15,6 +15,7 @@ const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 5px;
   font-weight: 700;
+  margin-top: 20px;
 `;
 
 const Description = styled.p`
@@ -54,8 +55,9 @@ const BgSelector = ({
   setSelectedColor,
   selectedImage,
   setSelectedImage,
+  checkedTab,
+  setCheckedTab,
 }) => {
-  const [checkedTab, setCheckedTab] = useState('color');
   const [images, setImages] = useState([]);
   const colors = ['beige', 'purple', 'blue', 'green'];
 

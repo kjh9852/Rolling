@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background-color: var(--purple600);
+  background-color: ${({ disabled }) =>
+    disabled ? 'var(--gray500)' : 'var(--purple600)'};
   width: 100%;
   color: var(--white);
   padding: 15px 30px;
@@ -10,15 +11,20 @@ const Button = styled.button`
   border: none;
   border-radius: 10px;
   font-size: 18px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   margin-top: 70px;
   &:hover {
-    background-color: var(--purple800);
+    background-color: ${({ disabled }) =>
+      disabled ? 'var(--gray500)' : 'var(--purple800)'};
   }
 `;
 
-const SubmitButton = () => {
-  return <Button type='submit'>생성하기</Button>;
+const SubmitButton = ({ disabled }) => {
+  return (
+    <Button type='submit' disabled={disabled}>
+      생성하기
+    </Button>
+  );
 };
 
 export default SubmitButton;

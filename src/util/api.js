@@ -34,7 +34,6 @@ export async function getRecipientMessage(recipientId) {
   return body.results;
 }
 
-
 export async function PostRecipientMessage({ id, name, image, relationShip, content, font }) {
   const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${id}/messages/`,
     {
@@ -50,10 +49,40 @@ export async function PostRecipientMessage({ id, name, image, relationShip, cont
         font: font,
       }),
 
-    });
+    }
+  );
 
   if (!response.ok) {
     throw new Error('데이터를 보내는데 오류가 발생했습니다.');
+  }
+  const body = await response.json();
+  return body;
+}
+
+export async function RecipientMessageForm({
+  name,
+  backgroundColor,
+  backgroundImageURL,
+}) {
+  const postData = {
+    name,
+    backgroundColor: backgroundColor || 'beige', // 기본값 설정
+    backgroundImageURL: backgroundImageURL || null,
+  };
+
+  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(postData),
+  });
+
+  if (!response.ok) {
+    const errorReaction = await response.json();
+    console.error('서버 응답 오류:', errorReaction);
+    throw new Error(
+      `데이터를 보내는 중 오류가 발생했습니다: ${JSON.stringify(errorReaction)}`
+    );
+
   }
   const body = await response.json();
   return body;
