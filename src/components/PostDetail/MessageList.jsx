@@ -124,10 +124,10 @@ export default function MessageList({
             )}
           </UserInfo>
           <ReactQuill
-            style={{ fontFamily: font }}
             readOnly={true}
             theme='bubble'
             value={content}
+            className={`readMessage ${font}`}
           />
           <CreateDate>
             <p>{convertDate}</p>

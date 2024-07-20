@@ -14,3 +14,40 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+.quill.readMessage {
+  flex: 1 0;
+}
+
+.quill.readMessage .ql-editor {
+  padding: 16px 0 0 0;
+  font-size: 16px;
+}
+
+.quill.readMessage .ql-editor ol,
+.quill.readMessage .ql-editor ul {
+  padding-left: 0;
+}
+/* 
+.quill.readMessage .ql-editor ol li:not(.ql-direction-rtl),
+.quill.readMessage .ql-editor ul li:not(.ql-direction-rtl) {
+  padding-left: 0;
+} */
+
+.quill.readMessage .ql-editor > * {
+  cursor: pointer;
+}
+
+.quill.readMessage.Noto .ql-editor > p {
+  font-family: 'Noto Sans';
+}
+.quill.readMessage.나눔손글씨 .ql-editor > p {
+  font-family: '나눔손글씨 손편지체';
+  font-size: 28px;
+}
+.quill.readMessage.나눔명조 .ql-editor > p {
+  font-family: '나눔명조';
+}
+.quill.readMessage.Pretendard .ql-editor > p {
+  font-family: 'Pretendard';
+}
