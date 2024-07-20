@@ -30,6 +30,7 @@ const CardListSection = ({
               backgroundImageURL={recipient.backgroundImageURL}
             >
               <CardContent
+                recipientId={recipient.id}
                 recipientName={recipient.name}
                 messageCount={recipient.messageCount}
               />

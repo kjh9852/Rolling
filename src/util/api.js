@@ -35,3 +35,16 @@ export async function getRecipientMessage(recipientId) {
   const body = await response.json();
   return body.results;
 }
+
+// 새롭게 추가된 함수: 각 수신자의 메시지 프로필 이미지를 가져오는 함수
+export async function getRecipientProfileImages(recipientId) {
+  const response = await fetch(
+    `${BASE_URL}/${TEAM}/recipients/${recipientId}/messages/`
+  );
+  if (!response.ok) {
+    throw new Error('데이터를 불러오는 중 오류가 발생했습니다.');
+  }
+  const body = await response.json();
+  const profileImages = body.results.map((message) => message.profileImageURL);
+  return profileImages;
+}
