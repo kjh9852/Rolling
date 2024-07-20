@@ -69,7 +69,7 @@ export async function getRecipientProfileImages(recipientId) {
 }
 
 export async function PostRecipientMessage({
-  id,
+  postId,
   name,
   image,
   relationShip,
@@ -77,13 +77,13 @@ export async function PostRecipientMessage({
   font,
 }) {
   const response = await fetch(
-    `${BASE_URL}/${TEAM}/recipients/${id}/messages/`,
+    `${BASE_URL}/${TEAM}/recipients/${postId}/messages/`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         team: '8-8',
-        recipient_id: id,
+        recipient_id: postId,
         sender: name,
         profileImageURL: image,
         relationship: relationShip,

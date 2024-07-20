@@ -7,10 +7,15 @@ import styled from 'styled-components';
 import { RecipientMessageForm } from '../../util/api';
 
 const PageWrap = styled.div`
-  padding-top: 60px;
   max-width: 720px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 95px;
+  box-sizing: border-box;
+
+  @media (max-width: 769px) {
+    margin-top: 26px;
+    padding: 24px 20px;
+  }
 `;
 
 const To = styled.h2`
@@ -72,7 +77,7 @@ const AddPost = () => {
           checkedTab={checkedTab}
           setCheckedTab={setCheckedTab}
         />
-        <SubmitButton disabled={isSubmitDisabled} />
+        <SubmitButton disabled={isSubmitDisabled}>생성하기</SubmitButton>
       </form>
     </PageWrap>
   );
