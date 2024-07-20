@@ -10,6 +10,7 @@ import { getRecipients } from '../../util/api';
 const CardListWrapper = styled.div`
   position: relative;
   width: 1160px;
+  height: 260px;
 `;
 
 const CardListSection = ({ title, handleCardClick }) => {
