@@ -72,7 +72,7 @@ const AddPost = () => {
           checkedTab={checkedTab}
           setCheckedTab={setCheckedTab}
         />
-        <SubmitButton disabled={isSubmitDisabled} />
+        <SubmitButton disabled={isSubmitDisabled}>생성하기</SubmitButton>
       </form>
     </PageWrap>
   );
