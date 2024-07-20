@@ -8,6 +8,7 @@ const ReactionsContainer = styled.div`
   gap: 8px;
   margin-top: 16px;
   position: relative;
+  z-index: 3;
 `;
 
 const CustomEmojiBadge = styled(EmojiBadge)`

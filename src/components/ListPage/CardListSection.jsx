@@ -34,6 +34,7 @@ const CardListSection = ({
                 recipientId={recipient.id}
                 recipientName={recipient.name}
                 messageCount={recipient.messageCount}
+                backgroundImageURL={recipient.backgroundImageURL} // 전달
               />
               <CardReactions reactions={recipient.topReactions} />
             </Card>

@@ -1,4 +1,6 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
+import Overlay from './Overlay';
 
 const getCSSVariable = (colorName) => {
   const colorMap = {
@@ -27,7 +29,6 @@ const specialShapeStyles = css`
         border-radius: 90.5px;
       }
     `}
-
   ${({ $backgroundColor, $backgroundImageURL }) =>
     !$backgroundImageURL &&
     $backgroundColor === 'beige' &&
@@ -43,7 +44,6 @@ const specialShapeStyles = css`
         border-radius: 51px;
       }
     `}
-
   ${({ $backgroundColor, $backgroundImageURL }) =>
     !$backgroundImageURL &&
     $backgroundColor === 'blue' &&
@@ -61,7 +61,6 @@ const specialShapeStyles = css`
         );
       }
     `}
-
   ${({ $backgroundColor, $backgroundImageURL }) =>
     !$backgroundImageURL &&
     $backgroundColor === 'green' &&
@@ -107,6 +106,7 @@ const Card = ({ backgroundColor, backgroundImageURL, children, ...props }) => (
     $backgroundImageURL={backgroundImageURL}
     {...props}
   >
+    {backgroundImageURL && <Overlay />}
     {children}
   </CardContainer>
 );

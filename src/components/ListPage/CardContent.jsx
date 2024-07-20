@@ -7,6 +7,8 @@ const CardContentContainer = styled.div`
   margin-bottom: 43px;
   flex-direction: column;
   gap: 12px;
+  position: relative;
+  z-index: 4;
 `;
 
 const RecipientName = styled.div`
@@ -14,7 +16,8 @@ const RecipientName = styled.div`
   font-size: 24px;
   line-height: 36px;
   letter-spacing: -0.01em;
-  color: var(--gray900);
+  color: ${({ hasBackgroundImage }) =>
+    hasBackgroundImage ? 'var(--white)' : 'var(--gray900)'};
   flex: none;
   order: 0;
   align-self: stretch;
@@ -27,7 +30,8 @@ const MessageCount = styled.div`
   font-size: 16px;
   line-height: 26px;
   letter-spacing: -0.01em;
-  color: var(--gray700);
+  color: ${({ hasBackgroundImage }) =>
+    hasBackgroundImage ? 'var(--gray200)' : 'var(--gray700)'};
   flex: none;
   order: 2;
   flex-grow: 0;
@@ -83,7 +87,12 @@ const ExtraProfiles = styled.div`
   color: var(--gray500);
 `;
 
-const CardContent = ({ recipientId, recipientName, messageCount }) => {
+const CardContent = ({
+  recipientId,
+  recipientName,
+  messageCount,
+  backgroundImageURL,
+}) => {
   const [profileImages, setProfileImages] = useState([]);
 
   useEffect(() => {
@@ -97,8 +106,10 @@ const CardContent = ({ recipientId, recipientName, messageCount }) => {
 
   return (
     <CardContentContainer>
-      <RecipientName>To. {recipientName}</RecipientName>
-      <MessageCount>
+      <RecipientName hasBackgroundImage={!!backgroundImageURL}>
+        To. {recipientName}
+      </RecipientName>
+      <MessageCount hasBackgroundImage={!!backgroundImageURL}>
         <span>{messageCount}</span>명이 작성했어요!
       </MessageCount>
       <ProfileImagesContainer>
