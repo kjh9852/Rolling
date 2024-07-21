@@ -341,9 +341,7 @@ export default function UserActionComponent({
         </ShareContainer>
       </ButtonContainer>
       {isClipBoard && (
-        <Toast isClipBoard={isClipBoard} resetClipBoard={resetClipBoard}>
-          복사완료
-        </Toast>
+        <Toast isClipBoard={isClipBoard} resetClipBoard={resetClipBoard} />
       )}
     </ActionContainer>
   );
