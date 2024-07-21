@@ -32,7 +32,7 @@ const Container = styled.div`
   background: var(--white);
   font-size: 2rem;
   &.fade_in {
-    animation: ${fadeIn} 1.5s ease 0s 1 normal forwards;
+    animation: ${fadeIn} 1s ease 0s 1 normal forwards;
   }
 
   &.fade_out {
@@ -78,7 +78,6 @@ export default function Toast({ children, isClipBoard, resetClipBoard }) {
   useEffect(() => {
     if (fade.fadeAnimation === 'fade_out') {
       const resetTimer = setTimeout(() => {
-        console.log('reset');
         resetClipBoard();
       }, 1500);
 
