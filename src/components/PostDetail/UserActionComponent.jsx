@@ -13,6 +13,12 @@ const ActionContainer = styled.div`
   display: flex;
   gap: 8px;
   height: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
 `;
 
 const ListContainer = styled.ul`
@@ -48,6 +54,31 @@ const OpenReactionCard = styled.div`
   border-radius: 8px;
   border: 1px solid #b6b6b6;
   background: var(--white);
+  z-index: 2;
+`;
+
+const ReactionContainer = styled.ul`
+  display: grid;
+  ${({ isColumn }) =>
+    isColumn <= 4
+      ? `
+    grid-template-columns: repeat(${isColumn}, auto);
+    `
+      : `
+  grid-template-columns: repeat(4, auto);
+   `};
+
+  @media (max-width: 1248px) {
+    ${({ isColumn }) =>
+      isColumn <= 3
+        ? `
+    grid-template-columns: repeat(${isColumn}, auto);
+    `
+        : `
+  grid-template-columns: repeat(3, auto);
+   `};
+  }
+  gap: 10px 8px;
 `;
 
 const ButtonContainer = styled.div`
