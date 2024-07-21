@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import EmojiPicker from 'emoji-picker-react';
 import styled, { css } from 'styled-components';
 import EmojiBadge from '../common/EmojiBadge';
@@ -61,7 +61,7 @@ const EmojiContainer = styled.div`
   position: relative;
   height: 100%;
 
-  ::before {
+  &:before {
     position: absolute;
     content: '';
     width: 1px;
@@ -84,11 +84,51 @@ const ShareBtn = styled(OutlineButton)`
   height: 100%;
 `;
 
-export default function UserActionComponent({ actionEmoji, topReaction }) {
+const ShareContainer = styled.div`
+  position: relative;
+  div {
+    position: absolute;
+    top: 40px;
+    right: 0px;
+  }
+  ul {
+    width: 140px;
+    padding: 10px 0;
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+  }
+  ul > li {
+    &:hover {
+      background: #f6f6f6;
+    }
+  }
+  ul > li > button {
+    width: 100%;
+    text-align: left;
+    font-size: 1.6rem;
+    padding: 12px 16px;
+    cursor: pointer;
+  }
+`;
+
+export default function UserActionComponent({
+  actionEmoji,
+  topReaction,
+  shareName,
+}) {
+  const { Kakao } = window;
   const navigate = useNavigate();
   const { postId } = useParams();
   const [openReaction, setOpenReaction] = useState(false);
   const [showEmoji, setShowEmoji] = useState(false);
+  const [isThrottled, setIsThrottled] = useState(false);
+  const [isSharedOpen, setIsSharedOpen] = useState(false);
+  const location = useLocation();
+
+  const handleSharedOpen = () => {
+    setIsSharedOpen((prevOpen) => !prevOpen);
+  };
 
   const handleOpenReaction = () => {
     setOpenReaction((prevOpen) => !prevOpen);
@@ -100,6 +140,9 @@ export default function UserActionComponent({ actionEmoji, topReaction }) {
 
   const handleEmojiClick = async (e) => {
     const newReaction = e.unified;
+    if (isThrottled) return;
+
+    setIsThrottled(true);
     try {
       const response = await fetch(
         `https://rolling-api.vercel.app/8-8/recipients/${postId}/reactions/`,
@@ -120,19 +163,71 @@ export default function UserActionComponent({ actionEmoji, topReaction }) {
       navigate(`/post/${postId}`, { replace: true });
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setTimeout(() => {
+        setIsThrottled(false);
+      }, 1000);
     }
   };
 
+  const emojiContents =
+    actionEmoji.count > 0 ? (
+      topReaction.map((list) => (
+        <EmojiBadge
+          key={list.id}
+          emojiCode={list.emoji}
+          emojiCount={list.count}
+        />
+      ))
+    ) : (
+      <span>반응을 추가해보세요!</span>
+    );
+
+  const baseUrl = 'https://8team-rolling.netlify.app';
+  const nowUrl = location.pathname;
+
+  console.log(process.env.REACT_APP_KAKAO_SHARE_KEY);
+  const handleShareKaKao = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+      if (!kakao.isInitialized()) {
+        kakao.init(process.env.REACT_APP_KAKAO_SHARE_KEY);
+      }
+      Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: 'Rolling',
+          description: `${shareName}님에게 롤링페이퍼를 써보세요`,
+          imageUrl:
+            'https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+          link: {
+            mobileWebUrl: `${baseUrl}${nowUrl}`,
+            webUrl: `${baseUrl}${nowUrl}`,
+          },
+        },
+        buttons: [
+          {
+            title: '웹으로 이동',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com',
+            },
+          },
+          {
+            title: '앱으로 이동',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com',
+            },
+          },
+        ],
+      });
+    }
+  };
   return (
     <ActionContainer>
       <ListContainer>
-        {topReaction.map((list) => (
-          <EmojiBadge
-            key={list.id}
-            emojiCode={list.emoji}
-            emojiCount={list.count}
-          />
-        ))}
+        {emojiContents}
         <ArrowBtnContainer isOpen={openReaction}>
           <button onClick={handleOpenReaction}>
             <img src={arrowIcon} alt='활성화 버튼' />
@@ -167,7 +262,25 @@ export default function UserActionComponent({ actionEmoji, topReaction }) {
             width={307}
           />
         </EmojiContainer>
-        <ShareBtn haveImg={true} imgSrc={shareIcon} />
+        <ShareContainer>
+          <ShareBtn
+            haveImg={true}
+            imgSrc={shareIcon}
+            onClick={handleSharedOpen}
+          />
+          {isSharedOpen && (
+            <div>
+              <ul>
+                <li>
+                  <button onClick={handleShareKaKao}>카카오톡 공유</button>
+                </li>
+                <li>
+                  <button>URL 공유</button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </ShareContainer>
       </ButtonContainer>
     </ActionContainer>
   );

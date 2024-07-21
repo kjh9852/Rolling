@@ -11,7 +11,7 @@ export async function getProfileImage() {
 
 export async function getUserMessage({ id, offset }) {
   const response = await fetch(
-    `${BASE_URL}/${TEAM}/recipients/${id}/messages/?limit=5&offset=${offset}`
+    `${process.env.REACT_APP_API}/${TEAM}/recipients/${id}/messages/?limit=5&offset=${offset}`
   );
   if (!response.ok) {
     throw new Error('데이터를 불러오는 중 오류가 발생했습니다.');
@@ -38,7 +38,7 @@ export async function PostRecipientMessage({ postId, name, image, relationShip, 
   const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${postId}/messages/`,
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         team: '8-8',
         recipient_id: postId,
@@ -48,7 +48,6 @@ export async function PostRecipientMessage({ postId, name, image, relationShip, 
         content: content,
         font: font,
       }),
-
     }
   );
 
@@ -82,8 +81,21 @@ export async function RecipientMessageForm({
     throw new Error(
       `데이터를 보내는 중 오류가 발생했습니다: ${JSON.stringify(errorReaction)}`
     );
-
   }
   const body = await response.json();
   return body;
+}
+
+export async function deleteMessage(id) {
+  const response = await fetch(`${BASE_URL}/${TEAM}/messages/${id}/`, {
+    method: 'DELETE',
+  });
+  return response;
+}
+
+export async function deleteUser(id) {
+  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${id}/`, {
+    method: 'DELETE',
+  });
+  return response;
 }
