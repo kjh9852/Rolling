@@ -86,7 +86,7 @@ function AddMessage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await PostRecipientMessage({
-      id: postId,
+      postId,
       name,
       image,
       relationShip,
