@@ -8,6 +8,7 @@ import PrimaryButton from '../common/PrimaryButton';
 import { getProfileImage } from '../../util/api';
 import { PostRecipientMessage } from '../../util/api';
 import { useNavigate, useParams } from 'react-router-dom';
+import Toast from '../../ui/Toast';
 
 const Container = styled.form`
   display: flex;
@@ -149,6 +150,7 @@ function AddMessage() {
       >
         생성하기
       </SubmitButton>
+      <Toast />
     </Container>
   );
 }
