@@ -15,7 +15,7 @@ const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 5px;
   font-weight: 700;
-  margin-top: 20px;
+  margin-top: 50px;
 `;
 
 const Description = styled.p`
@@ -45,9 +45,19 @@ const TabButton = styled.button`
 `;
 
 const OptionsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  @media (min-width: 769px) {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+  }
 `;
 
 const BgSelector = ({
