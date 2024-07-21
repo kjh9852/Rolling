@@ -34,8 +34,16 @@ export async function getRecipientMessage(recipientId) {
   return body.results;
 }
 
-export async function PostRecipientMessage({ postId, name, image, relationShip, content, font }) {
-  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${postId}/messages/`,
+export async function PostRecipientMessage({
+  postId,
+  name,
+  image,
+  relationShip,
+  content,
+  font,
+}) {
+  const response = await fetch(
+    `${BASE_URL}/${TEAM}/recipients/${postId}/messages/`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
