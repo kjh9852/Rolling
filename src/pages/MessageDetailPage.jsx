@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import ReactQuill from 'react-quill';
 import styled from 'styled-components';
 import Badge from '../components/common/Badge';
 import Card from '../components/common/Card';
@@ -8,10 +9,16 @@ import RELATION from '../util/relation';
 import PrimaryButton from '../components/common/PrimaryButton';
 
 const ModalCard = styled(Card)`
-  width: 600px;
-  max-width: 600px;
+  width: 100%;
   height: 476px;
   padding: 4rem;
+  @media (max-width: 768px) {
+    padding: 3rem;
+    height: 400px;
+  }
+  @media (max-width: 560px) {
+    height: 600px;
+  }
 `;
 
 const ListContainer = styled.article`
@@ -130,9 +137,12 @@ export default function MessageDetailPage() {
               <p>{convertDate}</p>
             </CreateDate>
           </UserInfo>
-          <Content font={data.font}>
-            <p>{data.content}</p>
-          </Content>
+          <ReactQuill
+            readOnly={true}
+            theme='bubble'
+            value={data.content}
+            className={`detailMessage ${data.font}`}
+          />
           <BtnContainer>
             <CheckBtn onClick={closeBtn}>확인</CheckBtn>
           </BtnContainer>

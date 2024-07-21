@@ -16,13 +16,21 @@ const Dialog = styled.dialog`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin: 0;
+  max-width: 600px;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
   border: none;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  padding: 0;
   overflow: hidden;
   z-index: 20;
+  @media (max-width: 768px) {
+    max-width: 500px;
+  }
+  @media (max-width: 560px) {
+    max-width: 350px;
+  }
 `;
 
 export default function Modal({ children, ...props }) {

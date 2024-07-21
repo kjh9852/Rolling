@@ -15,6 +15,7 @@ const ActionContainer = styled.div`
   height: 100%;
   @media (max-width: 768px) {
     width: 100%;
+    align-items: center;
     justify-content: space-between;
     gap: 0;
   }
@@ -66,6 +67,17 @@ const ReactionContainer = styled.ul`
       : `
   grid-template-columns: repeat(4, auto);
    `};
+
+  @media (max-width: 1248px) {
+    ${({ isColumn }) =>
+      isColumn <= 3
+        ? `
+    grid-template-columns: repeat(${isColumn}, auto);
+    `
+        : `
+  grid-template-columns: repeat(3, auto);
+   `};
+  }
   gap: 10px 8px;
 `;
 

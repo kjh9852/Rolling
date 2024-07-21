@@ -18,6 +18,12 @@ const SectionContainer = styled(Card)`
       box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
     }
     `}
+  @media (max-width: 1248px) {
+    height: 284px;
+  }
+  @media (max-width: 768px) {
+    height: 230px;
+  }
 `;
 const ListContainer = styled.article`
   display: flex;

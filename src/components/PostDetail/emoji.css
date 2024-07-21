@@ -6,3 +6,9 @@
   --epr-emoji-gap: 10px;
   --epr-bg-color: #000;
 }
+
+@media (max-width: 768px) {
+  .EmojiPickerReact {
+    right: -7rem;
+  }
+}

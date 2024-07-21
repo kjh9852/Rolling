@@ -46,12 +46,12 @@ const GridContainer = styled.div`
   padding-bottom: 5rem;
   @media (max-width: 960px) {
     grid-template-columns: repeat(2, 1fr);
-    padding-top: 9.3rem;
     gap: 1.6rem;
+    margin-top: 2rem;
   }
   @media (max-width: 640px) {
     grid-template-columns: repeat(1, 1fr);
-    padding-top: 3.2rem;
+    margin-top: 1.5rem;
   }
 `;
 
@@ -91,12 +91,24 @@ const LinkMessage = styled(Card)`
     transform: scale(1.05);
     box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
   }
+  @media (max-width: 1248px) {
+    height: 284px;
+  }
+  @media (max-width: 768px) {
+    height: 230px;
+  }
 `;
 
 const EditButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   padding-top: 6.3rem;
+  @media (max-width: 1248px) {
+    padding-top: 9.3rem;
+  }
+  @media (max-width: 640px) {
+    padding-top: 3rem;
+  }
 `;
 
 const EditButton = styled(PrimaryButton)`

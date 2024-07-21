@@ -13,6 +13,7 @@ const UserContainer = styled.div`
   box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
   z-index: 10;
   @media (max-width: 768px) {
+    height: auto;
     top: 0px;
   }
 `;
@@ -24,36 +25,57 @@ const UserInfo = styled.div`
   max-width: 1200px;
   height: 100%;
   margin: 0 auto;
+  @media (max-width: 1248px) {
+    padding: 0 24px;
+  }
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 20px;
+  }
 `;
 
 const UserName = styled.h2`
   font-size: 2.8rem;
   font-weight: 700;
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    padding: 12px 0;
+    border-bottom: 1px solid #ededed;
+  }
 `;
 const UserAction = styled.div`
   display: flex;
   align-items: center;
   gap: 57px;
   height: 36px;
+  @media (max-width: 768px) {
+    padding: 8px 0;
+    height: auto;
+  }
 `;
 
 const UserCountContainer = styled.div`
   position: relative;
-
+  height: 100%;
   &:before {
     position: absolute;
     content: '';
     width: 1px;
     height: 28px;
-    top: -5px;
+    top: 5px;
     right: -29px;
     background: #ededed;
+  }
+  @media (max-width: 880px) {
+    display: none;
   }
 `;
 
 const CountContainer = styled.ul`
   display: flex;
   align-items: center;
+  height: 100%;
   span {
     margin-left: 11px;
     font-size: 1.8rem;
@@ -74,7 +96,7 @@ const TotalUser = styled.li`
 `;
 
 export default function UserHeader({ userData, userReaction }) {
-  const AllWriter =
+  const allWriter =
     userData.messageCount >= 9 ? '+6' : `+${userData.messageCount - 3}`;
 
   return (
@@ -91,7 +113,7 @@ export default function UserHeader({ userData, userReaction }) {
                   sender={img.sender}
                 />
               ))}
-              {userData.messageCount > 3 && <TotalUser>{AllWriter}</TotalUser>}
+              {userData.messageCount > 3 && <TotalUser>{allWriter}</TotalUser>}
               {userData.messageCount > 0 ? (
                 <span>
                   <b>{userData.messageCount}</b>명이 작성했어요!
