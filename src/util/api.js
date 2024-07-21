@@ -11,7 +11,7 @@ export async function getProfileImage() {
 
 export async function getUserMessage({ id, offset }) {
   const response = await fetch(
-    `${process.env.REACT_APP_API}/${TEAM}/recipients/${id}/messages/?limit=5&offset=${offset}`
+    `${BASE_URL}/${TEAM}/recipients/${id}/messages/?limit=5&offset=${offset}`
   );
   if (!response.ok) {
     throw new Error('데이터를 불러오는 중 오류가 발생했습니다.');
@@ -34,8 +34,16 @@ export async function getRecipientMessage(recipientId) {
   return body.results;
 }
 
-export async function PostRecipientMessage({ postId, name, image, relationShip, content, font }) {
-  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${postId}/messages/`,
+export async function PostRecipientMessage({
+  postId,
+  name,
+  image,
+  relationShip,
+  content,
+  font,
+}) {
+  const response = await fetch(
+    `${BASE_URL}/${TEAM}/recipients/${postId}/messages/`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
