@@ -33,14 +33,13 @@ const CardListSection = ({ title, handleCardClick, sortBy }) => {
   };
 
   const handleNextClick = () => {
-    if (currentOffset < Math.floor(messages.length / 4)) {
+    if ((currentOffset + 1) * 4 < messages.length) {
       setCurrentOffset(currentOffset + 1);
     }
   };
 
   return (
     <>
-      <h2>{title}</h2>
       <CardListWrapper>
         <PrevButton
           onClick={handlePrevClick}
@@ -68,7 +67,7 @@ const CardListSection = ({ title, handleCardClick, sortBy }) => {
         />
         <NextButton
           onClick={handleNextClick}
-          disabled={currentOffset >= Math.floor(messages.length / 4)}
+          disabled={(currentOffset + 1) * 4 >= messages.length}
           isNext={true}
         />
       </CardListWrapper>
