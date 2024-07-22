@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import EmojiPicker from 'emoji-picker-react';
 import styled, { css } from 'styled-components';
@@ -7,11 +7,17 @@ import OutlineButton from '../common/OutlineButton';
 import emojiAddIcon from '../../assets/image/emoji_add_icon.png';
 import shareIcon from '../../assets/image/share_icon.png';
 import arrowIcon from '../../assets/image/arrow_down.png';
+import Toast from '../../ui/Toast';
 
 const ActionContainer = styled.div`
   display: flex;
   gap: 8px;
   height: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+  }
 `;
 
 const ListContainer = styled.ul`
@@ -39,16 +45,28 @@ const ArrowBtnContainer = styled.div`
   }
 `;
 
-const AllReactionContainer = styled.ul`
+const OpenReactionCard = styled.div`
   position: absolute;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  top: 4.2rem;
+  right: 0;
   padding: 2.4rem;
-  transform: translate(-28rem, 5px);
-  border: 1px solid #b6b6b6;
   border-radius: 8px;
-  gap: 10px 8px;
+  border: 1px solid #b6b6b6;
   background: var(--white);
+  z-index: 2;
+`;
+
+const ReactionContainer = styled.ul`
+  display: grid;
+  ${({ isColumn }) =>
+    isColumn <= 4
+      ? `
+    grid-template-columns: repeat(${isColumn}, auto);
+    `
+      : `
+  grid-template-columns: repeat(4, auto);
+   `};
+  gap: 10px 8px;
 `;
 
 const ButtonContainer = styled.div`
@@ -78,10 +96,32 @@ const EmojiBtn = styled(OutlineButton)`
   gap: 4px;
   font-size: 1.6rem;
   font-weight: 500;
+  @media (max-width: 768px) {
+    padding: 5px 8px;
+    span {
+      display: none;
+    }
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 const ShareBtn = styled(OutlineButton)`
   height: 100%;
+  font-size: 0;
+  @media (max-width: 768px) {
+    padding: 5px 8px;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+`;
+
+const EmptyText = styled.span`
+  font-size: 1.8rem;
 `;
 
 const ShareContainer = styled.div`
@@ -118,13 +158,14 @@ export default function UserActionComponent({
   shareName,
 }) {
   const { Kakao } = window;
-  const navigate = useNavigate();
   const { postId } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [openReaction, setOpenReaction] = useState(false);
   const [showEmoji, setShowEmoji] = useState(false);
   const [isThrottled, setIsThrottled] = useState(false);
   const [isSharedOpen, setIsSharedOpen] = useState(false);
-  const location = useLocation();
+  const [isClipBoard, setIsClipBoard] = useState('');
 
   const handleSharedOpen = () => {
     setIsSharedOpen((prevOpen) => !prevOpen);
@@ -180,13 +221,14 @@ export default function UserActionComponent({
         />
       ))
     ) : (
-      <span>반응을 추가해보세요!</span>
+      <EmptyText>반응을 추가해보세요!</EmptyText>
     );
 
   const baseUrl = 'https://8team-rolling.netlify.app';
-  const nowUrl = location.pathname;
+  const nowUrl = location.pathname.includes('/edit')
+    ? location.pathname.replace('/edit', '')
+    : location.pathname;
 
-  console.log(process.env.REACT_APP_KAKAO_SHARE_KEY);
   const handleShareKaKao = () => {
     if (window.Kakao) {
       const kakao = window.Kakao;
@@ -196,7 +238,7 @@ export default function UserActionComponent({
       Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
-          title: 'Rolling',
+          title: `To. ${shareName}`,
           description: `${shareName}님에게 롤링페이퍼를 써보세요`,
           imageUrl:
             'https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
@@ -210,38 +252,54 @@ export default function UserActionComponent({
             title: '웹으로 이동',
             link: {
               mobileWebUrl: 'https://developers.kakao.com',
-              webUrl: 'https://developers.kakao.com',
-            },
-          },
-          {
-            title: '앱으로 이동',
-            link: {
-              mobileWebUrl: 'https://developers.kakao.com',
-              webUrl: 'https://developers.kakao.com',
+              webUrl: `${baseUrl}${nowUrl}`,
             },
           },
         ],
       });
     }
   };
+
+  const resetClipBoard = () => {
+    setIsClipBoard('');
+  };
+
+  const handleShareUrl = () => {
+    setIsClipBoard(`${baseUrl}${nowUrl}`);
+  };
+
+  useEffect(() => {
+    if (isClipBoard) {
+      try {
+        navigator.clipboard.writeText(isClipBoard);
+      } catch {
+        console.log('복사 실패');
+      }
+    }
+  }, [isClipBoard]);
+
   return (
     <ActionContainer>
       <ListContainer>
         {emojiContents}
         <ArrowBtnContainer isOpen={openReaction}>
-          <button onClick={handleOpenReaction}>
-            <img src={arrowIcon} alt='활성화 버튼' />
-          </button>
+          {actionEmoji.results.length > 0 && (
+            <button onClick={handleOpenReaction}>
+              <img src={arrowIcon} alt='활성화 버튼' />
+            </button>
+          )}
           {openReaction && (
-            <AllReactionContainer>
-              {actionEmoji.results.map((list) => (
-                <EmojiBadge
-                  key={list.id}
-                  emojiCode={list.emoji}
-                  emojiCount={list.count}
-                />
-              ))}
-            </AllReactionContainer>
+            <OpenReactionCard>
+              <ReactionContainer isColumn={actionEmoji.results.length}>
+                {actionEmoji.results.map((list) => (
+                  <EmojiBadge
+                    key={list.id}
+                    emojiCode={list.emoji}
+                    emojiCount={list.count}
+                  />
+                ))}
+              </ReactionContainer>
+            </OpenReactionCard>
           )}
         </ArrowBtnContainer>
       </ListContainer>
@@ -252,7 +310,7 @@ export default function UserActionComponent({
             haveImg={true}
             imgSrc={emojiAddIcon}
           >
-            추가
+            <span>추가</span>
           </EmojiBtn>
           <EmojiPicker
             lazyLoad={true}
@@ -275,13 +333,16 @@ export default function UserActionComponent({
                   <button onClick={handleShareKaKao}>카카오톡 공유</button>
                 </li>
                 <li>
-                  <button>URL 공유</button>
+                  <button onClick={handleShareUrl}>URL 공유</button>
                 </li>
               </ul>
             </div>
           )}
         </ShareContainer>
       </ButtonContainer>
+      {isClipBoard && (
+        <Toast isClipBoard={isClipBoard} resetClipBoard={resetClipBoard} />
+      )}
     </ActionContainer>
   );
 }
