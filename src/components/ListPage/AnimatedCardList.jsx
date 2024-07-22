@@ -43,12 +43,12 @@ const Spacer = styled.div`
   }
 `;
 
-const AnimatedCardList = ({ cards, currentOffset }) => {
+const AnimatedCardList = ({ children, currentOffset }) => {
   return (
     <CardListWrapper>
       <CardList $currentOffset={currentOffset}>
         <Spacer />
-        {cards}
+        {children}
         <Spacer />
       </CardList>
     </CardListWrapper>
