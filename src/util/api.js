@@ -20,10 +20,31 @@ export async function getUserMessage({ id, offset }) {
   return data;
 }
 
-export async function getRecipients() {
-  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/`);
+// getRecipients 함수: 데이터를 가져오고 정렬하는 함수
+// - 기본적으로 createdAt을 기준으로 정렬
+// - sortBy 매개변수에 따라 messageCount를 기준으로 정렬 가능
+export async function getRecipients(
+  offset = 0,
+  limit = 1000,
+  sortBy = 'createdAt'
+) {
+  const response = await fetch(
+    `${BASE_URL}/${TEAM}/recipients/?offset=${offset}&limit=${limit}`
+  );
   const body = await response.json();
-  return body.results;
+
+  if (sortBy === 'messageCount') {
+    body.results.sort(
+      (a, b) =>
+        b.messageCount - a.messageCount ||
+        b.reactionCount - a.reactionCount ||
+        new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  } else {
+    body.results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  }
+
+  return body;
 }
 
 export async function getRecipientMessage(recipientId) {
@@ -32,6 +53,19 @@ export async function getRecipientMessage(recipientId) {
   );
   const body = await response.json();
   return body.results;
+}
+
+// 새롭게 추가된 함수: 각 수신자의 메시지 프로필 이미지를 가져오는 함수
+export async function getRecipientProfileImages(recipientId) {
+  const response = await fetch(
+    `${BASE_URL}/${TEAM}/recipients/${recipientId}/messages/`
+  );
+  if (!response.ok) {
+    throw new Error('데이터를 불러오는 중 오류가 발생했습니다.');
+  }
+  const body = await response.json();
+  const profileImages = body.results.map((message) => message.profileImageURL);
+  return profileImages;
 }
 
 export async function PostRecipientMessage({
