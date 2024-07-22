@@ -22,6 +22,10 @@ const Container = styled.form`
     max-width: 768px;
   }
 
+  @media (max-width: 769px) {
+    margin-top: 50px;
+  }
+
   @media (max-width: 640px) {
     padding: 0 20px;
   }
@@ -54,6 +58,27 @@ const SubmitButton = styled(PrimaryButton)`
   }
 `;
 
+const BackButton = styled.button`
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background-color: var(--error);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000;
+  &:hover {
+    background-color: #b63131;
+    transition: 0.2s all;
+  }
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
 function AddMessage() {
   const { postId } = useParams();
   const navigate = useNavigate();
@@ -79,6 +104,10 @@ function AddMessage() {
     setProfileItem(imageUrls);
   };
 
+  useEffect(() => {
+    handleLoad();
+  }, []);
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -96,12 +125,15 @@ function AddMessage() {
     navigate(`/post/${postId}`);
   };
 
-  useEffect(() => {
-    handleLoad();
-  }, []);
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <Container onSubmit={handleSubmit}>
+      <BackButton type='button' onClick={handleGoBack}>
+        이전
+      </BackButton>
       <InputContainer>
         <Title>From.</Title>
         <NameInput
