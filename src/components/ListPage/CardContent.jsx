@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { Card } from './Cards';
 import styled from 'styled-components';
-import { getRecipientProfileImages } from '../../util/api';
+import EmojiBadge from '../common/EmojiBadge';
 
 const CardContentContainer = styled.div`
+  position: relative;
   display: flex;
-  margin-bottom: 43px;
+  flex: 1 0;
+  padding-bottom: 30px;
   flex-direction: column;
   gap: 12px;
-  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   z-index: 4;
   @media (max-width: 768px) {
-    margin-bottom: 33px;
+    padding-bottom: 25px;
   }
 `;
 
@@ -22,7 +25,6 @@ const RecipientName = styled.div`
   color: ${({ $hasBackgroundImage }) =>
     $hasBackgroundImage ? 'var(--white)' : 'var(--gray900)'};
   flex: none;
-  order: 0;
   align-self: stretch;
   flex-grow: 0;
 
@@ -41,7 +43,6 @@ const MessageCount = styled.div`
   color: ${({ $hasBackgroundImage }) =>
     $hasBackgroundImage ? 'var(--gray200)' : 'var(--gray700)'};
   flex: none;
-  order: 2;
   flex-grow: 0;
   @media (max-width: 768px) {
     font-size: 14px;
@@ -105,42 +106,69 @@ const ExtraProfiles = styled.div`
   color: var(--gray500);
 `;
 
+const ReactionContainer = styled.ul`
+  position: relative;
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+  z-index: 10;
+  @media (max-width: 768px) {
+    gap: 4px;
+  }
+`;
+
+const MainEmojiBadge = styled(EmojiBadge)`
+  flex: 0 0;
+  @media (max-width: 768px) {
+    gap: 6px;
+    padding: 6px 8px;
+  }
+`;
+
 const CardContent = ({
-  recipientId,
+  id,
   recipientName,
   messageCount,
   backgroundImageURL,
+  backgroundColor,
+  profileImage,
+  topReaction,
+  handleCardClick,
 }) => {
-  const [profileImages, setProfileImages] = useState([]);
-
-  useEffect(() => {
-    const fetchProfileImages = async () => {
-      const images = await getRecipientProfileImages(recipientId);
-      setProfileImages(images);
-    };
-
-    fetchProfileImages();
-  }, [recipientId]);
-
   return (
-    <CardContentContainer>
-      <RecipientName $hasBackgroundImage={!!backgroundImageURL}>
-        To. {recipientName}
-      </RecipientName>
-      <MessageCount $hasBackgroundImage={!!backgroundImageURL}>
-        <span>{messageCount}</span>명이 작성했어요!
-      </MessageCount>
-      <ProfileImagesContainer>
-        {profileImages.slice(0, 3).map((url, index) => (
-          <div key={index}>
-            <img src={url} alt='Profile' />
-          </div>
+    <Card
+      onClick={handleCardClick}
+      backgroundColor={backgroundColor}
+      backgroundImageURL={backgroundImageURL}
+    >
+      <CardContentContainer>
+        <RecipientName $hasBackgroundImage={!!backgroundImageURL}>
+          To. {recipientName}
+        </RecipientName>
+        <ProfileImagesContainer>
+          {profileImage.map((profile, index) => (
+            <div key={index}>
+              <img src={profile.profileImageURL} alt='Profile' />
+            </div>
+          ))}
+          {messageCount > 3 && (
+            <ExtraProfiles>+{messageCount - 3}</ExtraProfiles>
+          )}
+        </ProfileImagesContainer>
+        <MessageCount $hasBackgroundImage={!!backgroundImageURL}>
+          <span>{messageCount}</span>명이 작성했어요!
+        </MessageCount>
+      </CardContentContainer>
+      <ReactionContainer>
+        {topReaction.map((list) => (
+          <MainEmojiBadge
+            key={list.id}
+            emojiCode={list.emoji}
+            emojiCount={list.count}
+          />
         ))}
-        {profileImages.length > 3 && (
-          <ExtraProfiles>+{profileImages.length - 3}</ExtraProfiles>
-        )}
-      </ProfileImagesContainer>
-    </CardContentContainer>
+      </ReactionContainer>
+    </Card>
   );
 };
 
