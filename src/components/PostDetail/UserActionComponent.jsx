@@ -8,25 +8,23 @@ import emojiAddIcon from '../../assets/image/emoji_add_icon.png';
 import shareIcon from '../../assets/image/share_icon.png';
 import arrowIcon from '../../assets/image/arrow_down.png';
 import Toast from '../../ui/Toast';
-
 const ActionContainer = styled.div`
   display: flex;
   gap: 8px;
   height: 100%;
   @media (max-width: 768px) {
     width: 100%;
+    align-items: center;
     justify-content: space-between;
     gap: 0;
   }
 `;
-
 const ListContainer = styled.ul`
   position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
 `;
-
 const ArrowBtnContainer = styled.div`
   button {
     padding: 10px;
@@ -44,7 +42,6 @@ const ArrowBtnContainer = styled.div`
     }
   }
 `;
-
 const OpenReactionCard = styled.div`
   position: absolute;
   top: 4.2rem;
@@ -55,7 +52,6 @@ const OpenReactionCard = styled.div`
   background: var(--white);
   z-index: 2;
 `;
-
 const ReactionContainer = styled.ul`
   display: grid;
   ${({ isColumn }) =>
@@ -66,6 +62,16 @@ const ReactionContainer = styled.ul`
       : `
   grid-template-columns: repeat(4, auto);
    `};
+  @media (max-width: 1248px) {
+    ${({ isColumn }) =>
+      isColumn <= 3
+        ? `
+    grid-template-columns: repeat(${isColumn}, auto);
+    `
+        : `
+  grid-template-columns: repeat(3, auto);
+   `};
+  }
   gap: 10px 8px;
 `;
 
@@ -74,11 +80,9 @@ const ButtonContainer = styled.div`
   gap: 2.8rem;
   height: 100%;
 `;
-
 const EmojiContainer = styled.div`
   position: relative;
   height: 100%;
-
   &:before {
     position: absolute;
     content: '';
@@ -107,7 +111,6 @@ const EmojiBtn = styled(OutlineButton)`
     }
   }
 `;
-
 const ShareBtn = styled(OutlineButton)`
   height: 100%;
   font-size: 0;
@@ -119,11 +122,9 @@ const ShareBtn = styled(OutlineButton)`
     }
   }
 `;
-
 const EmptyText = styled.span`
   font-size: 1.8rem;
 `;
-
 const ShareContainer = styled.div`
   position: relative;
   div {
@@ -151,7 +152,6 @@ const ShareContainer = styled.div`
     cursor: pointer;
   }
 `;
-
 export default function UserActionComponent({
   actionEmoji,
   topReaction,
@@ -166,23 +166,18 @@ export default function UserActionComponent({
   const [isThrottled, setIsThrottled] = useState(false);
   const [isSharedOpen, setIsSharedOpen] = useState(false);
   const [isClipBoard, setIsClipBoard] = useState('');
-
   const handleSharedOpen = () => {
     setIsSharedOpen((prevOpen) => !prevOpen);
   };
-
   const handleOpenReaction = () => {
     setOpenReaction((prevOpen) => !prevOpen);
   };
-
   const handleEmojiOpen = (e) => {
     setShowEmoji((prevOpen) => !prevOpen);
   };
-
   const handleEmojiClick = async (e) => {
     const newReaction = e.unified;
     if (isThrottled) return;
-
     setIsThrottled(true);
     try {
       const response = await fetch(
@@ -211,24 +206,10 @@ export default function UserActionComponent({
     }
   };
 
-  const emojiContents =
-    actionEmoji.count > 0 ? (
-      topReaction.map((list) => (
-        <EmojiBadge
-          key={list.id}
-          emojiCode={list.emoji}
-          emojiCount={list.count}
-        />
-      ))
-    ) : (
-      <EmptyText>반응을 추가해보세요!</EmptyText>
-    );
-
   const baseUrl = 'https://8team-rolling.netlify.app';
   const nowUrl = location.pathname.includes('/edit')
     ? location.pathname.replace('/edit', '')
     : location.pathname;
-
   const handleShareKaKao = () => {
     if (window.Kakao) {
       const kakao = window.Kakao;
@@ -259,15 +240,12 @@ export default function UserActionComponent({
       });
     }
   };
-
   const resetClipBoard = () => {
     setIsClipBoard('');
   };
-
   const handleShareUrl = () => {
     setIsClipBoard(`${baseUrl}${nowUrl}`);
   };
-
   useEffect(() => {
     if (isClipBoard) {
       try {
@@ -277,11 +255,20 @@ export default function UserActionComponent({
       }
     }
   }, [isClipBoard]);
-
   return (
     <ActionContainer>
       <ListContainer>
-        {emojiContents}
+        {actionEmoji.count > 0 ? (
+          topReaction.map((list) => (
+            <EmojiBadge
+              key={list.id}
+              emojiCode={list.emoji}
+              emojiCount={list.count}
+            />
+          ))
+        ) : (
+          <EmptyText>반응을 추가해보세요!</EmptyText>
+        )}
         <ArrowBtnContainer isOpen={openReaction}>
           {actionEmoji.results.length > 0 && (
             <button onClick={handleOpenReaction}>
@@ -341,7 +328,9 @@ export default function UserActionComponent({
         </ShareContainer>
       </ButtonContainer>
       {isClipBoard && (
-        <Toast isClipBoard={isClipBoard} resetClipBoard={resetClipBoard} />
+        <Toast isClipBoard={isClipBoard} resetClipBoard={resetClipBoard}>
+          복사완료
+        </Toast>
       )}
     </ActionContainer>
   );

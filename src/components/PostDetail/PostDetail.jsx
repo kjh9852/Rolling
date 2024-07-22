@@ -11,6 +11,7 @@ import BACKGROUND_COLOR from '../../util/backgroundColor';
 
 const DetailSection = styled(Section)`
   max-width: 100%;
+  height: 100vh;
   margin-top: 13.3rem;
   background: ${({ background }) => background || 'transparent'};
   background-image: ${({ backgroundImage }) => backgroundImage || 'none'};
@@ -23,7 +24,6 @@ const DetailSection = styled(Section)`
     padding-bottom: 20rem;
   }
 `;
-
 const Container = styled.div`
   max-width: 1200px;
   height: 100%;
@@ -36,7 +36,6 @@ const Container = styled.div`
     padding: 0 20px;
   }
 `;
-
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -46,12 +45,12 @@ const GridContainer = styled.div`
   padding-bottom: 5rem;
   @media (max-width: 960px) {
     grid-template-columns: repeat(2, 1fr);
-    padding-top: 9.3rem;
     gap: 1.6rem;
+    margin-top: 2rem;
   }
   @media (max-width: 640px) {
     grid-template-columns: repeat(1, 1fr);
-    padding-top: 3.2rem;
+    margin-top: 1.5rem;
   }
 `;
 
@@ -91,12 +90,24 @@ const LinkMessage = styled(Card)`
     transform: scale(1.05);
     box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
   }
+  @media (max-width: 1248px) {
+    height: 284px;
+  }
+  @media (max-width: 768px) {
+    height: 230px;
+  }
 `;
 
 const EditButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   padding-top: 6.3rem;
+  @media (max-width: 1248px) {
+    padding-top: 9.3rem;
+  }
+  @media (max-width: 640px) {
+    padding-top: 3rem;
+  }
 `;
 
 const EditButton = styled(PrimaryButton)`
@@ -104,7 +115,6 @@ const EditButton = styled(PrimaryButton)`
   font-size: 1.6rem;
   border-radius: 6px;
 `;
-
 const ConfirmButton = styled(PrimaryButton)`
   margin-left: 1.2rem;
   padding: 7px 16px;
@@ -118,13 +128,10 @@ export default function PostDetail({ userData }) {
   const [hasMore, setHasMore] = useState(true);
   const [offset, setOffset] = useState(0);
   const observerRef = useRef();
-
   const [isEdit, setIsEdit] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
   const editPaths = '/edit';
-
   useEffect(() => {
     if (location.pathname.includes(editPaths)) {
       setIsEdit(true);
@@ -132,7 +139,6 @@ export default function PostDetail({ userData }) {
       setIsEdit(false);
     }
   }, [location]);
-
   const fetchUserMessage = async () => {
     setLoading(true);
     try {
@@ -147,7 +153,6 @@ export default function PostDetail({ userData }) {
     }
     setLoading(false);
   };
-
   const handleDeleteMessage = async (event, id) => {
     event.preventDefault();
     try {
@@ -159,7 +164,6 @@ export default function PostDetail({ userData }) {
       console.log(error);
     }
   };
-
   const handleDeleteUser = async () => {
     try {
       await deleteUser(postId);
@@ -168,11 +172,9 @@ export default function PostDetail({ userData }) {
       console.log(error);
     }
   };
-
   const handleCompleteEdit = async () => {
     navigate('./');
   };
-
   const handleObserver = (entries) => {
     const target = entries[0];
     if (target.isIntersecting && hasMore) {
@@ -182,7 +184,6 @@ export default function PostDetail({ userData }) {
       }, [700]);
     }
   };
-
   useEffect(() => {
     const option = {
       threshold: 1,
@@ -197,17 +198,13 @@ export default function PostDetail({ userData }) {
       }
     };
   }, [loading]);
-
   useEffect(() => {
     fetchUserMessage();
   }, [offset]);
-
   const userBackground = BACKGROUND_COLOR.find(
     (list) => list.type === userData.backgroundColor
   );
-
   const userImageBackground = userData.backgroundImageURL;
-
   const backgroundStyle = userImageBackground
     ? { backgroundImage: `url(${userImageBackground})` }
     : { background: `var(${userBackground.background})` };
