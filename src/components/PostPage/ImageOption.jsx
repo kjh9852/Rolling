@@ -65,7 +65,7 @@ const LoadingPlaceholder = styled.div`
 
 const ImageOption = ({ images, selectedImage, onSelect, isLoading }) => {
   if (isLoading) {
-    return <LoadingPlaceholder>Loading...</LoadingPlaceholder>; // 새로 추가: 로딩 중 표시
+    return <LoadingPlaceholder>Loading...</LoadingPlaceholder>;
   }
 
   return (
@@ -76,7 +76,7 @@ const ImageOption = ({ images, selectedImage, onSelect, isLoading }) => {
           selected={selectedImage === image.original}
           onClick={() => onSelect(image)}
         >
-          <img src={image.thumbnail} alt={'Background'} />
+          <img src={image.thumbnail} alt={'Background'} loading='lazy' />
           <CheckingMark
             selected={selectedImage === image.original}
           ></CheckingMark>

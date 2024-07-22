@@ -142,7 +142,7 @@ export async function deleteUser(id) {
   return response;
 }
 
-export const fetchBackgroundImages = async (thumbnailSize = 168) => {
+export const fetchBackgroundImages = async () => {
   try {
     const response = await fetch(
       'https://rolling-api.vercel.app/background-images/'
@@ -152,19 +152,14 @@ export const fetchBackgroundImages = async (thumbnailSize = 168) => {
     }
     const data = await response.json();
 
-    // 썸네일 URL 생성
-    const thumbnailUrls = data.imageUrls.map((url) => {
-      const parts = url.split('/');
-      parts.splice(-2); // 마지막 두 부분(원본 크기) 제거
-      return `${parts.join('/')}/${thumbnailSize}/${thumbnailSize}`;
-    });
+    const thumbnailUrls = data.imageUrls.map((url) => url);
 
     return {
       thumbnailUrls,
       originalUrls: data.imageUrls,
     };
   } catch (error) {
-    console.error('배경 이미지 :', error);
+    console.error('Error fetching background images:', error);
     return {
       thumbnailUrls: [],
       originalUrls: [],

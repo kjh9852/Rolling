@@ -70,10 +70,9 @@ const BgSelector = ({
   setCheckedTab,
 }) => {
   const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // 로딩상태
+  const [isLoading, setIsLoading] = useState(true);
   const colors = ['beige', 'purple', 'blue', 'green'];
 
-  //프리로딩 함수
   const preloadImage = (url) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -85,27 +84,25 @@ const BgSelector = ({
 
   useEffect(() => {
     const loadBackgroundImages = async () => {
-      setIsLoading(true); // 로딩 시작
+      setIsLoading(true);
       try {
-        const { thumbnailUrls, originalUrls } = await fetchBackgroundImages(
-          168
-        );
+        const { thumbnailUrls, originalUrls } = await fetchBackgroundImages();
         const imageData = thumbnailUrls.map((thumb, index) => ({
           thumbnail: thumb,
           original: originalUrls[index],
         }));
+
         setImages(imageData);
 
         if (originalUrls.length > 0 && !selectedImage) {
           setSelectedImage(originalUrls[0]);
         }
 
-        // 새로 추가: 썸네일 이미지 프리로딩
         await Promise.all(thumbnailUrls.map(preloadImage));
       } catch (error) {
         console.error('Error loading images:', error);
       } finally {
-        setIsLoading(false); // 로딩 완료
+        setIsLoading(false);
       }
     };
 
