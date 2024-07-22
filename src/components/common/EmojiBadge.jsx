@@ -1,6 +1,5 @@
 import { Emoji } from 'emoji-picker-react';
 import styled from 'styled-components';
-
 const List = styled.li`
   display: flex;
   align-items: center;
@@ -11,16 +10,27 @@ const List = styled.li`
   background: rgba(0, 0, 0, 0.54);
   border-radius: 32px;
   span {
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 400;
     color: var(--white);
   }
+  @media (max-width: 560px) {
+    padding: 6px 10px;
+    span {
+      font-size: 1.2rem;
+    }
+  }
 `;
+
+let size = '20';
+if (window.innerWidth <= 560) {
+  size = '15';
+}
 
 export default function EmojiBadge({ emojiCode, emojiCount }) {
   return (
     <List>
-      <Emoji unified={emojiCode} size='20' />
+      <Emoji unified={emojiCode} size={size} />
       <span>{emojiCount}</span>
     </List>
   );

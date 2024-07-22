@@ -18,12 +18,20 @@ const SectionContainer = styled(Card)`
       box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
     }
     `}
+  @media (max-width: 1248px) {
+    height: 284px;
+  }
+  @media (max-width: 768px) {
+    height: 230px;
+  }
 `;
+
 const ListContainer = styled.article`
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
+
 const UserInfo = styled.div`
   display: flex;
   align-items: flex-start;
@@ -32,6 +40,7 @@ const UserInfo = styled.div`
   padding-bottom: 15px;
   border-bottom: 1px solid #eeeeee;
 `;
+
 const UserProfile = styled.img`
   width: 56px;
   height: 56px;
@@ -39,6 +48,7 @@ const UserProfile = styled.img`
   object-position: top;
   border-radius: 14rem;
 `;
+
 const UserBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -48,15 +58,10 @@ const UserBox = styled.div`
     font-size: 2rem;
   }
 `;
+
 const SenderContainer = styled.div`
   display: flex;
   gap: 1.4rem;
-`;
-const Content = styled.p`
-  flex: 1 0;
-  font-size: 1.8rem;
-  padding-top: 16px;
-  font-family: ${(props) => props.font};
 `;
 
 const CreateDate = styled.div`
@@ -84,7 +89,6 @@ export default function MessageList({
   const [isEdit, setIsEdit] = useState(false);
   const location = useLocation();
   const editPaths = '/edit';
-
   useEffect(() => {
     if (location.pathname.includes(editPaths)) {
       setIsEdit(true);
@@ -92,15 +96,12 @@ export default function MessageList({
       setIsEdit(false);
     }
   }, [location]);
-
   const findRelationShip = RELATION.find((list) => list.type === relationship);
-
   const spanStyle = {
     '--background': findRelationShip && `var(${findRelationShip.background})`,
     '--color': findRelationShip && `var(${findRelationShip.color})`,
   };
   const convertDate = createdAt.split('T')[0];
-
   return (
     <SectionContainer isEdit={isEdit}>
       <MessageContainer isEdit={isEdit} to={`message/${id}`}>
