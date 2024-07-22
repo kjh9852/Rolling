@@ -20,10 +20,14 @@ export default function PostDetailPage() {
 
 export async function loader({ params }) {
   const id = params.postId;
+  let limit = 8;
+  if (window.innerWidth <= 1248) {
+    limit = 6;
+  }
   const [userData, userReaction] = await Promise.all([
     fetch(`https://rolling-api.vercel.app/8-8/recipients/${id}/`),
     fetch(
-      `https://rolling-api.vercel.app/8-8/recipients/${id}/reactions/?limit=8`
+      `https://rolling-api.vercel.app/8-8/recipients/${id}/reactions/?limit=${limit}`
     ),
   ]);
 
