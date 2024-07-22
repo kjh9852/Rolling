@@ -1,12 +1,12 @@
-import styled from 'styled-components';
 import PrimaryButton from '../common/PrimaryButton';
+import styled from 'styled-components';
 
-const StartButton = styled(PrimaryButton)`
+const GoToMakeButton = styled(PrimaryButton)`
   padding: 14px 60px;
-  margin-bottom: 174px;
+  margin-bottom: 218px;
   line-height: 2.8rem;
   font-size: 1.8rem;
-  transition: all.3s ease;
+  transition: all 0.3s ease;
   white-space: nowrap;
   span {
     display: flex;
@@ -24,17 +24,16 @@ const StartButton = styled(PrimaryButton)`
   }
   @media (min-width: 769px) and (max-width: 1023px) {
     width: 100%;
-    margin-top: 72px;
-    margin-bottom: 24px;
     display: flex;
     justify-content: center;
+    margin: 132px 0 24px 0;
   }
   @media (max-width: 768px) {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin: 24px 0px;
+    margin: 32px 0px 24px;
   }
 `;
 
-export default StartButton;
+export default GoToMakeButton;

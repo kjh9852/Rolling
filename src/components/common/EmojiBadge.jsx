@@ -5,7 +5,7 @@ const List = styled.li`
   align-items: center;
   justify-content: space-between;
   flex: 1 0;
-  gap: 2px;
+  gap: 4px;
   padding: 8px 12px;
   background: rgba(0, 0, 0, 0.54);
   border-radius: 32px;
