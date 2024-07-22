@@ -38,6 +38,9 @@ const NavigationButton = styled.button`
   &:disabled {
     display: none;
   }
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 const NavigationButtonComponent = ({ isNext, ...props }) => (
