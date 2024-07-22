@@ -10,6 +10,14 @@ const Container = styled.form`
   gap: 30px;
   max-width: 720px;
   margin: 350px auto;
+  @media (max-width: 1248px) {
+    margin: 150px auto;
+    padding: 0 20px;
+  }
+
+  @media (max-width: 640px) {
+    margin: 150px auto;
+  }
 `;
 
 const MessageContainer = styled.div`
@@ -20,12 +28,26 @@ const MessageContainer = styled.div`
   gap: 15px;
 `;
 const ErrorTitle = styled.h1`
-  font-size: 200px;
+  font-size: 180px;
   color: var(--error);
+  @media (max-width: 1248px) {
+    font-size: 110px;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 90px;
+  }
 `;
 
 const ErrorMessage = styled.h2`
   font-size: 35px;
+  @media (max-width: 1248px) {
+    font-size: 30px;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 15px;
+  }
 `;
 
 const ErrorButton = styled(PrimaryButton)`
@@ -33,6 +55,15 @@ const ErrorButton = styled(PrimaryButton)`
   height: 60px;
   border-radius: 12px;
   font-size: 25px;
+  @media (max-width: 1248px) {
+  }
+
+  @media (max-width: 640px) {
+    border-radius: 5px;
+    width: 120px;
+    height: 45px;
+    font-size: 15px;
+  }
 `;
 
 function NotFoundPage() {
