@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import './emoji.css';
 const UserContainer = styled.div`
   position: fixed;
-  top: 66px;
+  top: 65px;
   left: 0;
   width: 100%;
   height: 68px;
