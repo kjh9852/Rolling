@@ -100,7 +100,7 @@ export async function PostRecipientMessage({
   return body;
 }
 
-export async function RecipientMessageForm({
+export async function recipientMessageForm({
   name,
   backgroundColor,
   backgroundImageURL,
@@ -141,3 +141,33 @@ export async function deleteUser(id) {
   });
   return response;
 }
+
+export const fetchBackgroundImages = async (thumbnailSize = 168) => {
+  try {
+    const response = await fetch(
+      'https://rolling-api.vercel.app/background-images/'
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+
+    // 썸네일 URL 생성
+    const thumbnailUrls = data.imageUrls.map((url) => {
+      const parts = url.split('/');
+      parts.splice(-2); // 마지막 두 부분(원본 크기) 제거
+      return `${parts.join('/')}/${thumbnailSize}/${thumbnailSize}`;
+    });
+
+    return {
+      thumbnailUrls,
+      originalUrls: data.imageUrls,
+    };
+  } catch (error) {
+    console.error('배경 이미지 :', error);
+    return {
+      thumbnailUrls: [],
+      originalUrls: [],
+    };
+  }
+};
