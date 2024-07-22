@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useLocation, Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Card from '../common/Card';
-import MessageList from './MessageList';
 import Section from '../common/Section';
+import Card from '../common/Card';
+import PrimaryButton from '../common/PrimaryButton';
+import MessageList from './MessageList';
 import LoadingSpinner from '../../ui/LoadingSpinner';
-import { getUserMessage } from '../../util/api';
+import { getUserMessage, deleteMessage, deleteUser } from '../../util/api';
 import BACKGROUND_COLOR from '../../util/backgroundColor';
 
 const DetailSection = styled(Section)`
@@ -36,12 +37,12 @@ const Container = styled.div`
   }
 `;
 
-const FlexContainer = styled.div`
+const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  margin-top: 1.1rem;
   gap: 2.4rem;
-  padding-top: 11.3rem;
   padding-bottom: 5rem;
   @media (max-width: 960px) {
     grid-template-columns: repeat(2, 1fr);
@@ -92,6 +93,24 @@ const LinkMessage = styled(Card)`
   }
 `;
 
+const EditButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 6.3rem;
+`;
+
+const EditButton = styled(PrimaryButton)`
+  padding: 7px 16px;
+  font-size: 1.6rem;
+  border-radius: 6px;
+`;
+
+const ConfirmButton = styled(PrimaryButton)`
+  margin-left: 1.2rem;
+  padding: 7px 16px;
+  font-size: 1.6rem;
+  border-radius: 6px;
+`;
 export default function PostDetail({ userData }) {
   const { postId } = useParams();
   const [loading, setLoading] = useState(false);
@@ -99,6 +118,20 @@ export default function PostDetail({ userData }) {
   const [hasMore, setHasMore] = useState(true);
   const [offset, setOffset] = useState(0);
   const observerRef = useRef();
+
+  const [isEdit, setIsEdit] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const editPaths = '/edit';
+
+  useEffect(() => {
+    if (location.pathname.includes(editPaths)) {
+      setIsEdit(true);
+    } else {
+      setIsEdit(false);
+    }
+  }, [location]);
 
   const fetchUserMessage = async () => {
     setLoading(true);
@@ -113,6 +146,31 @@ export default function PostDetail({ userData }) {
       console.log(error);
     }
     setLoading(false);
+  };
+
+  const handleDeleteMessage = async (event, id) => {
+    event.preventDefault();
+    try {
+      await deleteMessage(id);
+      setPostMessage((prevList) =>
+        prevList.filter((message) => message.id !== id)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    try {
+      await deleteUser(postId);
+      navigate('/list');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCompleteEdit = async () => {
+    navigate('./');
   };
 
   const handleObserver = (entries) => {
@@ -160,12 +218,24 @@ export default function PostDetail({ userData }) {
       backgroundImage={backgroundStyle.backgroundImage}
     >
       <Container>
-        <FlexContainer>
-          <Link to='message'>
-            <LinkMessage>
-              <div />
-            </LinkMessage>
-          </Link>
+        {!isEdit ? (
+          <EditButtonContainer>
+            <EditButton to='edit'>편집하기</EditButton>
+          </EditButtonContainer>
+        ) : (
+          <EditButtonContainer>
+            <EditButton onClick={handleDeleteUser}>삭제하기</EditButton>
+            <ConfirmButton onClick={handleCompleteEdit}>완료</ConfirmButton>
+          </EditButtonContainer>
+        )}
+        <GridContainer>
+          {!isEdit && (
+            <Link to='message'>
+              <LinkMessage>
+                <div />
+              </LinkMessage>
+            </Link>
+          )}
           {postMessage.map((list) => (
             <MessageList
               id={list.id}
@@ -176,9 +246,10 @@ export default function PostDetail({ userData }) {
               createdAt={list.createdAt}
               profileImageURL={list.profileImageURL}
               font={list.font}
+              handleDeleteMessage={handleDeleteMessage}
             />
           ))}
-        </FlexContainer>
+        </GridContainer>
         {!loading ? <div ref={observerRef}></div> : <LoadingSpinner />}
       </Container>
     </DetailSection>

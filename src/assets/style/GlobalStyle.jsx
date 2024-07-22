@@ -18,6 +18,29 @@ const GlobalStyle = createGlobalStyle`
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),
+  url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),
+  url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');
+}
+
+@font-face {
+    font-family: '나눔명조';
+    src: url('https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.eot');
+    src:url('https://cdn.jsdelivr.net/gh/wizfile/font/NanumMyeongjo.woff') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: '나눔손글씨 손편지체';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Handletter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*  default */
 * {
   box-sizing: border-box;
@@ -25,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
   list-style: none;
   text-decoration: none;
-  font-family: Pretendard, 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR',
+  font-family: Pretendard, 'Apple SD Gothic Neo', '나눔손글씨 손편지체', 나눔명조, Roboto, 'Noto Sans',
     NanumGothic, 'Malgun Gothic', 'Segoe UI', 'Apple SD Gothic Neo',
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }

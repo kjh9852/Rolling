@@ -18,6 +18,27 @@ const PageWrap = styled.div`
   }
 `;
 
+const BackButton = styled.button`
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background-color: var(--error);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000;
+  &:hover {
+    background-color: #b63131;
+    transition: 0.2s all;
+  }
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
 const To = styled.h2`
   font-size: 24px;
   font-weight: 700;
@@ -31,6 +52,10 @@ const AddPost = () => {
   const [checkedTab, setCheckedTab] = useState('color');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // 이전 페이지로 이동
+  };
 
   useEffect(() => {
     setIsSubmitDisabled(valueName.trim() === '');
@@ -62,6 +87,7 @@ const AddPost = () => {
 
   return (
     <PageWrap>
+      <BackButton onClick={handleGoBack}>이전</BackButton>
       <form onSubmit={handleSubmit}>
         <To>To.</To>
         <NameInput

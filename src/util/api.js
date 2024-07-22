@@ -55,6 +55,7 @@ export async function getRecipientMessage(recipientId) {
   return body.results;
 }
 
+<<<<<<< HEAD
 // 새롭게 추가된 함수: 각 수신자의 메시지 프로필 이미지를 가져오는 함수
 export async function getRecipientProfileImages(recipientId) {
   const response = await fetch(
@@ -68,6 +69,8 @@ export async function getRecipientProfileImages(recipientId) {
   return profileImages;
 }
 
+=======
+>>>>>>> a1c4ebef802645b4e75e49f529f0d069b0ad057b
 export async function PostRecipientMessage({
   postId,
   name,
@@ -126,4 +129,18 @@ export async function RecipientMessageForm({
   }
   const body = await response.json();
   return body;
+}
+
+export async function deleteMessage(id) {
+  const response = await fetch(`${BASE_URL}/${TEAM}/messages/${id}/`, {
+    method: 'DELETE',
+  });
+  return response;
+}
+
+export async function deleteUser(id) {
+  const response = await fetch(`${BASE_URL}/${TEAM}/recipients/${id}/`, {
+    method: 'DELETE',
+  });
+  return response;
 }

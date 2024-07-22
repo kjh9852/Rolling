@@ -4,7 +4,6 @@ import RootLayout from './router/RootLayout';
 import LandingPage from './pages/LandingPage';
 import ListPage from './pages/ListPage';
 import AddPostPage from './pages/AddPostPage';
-import PostEditPage from './pages/PostEditPage';
 import AddMessagePage from './pages/AddMessagePage';
 import NotFoundPage from './components/PostPage/NotFoundPage';
 import PostDetailPage, {
@@ -38,7 +37,6 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'edit',
-            element: <PostEditPage />,
           },
           {
             path: 'message/:messageId',
