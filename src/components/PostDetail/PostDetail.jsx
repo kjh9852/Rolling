@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation, Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Section from '../common/Section';
 import Card from '../common/Card';
 import PrimaryButton from '../common/PrimaryButton';
@@ -160,6 +160,19 @@ const ConfirmButton = styled(PrimaryButton)`
   }
 `;
 
+const EmptyText = styled.h2`
+  font-size: 2.4rem;
+  ${({ userImageBackground }) =>
+    userImageBackground
+      ? css`
+          color: var(--white);
+          text-shadow: -1px 0px #000, 0px 1px #000, 1px 0px #000, 0px -1px #000;
+        `
+      : css`
+          color: #000;
+        `};
+`;
+
 export default function PostDetail({ userData }) {
   const { postId } = useParams();
   const [loading, setLoading] = useState(false);
@@ -280,7 +293,9 @@ export default function PostDetail({ userData }) {
             </Link>
           ) : (
             !postMessage.length && (
-              <span style={{ fontSize: '1.8rem' }}>메세지가 없습니다.</span>
+              <EmptyText userImageBackground={userImageBackground}>
+                삭제할 메세지가 없습니다.
+              </EmptyText>
             )
           )}
 
