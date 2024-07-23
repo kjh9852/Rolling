@@ -11,7 +11,6 @@ import BACKGROUND_COLOR from '../../util/backgroundColor';
 
 const DetailSection = styled(Section)`
   max-width: 100%;
-  height: 100vh;
   margin-top: 13.3rem;
   background: ${({ background }) => background || 'transparent'};
   background-image: ${({ backgroundImage }) => backgroundImage || 'none'};
@@ -164,6 +163,7 @@ export default function PostDetail({ userData }) {
       console.log(error);
     }
   };
+
   const handleDeleteUser = async () => {
     try {
       await deleteUser(postId);
@@ -172,9 +172,11 @@ export default function PostDetail({ userData }) {
       console.log(error);
     }
   };
+
   const handleCompleteEdit = async () => {
     navigate('./');
   };
+
   const handleObserver = (entries) => {
     const target = entries[0];
     if (target.isIntersecting && hasMore) {
@@ -184,6 +186,7 @@ export default function PostDetail({ userData }) {
       }, [700]);
     }
   };
+
   useEffect(() => {
     const option = {
       threshold: 1,
@@ -198,9 +201,11 @@ export default function PostDetail({ userData }) {
       }
     };
   }, [loading]);
+
   useEffect(() => {
     fetchUserMessage();
   }, [offset]);
+
   const userBackground = BACKGROUND_COLOR.find(
     (list) => list.type === userData.backgroundColor
   );
