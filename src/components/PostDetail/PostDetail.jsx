@@ -11,6 +11,7 @@ import BACKGROUND_COLOR from '../../util/backgroundColor';
 
 const DetailSection = styled(Section)`
   max-width: 100%;
+  min-height: 100svh;
   padding-top: 2rem;
   margin-top: 13.3rem;
   background: ${({ background }) => background || 'transparent'};
@@ -277,6 +278,9 @@ export default function PostDetail({ userData }) {
                 <div />
               </LinkMessage>
             </Link>
+          )}
+          {isEdit && !postMessage.length && (
+            <span style={{ fontSize: '1.8rem' }}>메세지가 없습니다.</span>
           )}
           {postMessage.map((list) => (
             <MessageList
