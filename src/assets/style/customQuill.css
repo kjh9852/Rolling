@@ -40,6 +40,14 @@
   padding-left: 0;
 }
 
+.quill * > u {
+  text-decoration: underline;
+}
+
+.quill * > em {
+  font-style: italic;
+}
+
 .quill.readMessage .ql-editor > * {
   cursor: pointer;
 }

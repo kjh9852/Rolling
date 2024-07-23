@@ -31,7 +31,7 @@ function ContentArea({ onChange, value }) {
     return {
       toolbar: {
         container: [
-          ['bold'],
+          ['bold', 'italic', 'underline'],
           [{ align: [] }],
           [{ list: 'ordered' }, { list: 'bullet' }],
           [
