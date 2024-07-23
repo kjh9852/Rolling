@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PrimaryButton from '../common/PrimaryButton';
 import NameInput from './NameInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
@@ -13,29 +14,39 @@ const PageWrap = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 769px) {
-    margin-top: 26px;
+    margin-top: 60px;
     padding: 24px 20px;
   }
 `;
 
-const BackButton = styled.button`
+const ButtonContainer = styled.div`
+  display: none;
   position: fixed;
-  top: 16px;
-  right: 16px;
-  background-color: var(--error);
-  color: var(--white);
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 16px;
-  cursor: pointer;
-  z-index: 1000;
-  &:hover {
-    background-color: #b63131;
-    transition: 0.2s all;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 68px;
+  top: 0px;
+  left: 0px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #ededed;
+  @media (max-width: 768px) {
+    display: flex;
   }
-  @media (min-width: 769px) {
-    display: none;
+`;
+
+const BackButton = styled(PrimaryButton)`
+  display: none;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 6px;
+  svg {
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    display: flex;
   }
 `;
 
@@ -87,7 +98,9 @@ const AddPost = () => {
 
   return (
     <PageWrap>
-      <BackButton onClick={handleGoBack}>이전</BackButton>
+      <ButtonContainer>
+        <BackButton isSvg={true} onClick={handleGoBack} />
+      </ButtonContainer>
       <form onSubmit={handleSubmit}>
         <To>To.</To>
         <NameInput
