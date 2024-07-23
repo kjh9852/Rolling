@@ -38,7 +38,7 @@ const NavigationButton = styled.button`
   &:disabled {
     display: none;
   }
-  @media (max-width: 1024px) {
+  @media (max-width: 1248px) {
     display: none;
   }
 `;

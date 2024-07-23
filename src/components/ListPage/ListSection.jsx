@@ -7,13 +7,13 @@ const ListSection = styled(Section)`
   align-items: center;
   padding-top: 64px;
   padding-bottom: 100px;
-  @media (min-width: 769px) and (max-width: 1023px) {
+  @media (max-width: 1248px) {
     overflow-x: hidden;
-    height: 100vh;
+    height: calc(100svh);
   }
   @media (max-width: 768px) {
     overflow-x: hidden;
-    height: 100vh;
+    padding-bottom: 0;
   }
 `;
 

@@ -9,7 +9,7 @@ const CardListWrapper = styled.div`
   position: relative;
   width: 1160px;
   height: 260px;
-  @media (max-width: 1024px) {
+  @media (max-width: 1248px) {
     width: 100%;
   }
 `;

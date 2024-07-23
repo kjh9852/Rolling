@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 100%;
-  margin-bottom: 64px;
+  margin-bottom: 6.4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  @media (min-width: 769px) and (max-width: 1023px) {
-    width: 100vw;
-    margin: 0;
+  @media (max-width: 1248px) {
+    width: 100%;
+    margin-bottom: 15.6rem;
   }
   @media (max-width: 768px) {
-    width: 100vw;
-    margin-bottom: 0;
+    margin-bottom: 6.6rem;
   }
 `;
 
