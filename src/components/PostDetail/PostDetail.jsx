@@ -261,27 +261,29 @@ export default function PostDetail({ userData }) {
       backgroundImage={backgroundStyle.backgroundImage}
     >
       <Container>
-        {!isEdit ? (
-          <EditButtonContainer>
+        <EditButtonContainer>
+          {!isEdit ? (
             <EditButton to='edit'>편집하기</EditButton>
-          </EditButtonContainer>
-        ) : (
-          <EditButtonContainer>
-            <DeleteButton onClick={handleDeleteUser}>삭제하기</DeleteButton>
-            <ConfirmButton onClick={handleCompleteEdit}>완료</ConfirmButton>
-          </EditButtonContainer>
-        )}
+          ) : (
+            <>
+              <DeleteButton onClick={handleDeleteUser}>삭제하기</DeleteButton>
+              <ConfirmButton onClick={handleCompleteEdit}>완료</ConfirmButton>
+            </>
+          )}
+        </EditButtonContainer>
         <GridContainer>
-          {!isEdit && (
+          {!isEdit ? (
             <Link to='message'>
               <LinkMessage>
                 <div />
               </LinkMessage>
             </Link>
+          ) : (
+            !postMessage.length && (
+              <span style={{ fontSize: '1.8rem' }}>메세지가 없습니다.</span>
+            )
           )}
-          {isEdit && !postMessage.length && (
-            <span style={{ fontSize: '1.8rem' }}>메세지가 없습니다.</span>
-          )}
+
           {postMessage.map((list) => (
             <MessageList
               id={list.id}
