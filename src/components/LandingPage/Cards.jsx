@@ -78,7 +78,7 @@ const CardImg2 = styled(CardImg1)`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 124px;
+    height: 90px;
   }
 `;
 

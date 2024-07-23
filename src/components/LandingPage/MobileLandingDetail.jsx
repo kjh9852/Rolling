@@ -5,8 +5,8 @@ import PointBox from './PointBox';
 import Title from './Title';
 import SubTitle from './SubTitle';
 import StartButton from './StartButton';
-import mobileCardImg1 from '../../assets/image/mobileCardImg1.png';
-import mobileCardImg2 from '../../assets/image/mobileCardImg2.png';
+import mobileCardImg1 from '../../assets/image/cardImg1.png';
+import mobileCardImg2 from '../../assets/image/cardImg2.png';
 import LandingSection from './LandingSection';
 import styled from 'styled-components';
 
@@ -33,7 +33,7 @@ export default function MobileLandingDetail() {
         <CardImg2>
           <img
             src={mobileCardImg1}
-            style={{ minWidth: '320px' }}
+            style={{ minWidth: '355px' }}
             alt='point1'
           />
         </CardImg2>
