@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ImageWrap = styled.div`
-  display: contents; //  ImageOption 컴포넌트의 구조 유지
+  display: contents;
 
   @media (min-width: 769px) {
     display: flex;
@@ -21,7 +21,7 @@ const ImageCard = styled.div`
   overflow: hidden;
 
   @media (min-width: 769px) {
-    width: calc(25% - 7.5px); // 4개의 아이템이 한 줄에 들어가도록 조정
+    width: calc(25% - 7.5px);
     max-width: 168px;
   }
 
@@ -54,17 +54,32 @@ const CheckingMark = styled.div`
   }
 `;
 
-const ImageOption = ({ images, selectedImage, onSelect }) => {
+const LoadingPlaceholder = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ImageOption = ({ images, selectedImage, onSelect, isLoading }) => {
+  if (isLoading) {
+    return <LoadingPlaceholder>Loading...</LoadingPlaceholder>;
+  }
+
   return (
     <ImageWrap>
       {images.map((image, index) => (
         <ImageCard
           key={index}
-          selected={selectedImage === image}
+          selected={selectedImage === image.original}
           onClick={() => onSelect(image)}
         >
-          <img src={image} alt={'Background'} />
-          <CheckingMark selected={selectedImage === image}></CheckingMark>
+          <img src={image.thumbnail} alt={'Background'} loading='lazy' />
+          <CheckingMark
+            selected={selectedImage === image.original}
+          ></CheckingMark>
         </ImageCard>
       ))}
     </ImageWrap>

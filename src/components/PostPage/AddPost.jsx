@@ -4,7 +4,7 @@ import NameInput from './NameInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
 import styled from 'styled-components';
-import { RecipientMessageForm } from '../../util/api';
+import { recipientMessageForm } from '../../util/api';
 
 const PageWrap = styled.div`
   max-width: 720px;
@@ -76,7 +76,7 @@ const AddPost = () => {
     }
 
     try {
-      const response = await RecipientMessageForm(postData);
+      const response = await recipientMessageForm(postData);
       console.log('생성 완료:', response);
       navigate(`/post/${response.id}`);
     } catch (error) {

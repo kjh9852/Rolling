@@ -100,7 +100,7 @@ export async function PostRecipientMessage({
   return body;
 }
 
-export async function RecipientMessageForm({
+export async function recipientMessageForm({
   name,
   backgroundColor,
   backgroundImageURL,
@@ -141,3 +141,28 @@ export async function deleteUser(id) {
   });
   return response;
 }
+
+export const fetchBackgroundImages = async () => {
+  try {
+    const response = await fetch(
+      'https://rolling-api.vercel.app/background-images/'
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+
+    const thumbnailUrls = data.imageUrls.map((url) => url);
+
+    return {
+      thumbnailUrls,
+      originalUrls: data.imageUrls,
+    };
+  } catch (error) {
+    console.error('Error fetching background images:', error);
+    return {
+      thumbnailUrls: [],
+      originalUrls: [],
+    };
+  }
+};

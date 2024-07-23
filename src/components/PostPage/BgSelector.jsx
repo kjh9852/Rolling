@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ColorOption from './ColorOption';
 import ImageOption from './ImageOption';
+import { fetchBackgroundImages } from '../../util/api';
 
 const BgWrap = styled.div`
   width: 100%;
@@ -69,19 +70,44 @@ const BgSelector = ({
   setCheckedTab,
 }) => {
   const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const colors = ['beige', 'purple', 'blue', 'green'];
 
+  const preloadImage = (url) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = resolve;
+      img.onerror = reject;
+    });
+  };
+
   useEffect(() => {
-    fetch('https://rolling-api.vercel.app/background-images/')
-      .then((response) => response.json())
-      .then((data) => {
-        setImages(data.imageUrls);
-        if (data.imageUrls.length > 0 && !selectedImage) {
-          setSelectedImage(data.imageUrls[0]);
+    const loadBackgroundImages = async () => {
+      setIsLoading(true);
+      try {
+        const { thumbnailUrls, originalUrls } = await fetchBackgroundImages();
+        const imageData = thumbnailUrls.map((thumb, index) => ({
+          thumbnail: thumb,
+          original: originalUrls[index],
+        }));
+
+        setImages(imageData);
+
+        if (originalUrls.length > 0 && !selectedImage) {
+          setSelectedImage(originalUrls[0]);
         }
-      })
-      .catch((error) => console.error('Error:', error));
-  }, [selectedImage, setSelectedImage]);
+
+        await Promise.all(thumbnailUrls.map(preloadImage));
+      } catch (error) {
+        console.error('Error loading images:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadBackgroundImages();
+  }, []);
 
   const handleTabClick = (tab, event) => {
     event.preventDefault();
@@ -120,7 +146,8 @@ const BgSelector = ({
           <ImageOption
             images={images}
             selectedImage={selectedImage}
-            onSelect={setSelectedImage}
+            onSelect={(image) => setSelectedImage(image.original)}
+            isLoading={isLoading}
           />
         )}
       </OptionsWrapper>
