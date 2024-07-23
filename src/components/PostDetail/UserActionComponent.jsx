@@ -238,7 +238,7 @@ export default function UserActionComponent({
         content: {
           title: `To. ${shareName}`,
           description: `${shareName}님에게 롤링페이퍼를 써보세요`,
-          imageUrl: `${process.env.PUBLIC_URL}/kakao_shared.jpg`,
+          imageUrl: `${process.env.REACT_APP_BASE_URL}/kakao_shared.jpg`,
           link: {
             mobileWebUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
             webUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
