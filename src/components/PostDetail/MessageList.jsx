@@ -10,6 +10,7 @@ import ReactQuill from 'react-quill';
 import deleteIcon from '../../assets/image/deleted.png';
 
 const SectionContainer = styled(Card)`
+  overflow: hidden;
   transition: all.3s ease;
   ${({ isEdit }) =>
     !isEdit &&
