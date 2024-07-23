@@ -46,6 +46,11 @@ const CardListSection = ({ messages, loading }) => {
           <EllipsisLoading />
         ) : (
           <AnimatedCardList currentOffset={currentOffset}>
+            {!messages.length && (
+              <h2 style={{ fontSize: '2.4rem' }}>
+                롤링 페이퍼를 만들어 보세요.
+              </h2>
+            )}
             {messages.map((recipient) => (
               <CardContent
                 id={recipient.id}
