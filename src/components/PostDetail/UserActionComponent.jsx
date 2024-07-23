@@ -224,7 +224,6 @@ export default function UserActionComponent({
     }
   };
 
-  const baseUrl = 'https://8team-rolling.netlify.app';
   const nowUrl = location.pathname.includes('/edit')
     ? location.pathname.replace('/edit', '')
     : location.pathname;
@@ -240,18 +239,18 @@ export default function UserActionComponent({
           title: `To. ${shareName}`,
           description: `${shareName}님에게 롤링페이퍼를 써보세요`,
           imageUrl:
-            'https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+            'https://8team-rolling.netlify.app/assets/image/kakao_shared.jpg',
           link: {
-            mobileWebUrl: `${baseUrl}${nowUrl}`,
-            webUrl: `${baseUrl}${nowUrl}`,
+            mobileWebUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
+            webUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
           },
         },
         buttons: [
           {
             title: '웹으로 이동',
             link: {
-              mobileWebUrl: 'https://developers.kakao.com',
-              webUrl: `${baseUrl}${nowUrl}`,
+              mobileWebUrl: `${process.env.REACT_APP_BASE_URL}`,
+              webUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
             },
           },
         ],
@@ -262,7 +261,7 @@ export default function UserActionComponent({
     setIsClipBoard('');
   };
   const handleShareUrl = () => {
-    setIsClipBoard(`${baseUrl}${nowUrl}`);
+    setIsClipBoard(`${process.env.REACT_APP_BASE_URL}${nowUrl}`);
   };
   useEffect(() => {
     if (isClipBoard) {
