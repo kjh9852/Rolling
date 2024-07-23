@@ -5,7 +5,7 @@ import PointBox from './PointBox';
 import Title from './Title';
 import SubTitle from './SubTitle';
 import StartButton from './StartButton';
-import mobileCardImg1 from '../../assets/image/mobile_card_img.png';
+import mobileCardImg1 from '../../assets/image/mobileCardImg1.png';
 import mobileCardImg2 from '../../assets/image/mobileCardImg2.png';
 import LandingSection from './LandingSection';
 import styled from 'styled-components';
