@@ -1,91 +1,46 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import ListSection from './ListSection';
 import Container from './Container';
 import Title from './Title';
 import CardListSection from './CardListSection';
 import GoToMakeButton from './GoToMakeButton';
-import { getRecipients, getRecipientMessage } from '../../util/api';
-import LeftAlign from './LeftAlign';
 
 export default function DesktopListDetail() {
-  const [topMessages, setTopMessages] = useState([]);
-  const [bottomMessages, setBottomMessages] = useState([]);
-  const [currentTopOffset, setCurrentTopOffset] = useState(0);
-  const [currentBottomOffset, setCurrentBottomOffset] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
-  const itemsPerPage = 4;
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [offset, setOffset] = useState(0);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchRecipients(offset, setMessages, sortBy) {
-      try {
-        const response = await getRecipients(offset, itemsPerPage, sortBy);
-        const recipientsData = response.results;
-        const total = response.count;
-        setTotalItems(total);
-
-        const allMessages = await Promise.all(
-          recipientsData.map(async (recipient) => {
-            const recipientMessages = await getRecipientMessage(recipient.id);
-            return { ...recipient, messages: recipientMessages };
-          })
-        );
-        setMessages(allMessages);
-      } catch (error) {
-        console.error('Failed to fetch recipients and messages:', error);
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const resposne = await fetch(
+        `https://rolling-api.vercel.app/8-8/recipients/?limit=10&offset=${offset}`
+      );
+      const { results, ...data } = await resposne.json();
+      setMessages((prev) => [...prev, ...results]);
+      if (data.next !== null) {
+        setOffset((prev) => prev + 10);
+      } else {
+        setLoading(false);
       }
+    } catch (error) {
+      console.log(error);
     }
-
-    fetchRecipients(currentTopOffset, setTopMessages, 'messageCount');
-  }, [currentTopOffset]);
+  };
 
   useEffect(() => {
-    async function fetchRecipients(offset, setMessages, sortBy) {
-      try {
-        const response = await getRecipients(offset, itemsPerPage, sortBy);
-        const recipientsData = response.results;
-        const total = response.count;
-        setTotalItems(total);
+    fetchUser();
+  }, [offset]);
 
-        const allMessages = await Promise.all(
-          recipientsData.map(async (recipient) => {
-            const recipientMessages = await getRecipientMessage(recipient.id);
-            return { ...recipient, messages: recipientMessages };
-          })
-        );
-        setMessages(allMessages);
-      } catch (error) {
-        console.error('Failed to fetch recipients and messages:', error);
-      }
-    }
-
-    fetchRecipients(currentBottomOffset, setBottomMessages, 'createdAt');
-  }, [currentBottomOffset]);
-
-  const handlePrevTopClick = () => {
-    if (currentTopOffset > 0) {
-      setCurrentTopOffset(currentTopOffset - itemsPerPage);
-    }
-  };
-
-  const handleNextTopClick = () => {
-    if (currentTopOffset + itemsPerPage < totalItems) {
-      setCurrentTopOffset(currentTopOffset + itemsPerPage);
-    }
-  };
-
-  const handlePrevBottomClick = () => {
-    if (currentBottomOffset > 0) {
-      setCurrentBottomOffset(currentBottomOffset - itemsPerPage);
-    }
-  };
-
-  const handleNextBottomClick = () => {
-    if (currentBottomOffset + itemsPerPage < totalItems) {
-      setCurrentBottomOffset(currentBottomOffset + itemsPerPage);
-    }
-  };
+  const sortMessages = [...messages].sort(
+    (a, b) => b.messageCount - a.messageCount
+  );
+  const dateSortMessages = [...messages].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
 
   const handleCardClick = (id) => {
     navigate(`/post/${id}`);
@@ -94,32 +49,18 @@ export default function DesktopListDetail() {
   return (
     <ListSection>
       <Container>
-        <LeftAlign>
-          <Title>인기 롤링 페이퍼 🔥</Title>
-          <CardListSection
-            messages={topMessages}
-            handlePrevClick={handlePrevTopClick}
-            handleNextClick={handleNextTopClick}
-            currentOffset={currentTopOffset}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            handleCardClick={handleCardClick}
-            sortBy='messageCount'
-          />
-        </LeftAlign>
-        <LeftAlign>
-          <Title>최근에 만든 롤링 페이퍼 ⭐️️</Title>
-          <CardListSection
-            messages={bottomMessages}
-            handlePrevClick={handlePrevBottomClick}
-            handleNextClick={handleNextBottomClick}
-            currentOffset={currentBottomOffset}
-            totalItems={totalItems}
-            itemsPerPage={itemsPerPage}
-            handleCardClick={handleCardClick}
-            sortBy='createdAt'
-          />
-        </LeftAlign>
+        <Title>인기 롤링 페이퍼 🔥</Title>
+        <CardListSection
+          loading={loading}
+          messages={sortMessages}
+          handleCardClick={handleCardClick}
+        />
+        <Title>최근에 만든 롤링 페이퍼 ⭐️️</Title>
+        <CardListSection
+          loading={loading}
+          messages={dateSortMessages}
+          handleCardClick={handleCardClick}
+        />
       </Container>
       <GoToMakeButton to='/post'>나도 만들어보기</GoToMakeButton>
     </ListSection>

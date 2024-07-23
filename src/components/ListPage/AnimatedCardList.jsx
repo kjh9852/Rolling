@@ -7,14 +7,16 @@ const CardListWrapper = styled.div`
   overflow: hidden;
   border-radius: 16px;
 
-  @media (min-width: 769px) and (max-width: 1023px) {
+  @media (max-width: 1248px) {
     overflow-x: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     border-radius: 0;
   }
-  @media (max-width: 768px) {
-    overflow-x: scroll;
-    border-radius: 0;
-  }
+  border-radius: 0;
 `;
 
 const CardList = styled.div`
@@ -30,7 +32,7 @@ const CardList = styled.div`
 `;
 
 const Spacer = styled.div`
-  @media (min-width: 1024px) {
+  @media (min-width: 1248px) {
     display: none;
   }
   @media (max-width: 768px) {
@@ -43,12 +45,12 @@ const Spacer = styled.div`
   }
 `;
 
-const AnimatedCardList = ({ cards, currentOffset }) => {
+const AnimatedCardList = ({ children, currentOffset }) => {
   return (
     <CardListWrapper>
       <CardList $currentOffset={currentOffset}>
         <Spacer />
-        {cards}
+        {children}
         <Spacer />
       </CardList>
     </CardListWrapper>
