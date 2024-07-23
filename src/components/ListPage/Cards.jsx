@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import Overlay from './Overlay';
 
 const getCSSVariable = (colorName) => {
   const colorMap = {
@@ -105,11 +104,26 @@ const CardContainer = styled.div`
     $backgroundImageURL ? `url(${$backgroundImageURL})` : 'none'};
   background-size: cover;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   padding: 30px 24px 20px 24px;
   flex: none;
   overflow: hidden;
+  ${({ $backgroundImageURL }) =>
+    $backgroundImageURL &&
+    css`
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        box-sizing: content-box;
+        z-index: 2;
+      }
+    `}
   cursor: pointer;
   ${specialShapeStyles}
   @media (max-width: 768px) {
@@ -125,7 +139,6 @@ const Card = ({ backgroundColor, backgroundImageURL, children, ...props }) => (
     $backgroundImageURL={backgroundImageURL}
     {...props}
   >
-    {backgroundImageURL && <Overlay />}
     {children}
   </CardContainer>
 );
