@@ -1,4 +1,3 @@
-import { useParams, useLocation } from 'react-router-dom';
 import UserActionComponent from './UserActionComponent';
 import PrimaryButton from '../common/PrimaryButton';
 import MessageCount from '../common/MessageCount';
@@ -108,7 +107,7 @@ const TotalUser = styled.li`
   align-items: center;
   justify-content: center;
   margin: 0 -6px;
-  width: 28px;
+  padding: 0 3px;
   height: 28px;
   font-size: 12px;
   border-radius: 32px;
@@ -117,16 +116,6 @@ const TotalUser = styled.li`
 `;
 
 export default function UserHeader({ userData, userReaction }) {
-  const { postId } = useParams();
-  const location = useLocation();
-  const detailPagePath = `/post/${postId}`;
-
-  const existingDetailpath =
-    detailPagePath === location.pathname && window.innerWidth <= '768';
-
-  const allWriter =
-    userData.messageCount >= 9 ? '+6' : `+${userData.messageCount - 3}`;
-
   return (
     <UserContainer>
       <UserInfo>
@@ -144,7 +133,9 @@ export default function UserHeader({ userData, userReaction }) {
                   sender={img.sender}
                 />
               ))}
-              {userData.messageCount > 3 && <TotalUser>{allWriter}</TotalUser>}
+              {userData.messageCount > 3 && (
+                <TotalUser>{`+${userData.messageCount - 3}`}</TotalUser>
+              )}
               {userData.messageCount > 0 ? (
                 <span>
                   <b>{userData.messageCount}</b>명이 작성했어요!
