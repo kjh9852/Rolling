@@ -13,10 +13,13 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+.ql-container {
+  overflow: hidden;
+}
 
 .quill.readMessage {
   flex: 1 0;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .quill.readMessage .ql-editor {
