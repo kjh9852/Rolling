@@ -7,11 +7,7 @@ const OverlayContainer = styled.div`
   left: 0px;
   right: 0px;
   top: 0px;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.54) 0%,
-    rgba(0, 0, 0, 0.54) 100%
-  );
+  background: rgba(0, 0, 0, 0.54);
   z-index: 1;
 `;
 

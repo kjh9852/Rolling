@@ -109,8 +109,6 @@ const CardContainer = styled.div`
   border-radius: 16px;
   padding: 30px 24px 20px 24px;
   flex: none;
-  order: 0;
-  flex-grow: 0;
   overflow: hidden;
   cursor: pointer;
   ${specialShapeStyles}
