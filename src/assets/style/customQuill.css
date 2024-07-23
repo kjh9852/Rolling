@@ -35,6 +35,11 @@
   padding-left: 0;
 }
 
+.quill.readMessage .ql-editor ol li.ql-align-cetner:not(.ql-direction-rtl),
+.quill.readMessage .ql-editor ul li.ql-align-cetner:not(.ql-direction-rtl) {
+  padding-left: 0;
+}
+
 .quill.readMessage .ql-editor > * {
   cursor: pointer;
 }
@@ -121,8 +126,13 @@
   padding-left: 0;
 }
 
-.quill.detailMessage .ql-editor ol,
-.quill.detailMessage .ql-editor ul {
+.quill.detailMessage .ql-editor ol > li.ql-align-center,
+.quill.detailMessage .ql-editor ul > li.ql-align-center {
+  padding-left: 0;
+}
+
+.quill.detailMessage .ql-editor ol li.ql-align-cetner:not(.ql-direction-rtl),
+.quill.detailMessage .ql-editor ul li.ql-align-cetner:not(.ql-direction-rtl) {
   padding-left: 0;
 }
 
