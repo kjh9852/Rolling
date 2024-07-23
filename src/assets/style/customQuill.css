@@ -29,26 +29,64 @@
 .quill.readMessage .ql-editor ul {
   padding-left: 0;
 }
-/* 
-.quill.readMessage .ql-editor ol li:not(.ql-direction-rtl),
-.quill.readMessage .ql-editor ul li:not(.ql-direction-rtl) {
+
+.quill.readMessage .ql-editor ol > li.ql-align-center,
+.quill.readMessage .ql-editor ul > li.ql-align-center {
   padding-left: 0;
-} */
+}
+
 .quill.readMessage .ql-editor > * {
   cursor: pointer;
 }
-.quill.readMessage.Noto .ql-editor > p {
+
+.quill.readMessage.Noto * {
   font-family: 'Noto Sans';
 }
-.quill.readMessage.나눔손글씨 .ql-editor > p {
+
+.quill.readMessage.Noto * > u {
+  text-decoration: underline;
+}
+
+.quill.readMessage.Noto * > em {
+  font-style: italic;
+}
+/* Noto Sans */
+
+.quill.readMessage.나눔손글씨 * {
   font-family: '나눔손글씨 손편지체';
   font-size: 28px;
 }
-.quill.readMessage.나눔명조 .ql-editor > p {
+
+.quill.readMessage.나눔손글씨 * > u {
+  text-decoration: underline;
+}
+
+.quill.readMessage.나눔손글씨 * > em {
+  font-style: italic;
+}
+
+.quill.readMessage.나눔명조 * {
   font-family: '나눔명조';
 }
-.quill.readMessage.Pretendard .ql-editor > p {
+
+.quill.readMessage.나눔명조 * > u {
+  text-decoration: underline;
+}
+
+.quill.readMessage.나눔명조 * > em {
+  font-style: italic;
+}
+
+.quill.readMessage.Pretendard * {
   font-family: 'Pretendard';
+}
+
+.quill.readMessage.Pretendard * > u {
+  text-decoration: underline;
+}
+
+.quill.readMessage.Pretendard * > em {
+  font-style: italic;
 }
 
 .quill.detailMessage {
@@ -56,7 +94,7 @@
   max-height: 25rem;
   margin-top: 16px;
   overflow-y: hidden;
-  
+
   ::-webkit-scrollbar {
     width: 5px;
   }
@@ -92,19 +130,58 @@
   cursor: text;
 }
 
-.quill.detailMessage.Noto .ql-editor > p {
+.quill.detailMessage.Noto * {
   font-family: 'Noto Sans';
 }
-.quill.detailMessage.나눔손글씨 .ql-editor > p {
+
+.quill.detailMessage.Noto * > u {
+  text-decoration: underline;
+}
+
+.quill.detailMessage.Noto * > em {
+  font-style: italic;
+}
+
+/* Noto sans */
+
+.quill.detailMessage.나눔손글씨 * {
   font-family: '나눔손글씨 손편지체';
   font-size: 28px;
 }
-.quill.detailMessage.나눔명조 .ql-editor > p {
+.quill.detailMessage.나눔손글씨 * > u {
+  text-decoration: underline;
+}
+
+.quill.detailMessage.나눔손글씨 * > em {
+  font-style: italic;
+}
+/* 나눔손글씨 손편지체 */
+
+.quill.detailMessage.나눔명조 * {
   font-family: '나눔명조';
 }
-.quill.detailMessage.Pretendard .ql-editor > p {
+
+.quill.detailMessage.나눔명조 * > u {
+  text-decoration: underline;
+}
+
+.quill.detailMessage.나눔명조 * > em {
+  font-style: italic;
+}
+/* 나눔명조 */
+
+.quill.detailMessage.Pretendard * {
   font-family: 'Pretendard';
 }
+
+.quill.detailMessage.Pretendard * > u {
+  text-decoration: underline;
+}
+
+.quill.detailMessage.Pretendard * > em {
+  font-style: italic;
+}
+/* Pretendard */
 
 @media (max-width: 560px) {
   .quill.detailMessage {
