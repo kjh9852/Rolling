@@ -30,8 +30,8 @@ const ArrowBtnContainer = styled.div`
     padding: 10px;
     cursor: pointer;
     img {
-      ${({ isOpen }) =>
-        isOpen
+      ${({ $isOpen }) =>
+        $isOpen
           ? css`
               transform: rotate(180deg);
             `
@@ -39,6 +39,10 @@ const ArrowBtnContainer = styled.div`
               transform: rotate(0deg);
             `}
       transition: transform 0.3s ease;
+    }
+    @media (max-width: 768px) {
+      padding: 0;
+      padding-right: 8px;
     }
   }
 `;
@@ -51,6 +55,10 @@ const OpenReactionCard = styled.div`
   border: 1px solid #b6b6b6;
   background: var(--white);
   z-index: 2;
+  @media (max-width: 768px) {
+    top: 3.2rem;
+    padding: 1.6rem;
+  }
 `;
 const ReactionContainer = styled.ul`
   display: grid;
@@ -79,6 +87,9 @@ const ButtonContainer = styled.div`
   display: flex;
   gap: 2.8rem;
   height: 100%;
+  @media (max-width: 768px) {
+    gap: 2.4rem;
+  }
 `;
 const EmojiContainer = styled.div`
   position: relative;
@@ -91,6 +102,10 @@ const EmojiContainer = styled.div`
     top: 5px;
     right: -14px;
     background: #ededed;
+    @media (max-width: 768px) {
+      top: 3px;
+      right: -13px;
+    }
   }
 `;
 const EmojiBtn = styled(OutlineButton)`
@@ -131,6 +146,9 @@ const ShareContainer = styled.div`
     position: absolute;
     top: 40px;
     right: 0px;
+    @media (max-width: 768px) {
+      top: 35px;
+    }
   }
   ul {
     width: 140px;
@@ -269,7 +287,7 @@ export default function UserActionComponent({
         ) : (
           <EmptyText>반응을 추가해보세요!</EmptyText>
         )}
-        <ArrowBtnContainer isOpen={openReaction}>
+        <ArrowBtnContainer $isOpen={openReaction}>
           {actionEmoji.results.length > 0 && (
             <button onClick={handleOpenReaction}>
               <img src={arrowIcon} alt='활성화 버튼' />

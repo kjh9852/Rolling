@@ -1,4 +1,6 @@
+import { useParams, useLocation } from 'react-router-dom';
 import UserActionComponent from './UserActionComponent';
+import PrimaryButton from '../common/PrimaryButton';
 import MessageCount from '../common/MessageCount';
 import styled from 'styled-components';
 import './emoji.css';
@@ -29,7 +31,16 @@ const UserInfo = styled.div`
   @media (max-width: 768px) {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    padding: 0 20px;
+    padding: 0px;
+  }
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 768px) {
+      border-bottom: 1px solid #ededed;
+      padding: 0 20px;
+    }
   }
 `;
 
@@ -39,16 +50,29 @@ const UserName = styled.h2`
   @media (max-width: 768px) {
     font-size: 1.8rem;
     padding: 12px 0;
-    border-bottom: 1px solid #ededed;
   }
 `;
+
+const BackButton = styled(PrimaryButton)`
+  display: none;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 6px;
+  svg {
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
+
 const UserAction = styled.div`
   display: flex;
   align-items: center;
   gap: 57px;
   height: 36px;
   @media (max-width: 768px) {
-    padding: 8px 0;
+    padding: 8px 20px;
     height: auto;
   }
 `;
@@ -93,13 +117,23 @@ const TotalUser = styled.li`
 `;
 
 export default function UserHeader({ userData, userReaction }) {
+  const { postId } = useParams();
+  const location = useLocation();
+  const detailPagePath = `/post/${postId}`;
+
+  const existingDetailpath =
+    detailPagePath === location.pathname && window.innerWidth <= '768';
+
   const allWriter =
     userData.messageCount >= 9 ? '+6' : `+${userData.messageCount - 3}`;
 
   return (
     <UserContainer>
       <UserInfo>
-        <UserName>{`To. ${userData.name}`}</UserName>
+        <div>
+          <UserName>{`To. ${userData.name}`}</UserName>
+          <BackButton isSvg={true} to='/list' />
+        </div>
         <UserAction>
           <UserCountContainer>
             <CountContainer>
