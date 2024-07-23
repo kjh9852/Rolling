@@ -19,7 +19,6 @@ const Dialog = styled.dialog`
   max-width: 600px;
   width: 100%;
   padding: 0;
-  margin: 0 auto;
   border: none;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);

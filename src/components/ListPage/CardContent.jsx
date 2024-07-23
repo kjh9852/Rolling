@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { Card } from './Cards';
 import styled from 'styled-components';
 import EmojiBadge from '../common/EmojiBadge';
@@ -69,8 +68,6 @@ const ProfileImagesContainer = styled.div`
   div {
     width: 28px;
     height: 28px;
-    background: var(--white);
-    border: 1.5px solid var(--white);
     border-radius: 50px;
     display: flex;
     align-items: center;
@@ -82,9 +79,10 @@ const ProfileImagesContainer = styled.div`
     }
 
     img {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
+      border: solid 2px var(--white);
     }
   }
 `;

@@ -5,7 +5,6 @@ import NameInput from '../Input/NameInput';
 import ContentArea from '../TextArea/ContentArea';
 import ProfileImageList from '../ProfileImageList/ProfileImageList';
 import PrimaryButton from '../common/PrimaryButton';
-import { getProfileImage } from '../../util/api';
 import { PostRecipientMessage } from '../../util/api';
 import { useNavigate, useParams } from 'react-router-dom';
 import profileImages from '../../util/profileImages';
@@ -24,7 +23,7 @@ const Container = styled.form`
   }
 
   @media (max-width: 769px) {
-    margin-top: 50px;
+    margin-top: 84px;
   }
 
   @media (max-width: 640px) {
@@ -59,24 +58,34 @@ const SubmitButton = styled(PrimaryButton)`
   }
 `;
 
-const BackButton = styled.button`
+const ButtonContainer = styled.div`
+  display: none;
   position: fixed;
-  top: 16px;
-  right: 16px;
-  background-color: var(--error);
-  color: var(--white);
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 16px;
-  cursor: pointer;
-  z-index: 1000;
-  &:hover {
-    background-color: #b63131;
-    transition: 0.2s all;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 68px;
+  top: 0px;
+  left: 0px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #ededed;
+  @media (max-width: 768px) {
+    display: flex;
   }
-  @media (min-width: 769px) {
-    display: none;
+`;
+
+const BackButton = styled(PrimaryButton)`
+  display: none;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 6px;
+  svg {
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    display: flex;
   }
 `;
 
@@ -100,7 +109,6 @@ function AddMessage() {
   const [font, setFont] = useState(fontOptions[0]);
   const [content, setContent] = useState('');
 
-
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -118,17 +126,15 @@ function AddMessage() {
     navigate(`/post/${postId}`);
   };
 
-
   const handleGoBack = () => {
     navigate(-1);
   };
 
-
   return (
     <Container onSubmit={handleSubmit}>
-      <BackButton type='button' onClick={handleGoBack}>
-        이전
-      </BackButton>
+      <ButtonContainer>
+        <BackButton isSvg={true} type='button' onClick={handleGoBack} />
+      </ButtonContainer>
       <InputContainer>
         <Title>From.</Title>
         <NameInput

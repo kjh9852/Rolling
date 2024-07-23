@@ -9,6 +9,7 @@
 
 @media (max-width: 768px) {
   .EmojiPickerReact {
-    right: -7rem;
+    top: 3.5rem;
+    right: -6.3rem;
   }
 }

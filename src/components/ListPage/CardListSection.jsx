@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PrevButton, NextButton } from './NavigationButton';
 import CardContent from './CardContent';
 import AnimatedCardList from './AnimatedCardList';
+import EllipsisLoading from '../../ui/EllipsisLoading';
 
 const CardListWrapper = styled.div`
   position: relative;
@@ -42,7 +43,7 @@ const CardListSection = ({ messages, loading }) => {
           isNext={false}
         />
         {loading ? (
-          <p>Loading...</p>
+          <EllipsisLoading />
         ) : (
           <AnimatedCardList currentOffset={currentOffset}>
             {messages.map((recipient) => (

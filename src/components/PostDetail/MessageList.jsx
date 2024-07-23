@@ -57,6 +57,9 @@ const UserBox = styled.div`
   h2 {
     margin-bottom: 6px;
     font-size: 2rem;
+    @media (max-width: 768px) {
+      font-size: 1.6rem;
+    }
   }
 `;
 

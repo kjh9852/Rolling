@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import OutlineButton from '../components/common/OutlineButton';
+import PrimaryButton from '../components/common/PrimaryButton';
 import styled from 'styled-components';
 import logoImg from '../assets/image/logo.png';
 
@@ -30,8 +31,15 @@ const Navigation = styled.nav`
   }
 `;
 
+const BackButton = styled(PrimaryButton)`
+  padding: 7px 16px;
+  font-size: 1.6rem;
+  border-radius: 6px;
+`;
+
 export default function Header() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const { postId } = useParams();
   const location = useLocation();
 
   useEffect(() => {
@@ -41,8 +49,12 @@ export default function Header() {
   }, []);
 
   const excludedPaths = ['/', '/list'];
+  const detailPagePath = `/post/${postId}`;
 
-  if (isMobile && !excludedPaths.includes(location.pathname)) {
+  const existingPath = excludedPaths.includes(location.pathname);
+  const existingDetailpath = detailPagePath === location.pathname;
+
+  if (isMobile && !existingPath) {
     return null;
   }
 
@@ -54,7 +66,10 @@ export default function Header() {
             <img src={logoImg} alt='롤링 로고' />
           </Link>
         </div>
-        <OutlineButton to='/post'>롤링 페이퍼 만들기</OutlineButton>
+        {existingPath && (
+          <OutlineButton to='/post'>롤링 페이퍼 만들기</OutlineButton>
+        )}
+        {existingDetailpath && <BackButton to='/list'>이전으로</BackButton>}
       </Navigation>
     </HeaderContainer>
   );

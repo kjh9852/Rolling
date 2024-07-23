@@ -11,6 +11,7 @@ import BACKGROUND_COLOR from '../../util/backgroundColor';
 
 const DetailSection = styled(Section)`
   max-width: 100%;
+  padding-top: 2rem;
   margin-top: 13.3rem;
   background: ${({ background }) => background || 'transparent'};
   background-image: ${({ backgroundImage }) => backgroundImage || 'none'};
@@ -100,12 +101,15 @@ const LinkMessage = styled(Card)`
 const EditButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding-top: 6.3rem;
+  padding-top: 2rem;
   @media (max-width: 1248px) {
-    padding-top: 9.3rem;
+    position: fixed;
+    width: calc(100% - 48px);
+    bottom: 1rem;
+    z-index: 5;
   }
-  @media (max-width: 640px) {
-    padding-top: 3rem;
+  @media (max-width: 768px) {
+    width: calc(100% - 40px);
   }
 `;
 
@@ -113,13 +117,48 @@ const EditButton = styled(PrimaryButton)`
   padding: 7px 16px;
   font-size: 1.6rem;
   border-radius: 6px;
+  @media (max-width: 1248px) {
+    display: inline-block;
+    width: 100%;
+    border-radius: 12px;
+    padding: 14px 16px;
+    span {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+      font-size: 1.8rem;
+    }
+  }
+`;
+const DeleteButton = styled(EditButton)`
+  background-color: var(--error);
+  &:hover {
+    background-color: #c93636;
+  }
+  &:active {
+    background-color: #b63131;
+  }
+  &:focus {
+    background-color: #b63131;
+  }
 `;
 const ConfirmButton = styled(PrimaryButton)`
   margin-left: 1.2rem;
   padding: 7px 16px;
   font-size: 1.6rem;
   border-radius: 6px;
+
+  @media (max-width: 1248px) {
+    width: 100%;
+    border-radius: 12px;
+    span {
+      display: inline-block;
+      width: 100%;
+      font-size: 1.8rem;
+    }
+  }
 `;
+
 export default function PostDetail({ userData }) {
   const { postId } = useParams();
   const [loading, setLoading] = useState(false);
@@ -131,6 +170,7 @@ export default function PostDetail({ userData }) {
   const location = useLocation();
   const navigate = useNavigate();
   const editPaths = '/edit';
+
   useEffect(() => {
     if (location.pathname.includes(editPaths)) {
       setIsEdit(true);
@@ -174,7 +214,7 @@ export default function PostDetail({ userData }) {
   };
 
   const handleCompleteEdit = async () => {
-    navigate('./');
+    navigate('.');
   };
 
   const handleObserver = (entries) => {
@@ -226,7 +266,7 @@ export default function PostDetail({ userData }) {
           </EditButtonContainer>
         ) : (
           <EditButtonContainer>
-            <EditButton onClick={handleDeleteUser}>삭제하기</EditButton>
+            <DeleteButton onClick={handleDeleteUser}>삭제하기</DeleteButton>
             <ConfirmButton onClick={handleCompleteEdit}>완료</ConfirmButton>
           </EditButtonContainer>
         )}

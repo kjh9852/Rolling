@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 const MessageLink = styled(Link)``;
 
-const Card = styled.div``;
+const Card = styled.div`
+  display: inline;
+`;
 
 export default function MessageContainer({
   className,
