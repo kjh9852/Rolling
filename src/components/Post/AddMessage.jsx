@@ -8,6 +8,7 @@ import PrimaryButton from '../common/PrimaryButton';
 import { getProfileImage } from '../../util/api';
 import { PostRecipientMessage } from '../../util/api';
 import { useNavigate, useParams } from 'react-router-dom';
+import profileImages from '../../util/profileImages';
 
 const Container = styled.form`
   display: flex;
@@ -90,7 +91,7 @@ function AddMessage() {
     '나눔손글씨 손편지체',
   ];
 
-  const [profileItem, setProfileItem] = useState([]);
+  const [profileItem] = useState([profileImages]);
   const [name, setName] = useState('');
   const [image, setImage] = useState(
     'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png'
@@ -99,14 +100,6 @@ function AddMessage() {
   const [font, setFont] = useState(fontOptions[0]);
   const [content, setContent] = useState('');
 
-  const handleLoad = async () => {
-    const { imageUrls } = await getProfileImage();
-    setProfileItem(imageUrls);
-  };
-
-  useEffect(() => {
-    handleLoad();
-  }, []);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -125,9 +118,11 @@ function AddMessage() {
     navigate(`/post/${postId}`);
   };
 
+
   const handleGoBack = () => {
     navigate(-1);
   };
+
 
   return (
     <Container onSubmit={handleSubmit}>
