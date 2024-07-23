@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const PointBox = styled.div`
   padding: 6px 12px;
+  margin-bottom: 16px;
   display: flex;
   justify-content: center;
   align-items: center;

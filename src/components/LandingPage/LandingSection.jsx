@@ -14,7 +14,7 @@ const LandingSection = styled(Section)`
   @media (max-width: 768px) {
     padding: 0 20px;
     margin-top: 106px;
-    height: 100svh;
+    min-height: calc(100lvh + 65px);
   }
 `;
 
