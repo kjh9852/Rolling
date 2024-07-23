@@ -248,7 +248,14 @@ export default function UserActionComponent({
           {
             title: '웹으로 이동',
             link: {
-              mobileWebUrl: `${process.env.REACT_APP_BASE_URL}`,
+              mobileWebUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
+              webUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
+            },
+          },
+          {
+            title: '앱으로 이동',
+            link: {
+              mobileWebUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
               webUrl: `${process.env.REACT_APP_BASE_URL}${nowUrl}`,
             },
           },
