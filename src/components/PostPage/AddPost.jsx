@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from '../common/PrimaryButton';
-import NameInput from './NameInput';
+import NameInput from '../Input/NameInput';
 import BgSelector from './BgSelector';
 import SubmitButton from './SubmitButton';
 import styled from 'styled-components';
