@@ -54,7 +54,7 @@ function NameInput({ placeholder, onChange, value }) {
         isError={isError}
       />
 
-      {isError && <ErrorMessage>값을 입력해주세요.</ErrorMessage>}
+      {isError && <ErrorMessage>이름을 입력해주세요.</ErrorMessage>}
     </InputContainer>
   );
 }
