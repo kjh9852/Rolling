@@ -31,6 +31,7 @@ const ButtonContainer = styled.div`
   padding: 10px 20px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid #ededed;
   @media (max-width: 768px) {
     display: flex;

@@ -24,7 +24,6 @@ const StartButton = styled(PrimaryButton)`
   }
   @media (min-width: 769px) and (max-width: 1023px) {
     width: 100%;
-    margin-top: 72px;
     margin-bottom: 24px;
     display: flex;
     justify-content: center;

@@ -7,7 +7,7 @@ const CardBase = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: var(--surface);
 
   @media (min-width: 769px) and (max-width: 1023px) {
@@ -20,23 +20,18 @@ const CardBase = styled.div`
 `;
 
 const Card1 = styled(CardBase)`
-  justify-content: space-between;
-  margin-top: 124px;
   margin-bottom: 30px;
-  padding: 60px 40px 60px 60px;
 
   @media (min-width: 769px) and (max-width: 1023px) {
-    margin-top: 113px;
     height: 440px;
-    padding: 88px 40px 61px 40px;
     flex-direction: column;
     justify-content: center;
   }
   @media (max-width: 768px) {
+    padding: 24px 24px 51px 24px;
     flex-direction: column;
     justify-content: flex-start;
-    height: 352px;
-    padding: 68px 24px 24px 24px;
+    height: 100%;
     margin-bottom: 24px;
     overflow: hidden;
   }
@@ -44,18 +39,16 @@ const Card1 = styled(CardBase)`
 
 const Card2 = styled(CardBase)`
   justify-content: flex-start;
-  padding: 60px 60px 60px 0px;
   margin-bottom: 48px;
   @media (min-width: 769px) and (max-width: 1023px) {
-    padding: 88px 40px 40px 40px;
     justify-content: center;
   }
   @media (max-width: 768px) {
+    padding: 24px 24px 51px 24px;
     flex-direction: column;
     justify-content: flex-start;
-    height: 362px;
+    height: 100%;
     margin-bottom: 37px;
-    padding: 68px 24px 24px 24px;
     overflow: hidden;
   }
 `;
@@ -80,13 +73,12 @@ const CardImg2 = styled(CardImg1)`
   background-repeat: no-repeat;
   width: 720px;
   height: 220px;
-  margin: 0px -40px -16px -40px;
   @media (max-width: 768px) {
-    width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     height: 124px;
-    margin-top: -2px;
-    margin: -2px 17.255px -11px 17.255px;
-    margin-bottom: -11px;
   }
 `;
 

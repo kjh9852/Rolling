@@ -9,6 +9,7 @@ const IntroSection = styled.div`
     width: 340px;
   }
   @media (min-width: 769px) and (max-width: 1023px) {
+    margin-top: 40px;
   }
   @media (max-width: 768px) {
     margin-bottom: 50px;

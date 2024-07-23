@@ -16,6 +16,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  @media (max-width: 1024px) {
+    max-width: 640px;
+    justify-content: flex-start;
+    gap: 57px;
+  }
 `;
 
 export default function TabletLandingDetail() {

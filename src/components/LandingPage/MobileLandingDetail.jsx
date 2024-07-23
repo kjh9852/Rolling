@@ -5,7 +5,7 @@ import PointBox from './PointBox';
 import Title from './Title';
 import SubTitle from './SubTitle';
 import StartButton from './StartButton';
-import mobileCardImg1 from '../../assets/image/mobileCardImg1.png';
+import mobileCardImg1 from '../../assets/image/mobile_card_img.png';
 import mobileCardImg2 from '../../assets/image/mobileCardImg2.png';
 import LandingSection from './LandingSection';
 import styled from 'styled-components';
@@ -13,11 +13,10 @@ import styled from 'styled-components';
 const Container = styled.div`
   padding: 0px;
   display: flex;
-  flex-direction: row;
-`;
-
-const IntroSection2 = styled(IntroSection)`
-  margin-right: 81.84px;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 360px;
 `;
 
 export default function MobileLandingDetail() {
@@ -31,17 +30,29 @@ export default function MobileLandingDetail() {
             <SubTitle>로그인 없이 자유롭게 만들어요.</SubTitle>
           </IntroSection>
         </Container>
-        <CardImg1 style={{ backgroundImage: `url(${mobileCardImg1})` }} />
+        <CardImg2>
+          <img
+            src={mobileCardImg1}
+            style={{ minWidth: '320px' }}
+            alt='point1'
+          />
+        </CardImg2>
       </Card1>
       <Card2>
         <Container>
-          <IntroSection2>
+          <IntroSection>
             <PointBox>Point. 02</PointBox>
             <Title>서로에게 이모지로 감정을 표현해보세요</Title>
             <SubTitle>롤링 페이퍼에 이모지를 추가할 수 있어요.</SubTitle>
-          </IntroSection2>
+          </IntroSection>
         </Container>
-        <CardImg2 style={{ backgroundImage: `url(${mobileCardImg2})` }} />
+        <CardImg2>
+          <img
+            src={mobileCardImg2}
+            style={{ minWidth: '320px' }}
+            alt='point2'
+          />
+        </CardImg2>
       </Card2>
       <StartButton to='/list'>구경해보기</StartButton>
     </LandingSection>
