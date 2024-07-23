@@ -9,14 +9,14 @@ const fadeIn = keyframes`
     visibility: hidden;
   }
   to {
-    opacity: 1;
+    opacity: 0.8;
     visibility: visible;
   }
 `;
 
 const fadeOut = keyframes`
 from {
-  opacity: 1;
+  opacity: 0.8;
   visibility: visible;
 }
 to {
@@ -29,7 +29,6 @@ const Container = styled.div`
   left: 50%;
   transform: translateX(-50%);
   bottom: 7rem;
-  background: var(--white);
   font-size: 2rem;
   &.fade_in {
     animation: ${fadeIn} 1s ease 0s 1 normal forwards;
@@ -37,6 +36,12 @@ const Container = styled.div`
 
   &.fade_out {
     animation: ${fadeOut} 1s ease 0s 1 normal forwards;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    left: 0%;
+    transform: translateX(0%);
+    padding: 0 20px;
   }
 `;
 
@@ -47,9 +52,12 @@ const Wrapper = styled.div`
   width: 524px;
   height: 64px;
   background: var(--black);
-  opacity: 0.8;
   border-radius: 8px;
   padding: 0 30px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const MessageWrapper = styled.div`
   display: flex;
