@@ -107,23 +107,44 @@ function AddMessage() {
     'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png'
   );
   const [relationShip, setRelationShip] = useState(relationShipOptions[0]);
-  const [font, setFont] = useState(fontOptions[0]);
   const [content, setContent] = useState('');
+  const [font, setFont] = useState(fontOptions[0]);
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
+  const [postData, setPostData] = useState({
+    name: '',
+    image:
+      'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png',
+    relationShip: relationShipOptions[0],
+    content: '',
+    font: fontOptions[0],
+  });
+
+  const handleNameChange = (event) => {
+    // setName(e.target.value);
+    setPostData((prev) => ({ ...prev, name: event.target.value }));
+  };
+
+  const handleImageChange = (selectedImage) => {
+    setPostData((prev) => ({ ...prev, iamge: selectedImage }));
+  };
+
+  const handleRelationShipChange = (selectedRelation) => {
+    setPostData((prev) => ({ ...prev, relationShip: selectedRelation }));
+  };
+
+  const handleContentChange = (selectedContent) => {
+    setPostData((prev) => ({ ...prev, content: selectedContent }));
+  };
+
+  const handleFontChange = (selectedFont) => {
+    setPostData((prev) => ({ ...prev, font: selectedFont }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await postRecipientMessage(postId, {
-        sender: name,
-        profileImageURL: image,
-        relationship: relationShip,
-        content: content,
-        font: font,
-      });
+      await postRecipientMessage(postId, postData);
       navigate(`/post/${postId}`);
     } catch (error) {
       console.error('메시지 전송 실패:', error);
@@ -136,6 +157,10 @@ function AddMessage() {
     navigate(-1);
   };
 
+  useEffect(() => {
+    console.log(postData.image);
+  }, [postData.image]);
+
   return (
     <Container onSubmit={handleSubmit}>
       <ButtonContainer>
@@ -146,7 +171,8 @@ function AddMessage() {
         <NameInput
           placeholder='이름을 입력해주세요.'
           onChange={handleNameChange}
-          value={name}
+          // value={name}
+          value={postData.name}
         />
       </InputContainer>
       <InputContainer>
@@ -154,7 +180,8 @@ function AddMessage() {
         <InputImageContainer>
           <ProfileImageList
             items={profileItem}
-            onImageSelect={setImage}
+            // onImageSelect={setImage}
+            onImageSelect={handleImageChange}
           ></ProfileImageList>
         </InputImageContainer>
       </InputContainer>
@@ -163,21 +190,25 @@ function AddMessage() {
         <Select
           options={relationShipOptions}
           type='relationship'
-          onRelationShipSelect={setRelationShip}
-          onFontSelect={() => {}}
+          // onRelationShipSelect={setRelationShip}
+          onRelationShipSelect={handleRelationShipChange}
         />
       </InputContainer>
       <InputContainer>
         <Title>내용을 입력해 주세요</Title>
-        <ContentArea onChange={setContent} value={content} />
+        <ContentArea
+          //  onChange={setContent}
+          onChange={handleContentChange}
+          value={content}
+        />
       </InputContainer>
       <InputContainer>
         <Title>폰트 선택</Title>
         <Select
           options={fontOptions}
           type='font'
-          onRelationShipSelect={() => {}}
-          onFontSelect={setFont}
+          //  onFontSelect={setFont}
+          onFontSelect={handleFontChange}
         />
       </InputContainer>
       <SubmitButton
