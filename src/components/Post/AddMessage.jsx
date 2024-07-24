@@ -5,7 +5,7 @@ import NameInput from '../Input/NameInput';
 import ContentArea from '../TextArea/ContentArea';
 import ProfileImageList from '../ProfileImageList/ProfileImageList';
 import PrimaryButton from '../common/PrimaryButton';
-import { PostRecipientMessage } from '../../util/api';
+import { postRecipientMessage } from '../../util/api';
 import { useNavigate, useParams } from 'react-router-dom';
 import profileImages from '../../util/profileImages';
 
@@ -116,7 +116,7 @@ function AddMessage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await PostRecipientMessage({
+    await postRecipientMessage({
       postId,
       name,
       image,
