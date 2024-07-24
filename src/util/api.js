@@ -33,40 +33,6 @@ export async function postRecipientMessage(postId, postData) {
     body: JSON.stringify({ team: TEAM, recipient_id: postId, ...postData }),
   });
 }
-
-// export async function PostRecipientMessage({
-//   postId,
-//   // name,
-//   // image,
-//   // relationShip,
-//   // content,
-//   // font,
-//   postData,
-// }) {
-//   const response = await fetch(
-//     `${BASE_URL}/${TEAM}/recipients/${postId}/messages/`,
-//     {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({
-//         team: '8-8',
-//         recipient_id: postId,
-//         sender: postData.name,
-//         profileImageURL: postData.image,
-//         relationship: postData.relationShip,
-//         content: postData.content,
-//         font: postData.font,
-//       }),
-//     }
-//   );
-
-if (!response.ok) {
-  throw new Error('데이터를 보내는데 오류가 발생했습니다.');
-}
-const body = await response.json();
-return body;
-}
-
 export async function recipientMessageForm(formData) {
   const postData = {
     ...formData,
@@ -80,8 +46,6 @@ export async function recipientMessageForm(formData) {
     body: JSON.stringify(postData),
   });
 }
-
-
 
 export async function deleteMessage(id) {
   return fetch(`${BASE_URL}/${TEAM}/messages/${id}/`, { method: 'DELETE' });
