@@ -5,7 +5,7 @@ import NameInput from '../Input/NameInput';
 import ContentArea from '../TextArea/ContentArea';
 import ProfileImageList from '../ProfileImageList/ProfileImageList';
 import PrimaryButton from '../common/PrimaryButton';
-import { PostRecipientMessage } from '../../util/api';
+import { postRecipientMessage } from '../../util/api';
 import { useNavigate, useParams } from 'react-router-dom';
 import profileImages from '../../util/profileImages';
 
@@ -116,15 +116,20 @@ function AddMessage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await PostRecipientMessage({
-      postId,
-      name,
-      image,
-      relationShip,
-      content,
-      font,
-    });
-    navigate(`/post/${postId}`);
+    try {
+      await postRecipientMessage(postId, {
+        sender: name,
+        profileImageURL: image,
+        relationship: relationShip,
+        content: content,
+        font: font,
+      });
+      navigate(`/post/${postId}`);
+    } catch (error) {
+      console.error('메시지 전송 실패:', error);
+      // 사용자에게 오류 알림
+      alert('메시지 전송에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   const handleGoBack = () => {
