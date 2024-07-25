@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
+import { getMessage } from '../util/api';
 import styled from 'styled-components';
 import Badge from '../components/common/Badge';
 import Card from '../components/common/Card';
@@ -98,7 +99,7 @@ export default function MessageDetailPage() {
     '--background': findRelationShip && `var(${findRelationShip.background})`,
     '--color': findRelationShip && `var(${findRelationShip.color})`,
   };
-  const convertDate = data.createdAt.split('T')[0];
+  const convertDate = new Date(data.createdAt).toLocaleDateString('ko-KR');
 
   return (
     <Modal>
@@ -134,9 +135,6 @@ export default function MessageDetailPage() {
 
 export async function loader({ params }) {
   const id = params.messageId;
-  const response = await fetch(
-    `https://rolling-api.vercel.app/8-8/messages/${id}/`
-  );
-  const data = await response.json();
-  return data;
+  const response = await getMessage({ id });
+  return response;
 }

@@ -143,31 +143,6 @@ const EmptyText = styled.span`
   font-size: 1.8rem;
 `;
 
-const menuHeight = keyframes`
-  0% {
-    height: 0px;
-    padding: 0;
-    border: none;
-  }
-  100% {
-    height: auto;
-    padding: 10px 0;
-    border: 1px solid #cccccc;
-  }
-`;
-const menuHeight02 = keyframes`
-  0% {
-    height: auto;
-    padding: 10px 0;
-    border: 1px solid #cccccc;
-  }
-  100% {
-    height: 0px;
-    padding: 0;
-    border: none;
-  }
-`;
-
 const ShareButtons = styled.div`
   position: absolute;
   top: 40px;
@@ -187,12 +162,10 @@ const ShareButtons = styled.div`
     ${({ $isSharedOpen }) =>
       $isSharedOpen
         ? css`
-            animation: ${menuHeight} 0.5s;
-            animation-fill-mode: forwards;
+            display: block;
           `
         : css`
-            animation: ${menuHeight02} 0.5s;
-            animation-fill-mode: forwards;
+            display: none;
           `}
   }
   li {
@@ -208,6 +181,7 @@ const ShareButtons = styled.div`
     cursor: pointer;
   }
 `;
+
 const ShareContainer = styled.div`
   position: relative;
 `;
