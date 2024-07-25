@@ -111,11 +111,13 @@ function AddMessage() {
     font: fontOptions[0],
   });
 
+
   const handleChange = (field, value) => {
     setPostData((prevForm) => ({
       ...prevForm,
       [field]: value,
     }));
+
   };
 
   const handleSubmit = async (e) => {
