@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getAllUser } from '../../util/api';
 import { useNavigate } from 'react-router-dom';
 import ListSection from './ListSection';
 import Container from './Container';
@@ -16,10 +17,8 @@ export default function DesktopListDetail() {
   const fetchUser = async () => {
     setLoading(true);
     try {
-      const resposne = await fetch(
-        `https://rolling-api.vercel.app/8-8/recipients/?limit=10&offset=${offset}`
-      );
-      const { results, ...data } = await resposne.json();
+      const resposne = await getAllUser({ limit: '10', offset });
+      const { results, ...data } = resposne;
       setMessages((prev) => [...prev, ...results]);
       if (data.next !== null) {
         setOffset((prev) => prev + 10);
