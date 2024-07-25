@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import EmojiPicker from 'emoji-picker-react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { postEmoji } from '../../util/api';
 import EmojiBadge from '../common/EmojiBadge';
 import OutlineButton from '../common/OutlineButton';
 import emojiAddIcon from '../../assets/image/emoji_add_icon.png';
@@ -137,38 +138,52 @@ const ShareBtn = styled(OutlineButton)`
     }
   }
 `;
+
 const EmptyText = styled.span`
   font-size: 1.8rem;
 `;
-const ShareContainer = styled.div`
-  position: relative;
-  div {
-    position: absolute;
-    top: 40px;
-    right: 0px;
-    @media (max-width: 768px) {
-      top: 35px;
-    }
+
+const ShareButtons = styled.div`
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  height: 0px;
+  @media (max-width: 768px) {
+    top: 35px;
   }
   ul {
     width: 140px;
     padding: 10px 0;
+    overflow: hidden;
     background: var(--white);
     border-radius: 8px;
     border: 1px solid #cccccc;
+    transition: all.3s ease;
+    ${({ $isSharedOpen }) =>
+      $isSharedOpen
+        ? css`
+            display: block;
+          `
+        : css`
+            display: none;
+          `}
   }
-  ul > li {
+  li {
     &:hover {
       background: #f6f6f6;
     }
   }
-  ul > li > button {
+  li > button {
     width: 100%;
     text-align: left;
     font-size: 1.6rem;
     padding: 12px 16px;
     cursor: pointer;
   }
+`;
+
+const ShareContainer = styled.div`
+  position: relative;
 `;
 export default function UserActionComponent({
   actionEmoji,
@@ -198,22 +213,7 @@ export default function UserActionComponent({
     if (isThrottled) return;
     setIsThrottled(true);
     try {
-      const response = await fetch(
-        `https://rolling-api.vercel.app/8-8/recipients/${postId}/reactions/`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            emoji: newReaction,
-            type: 'increase',
-          }),
-        }
-      );
-      if (!response.ok) {
-        throw new Error('데이터 불러오기 실패');
-      }
+      await postEmoji(postId, newReaction);
       navigate(`/post/${postId}`, { replace: true });
     } catch (error) {
       console.log(error.message);
@@ -336,18 +336,16 @@ export default function UserActionComponent({
             imgSrc={shareIcon}
             onClick={handleSharedOpen}
           />
-          {isSharedOpen && (
-            <div>
-              <ul>
-                <li>
-                  <button onClick={handleShareKaKao}>카카오톡 공유</button>
-                </li>
-                <li>
-                  <button onClick={handleShareUrl}>URL 공유</button>
-                </li>
-              </ul>
-            </div>
-          )}
+          <ShareButtons $isSharedOpen={isSharedOpen}>
+            <ul>
+              <li>
+                <button onClick={handleShareKaKao}>카카오톡 공유</button>
+              </li>
+              <li>
+                <button onClick={handleShareUrl}>URL 공유</button>
+              </li>
+            </ul>
+          </ShareButtons>
         </ShareContainer>
       </ButtonContainer>
       {isClipBoard && (

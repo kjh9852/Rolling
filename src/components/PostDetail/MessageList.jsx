@@ -12,8 +12,8 @@ import deleteIcon from '../../assets/image/deleted.png';
 const SectionContainer = styled(Card)`
   overflow: hidden;
   transition: all.3s ease;
-  ${({ isEdit }) =>
-    !isEdit &&
+  ${({ $isEdit }) =>
+    !$isEdit &&
     `&:hover {
       transform: scale(1.05);
       box-shadow: 0px 4px 3px -1px rgba(0, 0, 0, 0.2);
@@ -100,15 +100,17 @@ export default function MessageList({
       setIsEdit(false);
     }
   }, [location]);
+
   const findRelationShip = RELATION.find((list) => list.type === relationship);
   const spanStyle = {
     '--background': findRelationShip && `var(${findRelationShip.background})`,
     '--color': findRelationShip && `var(${findRelationShip.color})`,
   };
-  const convertDate = createdAt.split('T')[0];
+  const convertDate = new Date(createdAt).toLocaleDateString('ko-KR');
+
   return (
-    <SectionContainer isEdit={isEdit}>
-      <MessageContainer isEdit={isEdit} to={`message/${id}`}>
+    <SectionContainer $isEdit={isEdit}>
+      <MessageContainer $isEdit={isEdit} to={`message/${id}`}>
         <ListContainer>
           <UserInfo>
             <SenderContainer>

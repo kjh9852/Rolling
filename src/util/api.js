@@ -15,9 +15,25 @@ export async function getProfileImage() {
   return fetchAPI('/profile-images/');
 }
 
-export async function getUserMessage({ id, offset }) {
+export async function getUser({ id }) {
+  return fetchAPI(`/${TEAM}/recipients/${id}/`);
+}
+
+export async function getAllUser({ limit, offset }) {
+  return fetchAPI(`/${TEAM}/recipients/?limit=${limit}&offset=${offset}`);
+}
+
+export async function getReactions({ id, limit }) {
+  return fetchAPI(`/${TEAM}/recipients/${id}/reactions/?limit=${limit}`);
+}
+
+export async function getMessage({ id }) {
+  return fetchAPI(`/${TEAM}/messages/${id}/`);
+}
+
+export async function getUserMessage({ id, limit, offset }) {
   return fetchAPI(
-    `/${TEAM}/recipients/${id}/messages/?limit=5&offset=${offset}`
+    `/${TEAM}/recipients/${id}/messages/?limit=${limit}&offset=${offset}`
   );
 }
 
@@ -33,6 +49,15 @@ export async function postRecipientMessage(postId, postData) {
     body: JSON.stringify({ team: TEAM, recipient_id: postId, ...postData }),
   });
 }
+
+export async function postEmoji(postId, emoji) {
+  return fetchAPI(`/${TEAM}/recipients/${postId}/reactions/`, {
+    method: 'POST',
+    headers: HEADERS,
+    body: JSON.stringify({ emoji: emoji, type: 'increase' }),
+  });
+}
+
 export async function recipientMessageForm(formData) {
   const postData = {
     ...formData,

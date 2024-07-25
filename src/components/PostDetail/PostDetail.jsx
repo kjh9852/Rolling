@@ -14,8 +14,14 @@ const DetailSection = styled(Section)`
   min-height: 100svh;
   padding-top: 2rem;
   margin-top: 13.3rem;
-  background: ${({ background }) => background || 'transparent'};
-  background-image: ${({ backgroundImage }) => backgroundImage || 'none'};
+  ${({ $backgroundImage, $background }) =>
+    $backgroundImage
+      ? css`
+          background-image: url(${$backgroundImage});
+        `
+      : css`
+          background: var(${$background});
+        `}
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -175,14 +181,14 @@ const EmptyText = styled.h2`
 
 export default function PostDetail({ userData }) {
   const { postId } = useParams();
+  const observerRef = useRef();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [postMessage, setPostMessage] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [offset, setOffset] = useState(0);
-  const observerRef = useRef();
   const [isEdit, setIsEdit] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
   const editPaths = '/edit';
 
   useEffect(() => {
@@ -192,10 +198,11 @@ export default function PostDetail({ userData }) {
       setIsEdit(false);
     }
   }, [location]);
+
   const fetchUserMessage = async () => {
     setLoading(true);
     try {
-      const messages = await getUserMessage({ id: postId, offset });
+      const messages = await getUserMessage({ id: postId, limit: '5', offset });
       const { results, next } = messages;
       setPostMessage((prevList) => [...prevList, ...results]);
       if (next === null) {
@@ -206,6 +213,7 @@ export default function PostDetail({ userData }) {
     }
     setLoading(false);
   };
+
   const handleDeleteMessage = async (event, id) => {
     event.preventDefault();
     try {
@@ -263,15 +271,10 @@ export default function PostDetail({ userData }) {
   const userBackground = BACKGROUND_COLOR.find(
     (list) => list.type === userData.backgroundColor
   );
-  const userImageBackground = userData.backgroundImageURL;
-  const backgroundStyle = userImageBackground
-    ? { backgroundImage: `url(${userImageBackground})` }
-    : { background: `var(${userBackground.background})` };
-
   return (
     <DetailSection
-      background={backgroundStyle.background}
-      backgroundImage={backgroundStyle.backgroundImage}
+      $background={userBackground.background}
+      $backgroundImage={userData.backgroundImageURL}
     >
       <Container>
         <EditButtonContainer>
@@ -293,7 +296,7 @@ export default function PostDetail({ userData }) {
             </Link>
           ) : (
             !postMessage.length && (
-              <EmptyText userImageBackground={userImageBackground}>
+              <EmptyText userImageBackground={userData.backgroundImageURL}>
                 삭제할 메세지가 없습니다.
               </EmptyText>
             )
