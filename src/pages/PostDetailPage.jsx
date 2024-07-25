@@ -1,17 +1,19 @@
 import { Suspense } from 'react';
 import { useLoaderData, Outlet } from 'react-router-dom';
+import { getUser, getReactions } from '../util/api';
+import LoadingSpinner from '../ui/LoadingSpinner';
 import PostDetail from '../components/PostDetail/PostDetail';
 import UserHeader from '../components/PostDetail/UserHeader';
 
 export default function PostDetailPage() {
-  const { recipientsData, reactionData } = useLoaderData();
+  const { userData, userReaction } = useLoaderData();
   return (
     <>
-      <Suspense fallback={<p>Loading...</p>}>
-        <UserHeader userData={recipientsData} userReaction={reactionData} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <UserHeader userData={userData} userReaction={userReaction} />
       </Suspense>
-      <Suspense fallback={<p>Loading...</p>}>
-        <PostDetail userData={recipientsData} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <PostDetail userData={userData} />
       </Suspense>
       <Outlet />
     </>
@@ -24,19 +26,13 @@ export async function loader({ params }) {
   if (window.innerWidth <= 1248) {
     limit = 6;
   }
-  const [userData, userReaction] = await Promise.all([
-    fetch(`https://rolling-api.vercel.app/8-8/recipients/${id}/`),
-    fetch(
-      `https://rolling-api.vercel.app/8-8/recipients/${id}/reactions/?limit=${limit}`
-    ),
-  ]);
-
-  if (!userData.ok || !userReaction.ok) {
-    throw new Error('데이터 불러오기 실패');
+  try {
+    const [userData, userReaction] = await Promise.all([
+      getUser({ id }),
+      getReactions({ id, limit }),
+    ]);
+    return { userData, userReaction };
+  } catch (error) {
+    console.log(error);
   }
-
-  const recipientsData = await userData.json();
-  const reactionData = await userReaction.json();
-
-  return { recipientsData, reactionData };
 }
