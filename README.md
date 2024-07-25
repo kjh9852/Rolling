@@ -6,7 +6,7 @@
 ## 팀원 소개
 |이름|상세 내용|
 |------|---|
-|김정현(팀장)|postDetail페이지, 공통컴포넌트 제작, 카카오API연결, 라우터 연결, 컴포넌트 최소화, 코드 리팩토링|
+|김정현(팀장)|postDetail페이지,  MessageDetail페이지, 공통컴포넌트 제작, 카카오API연결, 라우터 연결, 컴포넌트 최소화, 코드 리팩토링|
 |엄세환|Landing,List페이지, 회의 내용 정리 |
 |정인재|AddMessage페이지, 회의 내용 정리, 코드 리팩토링|
 |최원혁|AddPost페이지, PPT제작 및 발표, API 요청 로직 모듈화, 코드 리팩토링|
@@ -40,7 +40,7 @@ src/
   │   └── PostDetailPage.jsx
   ├── router/    
   │   └── RootLayout.jsx
-  ├── ui/         
+  ├── ui/         - UI 컴포넌트
   │   ├── Header.jsx
   │   ├── Loading.jsx
   │   ├── Modal.jsx
@@ -62,7 +62,7 @@ src/
 <br/>
 원인 - api에서 어떤 값을 반환하는지 이해를 하지 못해 과도하게 많은 요청으로 api 호출
 <br/>
-해결 [https://github.com/kjh9852/Rolling/pull/51] e2fc219 커밋
+해결 - [https://github.com/kjh9852/Rolling/pull/51] e2fc219 커밋
 
 ## 좋았던 점
 - PR올렸을때 피드백이 활발해서 좋았습니다. 팀원분들의 PR을 해드릴려고 더 열심히 하게 되었습니다.
