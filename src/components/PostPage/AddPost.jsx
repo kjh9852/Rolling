@@ -58,34 +58,32 @@ const To = styled.h2`
 `;
 
 const AddPost = () => {
-  const [valueName, setValueName] = useState('');
-  const [selectedColor, setSelectedColor] = useState('beige');
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [checkedTab, setCheckedTab] = useState('color');
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [form, setForm] = useState({
+    name: '',
+    selectedColor: 'beige',
+    selectedImage: null,
+    checkedTab: 'color',
+  });
+
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1); // 이전 페이지로 이동
+    navigate(-1);
   };
 
-  useEffect(() => {
-    setIsSubmitDisabled(valueName.trim() === '');
-  }, [valueName]);
+  const handleChange = (field, value) => {
+    setForm((prevForm) => ({ ...prevForm, [field]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let postData = {
-      name: valueName,
-      backgroundColor: selectedColor, // 항상 기본값 설정
-      backgroundImageURL: null,
+    const postData = {
+      name: form.name,
+      backgroundColor: form.selectedColor,
+      backgroundImageURL:
+        form.checkedTab === 'image' ? form.selectedImage : null,
     };
-
-    if (checkedTab === 'image' && selectedImage) {
-      postData.backgroundImageURL = selectedImage;
-      // 이미지를 선택했을 때도 backgroundColor를 null로 설정하지 않음
-    }
 
     try {
       const response = await recipientMessageForm(postData);
@@ -106,18 +104,18 @@ const AddPost = () => {
         <To>To.</To>
         <NameInput
           placeholder='받는 사람 이름을 입력해 주세요'
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
+          value={form.name}
+          onChange={(e) => handleChange('name', e.target.value)}
         />
         <BgSelector
-          selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
-          selectedImage={selectedImage}
-          setSelectedImage={setSelectedImage}
-          checkedTab={checkedTab}
-          setCheckedTab={setCheckedTab}
+          selectedColor={form.selectedColor}
+          setSelectedColor={(color) => handleChange('selectedColor', color)}
+          selectedImage={form.selectedImage}
+          setSelectedImage={(image) => handleChange('selectedImage', image)}
+          checkedTab={form.checkedTab}
+          setCheckedTab={(tab) => handleChange('checkedTab', tab)}
         />
-        <SubmitButton disabled={isSubmitDisabled}>생성하기</SubmitButton>
+        <SubmitButton disabled={form.name.trim() === ''}>생성하기</SubmitButton>
       </form>
     </PageWrap>
   );

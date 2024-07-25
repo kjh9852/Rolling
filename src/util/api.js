@@ -42,11 +42,11 @@ export async function getRecipientMessage(recipientId) {
   return data.results;
 }
 
-export async function postRecipientMessage(postId, messageData) {
+export async function postRecipientMessage(postId, postData) {
   return fetchAPI(`/${TEAM}/recipients/${postId}/messages/`, {
     method: 'POST',
     headers: HEADERS,
-    body: JSON.stringify({ team: TEAM, recipient_id: postId, ...messageData }),
+    body: JSON.stringify({ team: TEAM, recipient_id: postId, ...postData }),
   });
 }
 

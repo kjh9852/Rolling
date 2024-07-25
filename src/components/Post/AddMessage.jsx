@@ -102,28 +102,29 @@ function AddMessage() {
   ];
 
   const [profileItem] = useState([profileImages]);
-  const [name, setName] = useState('');
-  const [image, setImage] = useState(
-    'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png'
-  );
-  const [relationShip, setRelationShip] = useState(relationShipOptions[0]);
-  const [font, setFont] = useState(fontOptions[0]);
-  const [content, setContent] = useState('');
+  const [postData, setPostData] = useState({
+    sender: '',
+    profileImageURL:
+      'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png',
+    relationship: relationShipOptions[0],
+    content: '',
+    font: fontOptions[0],
+  });
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
+
+  const handleChange = (field, value) => {
+    setPostData((prevForm) => ({
+      ...prevForm,
+      [field]: value,
+    }));
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await postRecipientMessage(postId, {
-        sender: name,
-        profileImageURL: image,
-        relationship: relationShip,
-        content: content,
-        font: font,
-      });
+      await postRecipientMessage(postId, postData);
       navigate(`/post/${postId}`);
     } catch (error) {
       console.error('메시지 전송 실패:', error);
@@ -136,6 +137,9 @@ function AddMessage() {
     navigate(-1);
   };
 
+  const active =
+    postData.sender && postData.content && postData.content !== '<p><br></p>';
+
   return (
     <Container onSubmit={handleSubmit}>
       <ButtonContainer>
@@ -145,8 +149,8 @@ function AddMessage() {
         <Title>From.</Title>
         <NameInput
           placeholder='이름을 입력해주세요.'
-          onChange={handleNameChange}
-          value={name}
+          onChange={(e) => handleChange('sender', e.target.value)}
+          value={postData.sender}
         />
       </InputContainer>
       <InputContainer>
@@ -154,8 +158,10 @@ function AddMessage() {
         <InputImageContainer>
           <ProfileImageList
             items={profileItem}
-            onImageSelect={setImage}
-          ></ProfileImageList>
+            onImageSelect={(selectedImage) =>
+              handleChange('profileImageURL', selectedImage)
+            }
+          />
         </InputImageContainer>
       </InputContainer>
       <InputContainer>
@@ -163,27 +169,30 @@ function AddMessage() {
         <Select
           options={relationShipOptions}
           type='relationship'
-          onRelationShipSelect={setRelationShip}
-          onFontSelect={() => {}}
+          onRelationShipSelect={(selectedRelation) => (
+            'relationship', selectedRelation
+          )}
         />
       </InputContainer>
       <InputContainer>
         <Title>내용을 입력해 주세요</Title>
-        <ContentArea onChange={setContent} value={content} />
+        <ContentArea
+          onChange={(content) => handleChange('content', content)}
+          value={postData.content}
+        />
       </InputContainer>
       <InputContainer>
         <Title>폰트 선택</Title>
         <Select
           options={fontOptions}
           type='font'
-          onRelationShipSelect={() => {}}
-          onFontSelect={setFont}
+          onFontSelect={(selectdFont) => handleChange('font', selectdFont)}
         />
       </InputContainer>
       <SubmitButton
         className={'AddMessageCommit'}
         type='submit'
-        disabled={name && content && content !== '<p><br></p>' ? false : true}
+        disabled={active ? false : true}
       >
         생성하기
       </SubmitButton>
