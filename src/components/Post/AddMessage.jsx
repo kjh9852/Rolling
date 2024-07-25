@@ -116,7 +116,7 @@ function AddMessage() {
   };
 
   const handleImageChange = (selectedImage) => {
-    setPostData((prev) => ({ ...prev, iamge: selectedImage }));
+    setPostData((prev) => ({ ...prev, profileImageURL: selectedImage }));
   };
 
   const handleRelationShipChange = (selectedRelation) => {
