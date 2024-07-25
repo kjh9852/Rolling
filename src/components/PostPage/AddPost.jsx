@@ -64,16 +64,12 @@ const AddPost = () => {
     selectedImage: null,
     checkedTab: 'color',
   });
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
   const navigate = useNavigate();
 
   const handleGoBack = () => {
     navigate(-1);
   };
-
-  useEffect(() => {
-    setIsSubmitDisabled(form.name.trim() === '');
-  }, [form.name]);
 
   const handleChange = (field, value) => {
     setForm((prevForm) => ({ ...prevForm, [field]: value }));
@@ -119,7 +115,7 @@ const AddPost = () => {
           checkedTab={form.checkedTab}
           setCheckedTab={(tab) => handleChange('checkedTab', tab)}
         />
-        <SubmitButton disabled={isSubmitDisabled}>생성하기</SubmitButton>
+        <SubmitButton disabled={form.name.trim() === ''}>생성하기</SubmitButton>
       </form>
     </PageWrap>
   );
