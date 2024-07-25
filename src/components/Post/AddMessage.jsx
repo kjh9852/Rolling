@@ -111,24 +111,11 @@ function AddMessage() {
     font: fontOptions[0],
   });
 
-  const handleNameChange = (event) => {
-    setPostData((prev) => ({ ...prev, sender: event.target.value }));
-  };
-
-  const handleImageChange = (selectedImage) => {
-    setPostData((prev) => ({ ...prev, iamge: selectedImage }));
-  };
-
-  const handleRelationShipChange = (selectedRelation) => {
-    setPostData((prev) => ({ ...prev, relationShip: selectedRelation }));
-  };
-
-  const handleContentChange = (content) => {
-    setPostData((prev) => ({ ...prev, content: content }));
-  };
-
-  const handleFontChange = (selectedFont) => {
-    setPostData((prev) => ({ ...prev, font: selectedFont }));
+  const handleChange = (field, value) => {
+    setPostData((prevForm) => ({
+      ...prevForm,
+      [field]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -148,6 +135,9 @@ function AddMessage() {
     navigate(-1);
   };
 
+  const active =
+    postData.sender && postData.content && postData.content !== '<p><br></p>';
+
   return (
     <Container onSubmit={handleSubmit}>
       <ButtonContainer>
@@ -157,7 +147,7 @@ function AddMessage() {
         <Title>From.</Title>
         <NameInput
           placeholder='이름을 입력해주세요.'
-          onChange={handleNameChange}
+          onChange={(e) => handleChange('sender', e.target.value)}
           value={postData.sender}
         />
       </InputContainer>
@@ -166,8 +156,10 @@ function AddMessage() {
         <InputImageContainer>
           <ProfileImageList
             items={profileItem}
-            onImageSelect={handleImageChange}
-          ></ProfileImageList>
+            onImageSelect={(selectedImage) =>
+              handleChange('profileImageURL', selectedImage)
+            }
+          />
         </InputImageContainer>
       </InputContainer>
       <InputContainer>
@@ -175,31 +167,30 @@ function AddMessage() {
         <Select
           options={relationShipOptions}
           type='relationship'
-          onRelationShipSelect={handleRelationShipChange}
+          onRelationShipSelect={(selectedRelation) => (
+            'relationship', selectedRelation
+          )}
         />
       </InputContainer>
       <InputContainer>
         <Title>내용을 입력해 주세요</Title>
-        <ContentArea onChange={handleContentChange} value={postData.content} />
+        <ContentArea
+          onChange={(content) => handleChange('content', content)}
+          value={postData.content}
+        />
       </InputContainer>
       <InputContainer>
         <Title>폰트 선택</Title>
         <Select
           options={fontOptions}
           type='font'
-          onFontSelect={handleFontChange}
+          onFontSelect={(selectdFont) => handleChange('font', selectdFont)}
         />
       </InputContainer>
       <SubmitButton
         className={'AddMessageCommit'}
         type='submit'
-        disabled={
-          postData.sender &&
-          postData.content &&
-          postData.content !== '<p><br></p>'
-            ? false
-            : true
-        }
+        disabled={active ? false : true}
       >
         생성하기
       </SubmitButton>
