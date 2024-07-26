@@ -13,6 +13,9 @@
 ## 📃 상세 계획
 [노션 상세 계획 링크](https://mud-stranger-c40.notion.site/Codeit_-2ac5dcbb0b8d43818a80422a43ded058)
 
+## User Flow
+![구성](https://github.com/user-attachments/assets/c54d76d3-db97-47f1-83c4-0e0aa8f91237)
+
 ## 📁 프로젝트 구조
 ```
 src/              
