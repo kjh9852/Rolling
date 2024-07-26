@@ -1,4 +1,4 @@
-## 💌 Rolling
+## 💌 Rolling 24.07.10 ~ 24.07.25
 ![og_image](https://github.com/user-attachments/assets/36421e71-53b8-4828-81da-bc601f578dc4)
 
 추억의 롤링 페이퍼를 웹 상에서도 즐길 수 있는 플랫폼인 '롤링'
