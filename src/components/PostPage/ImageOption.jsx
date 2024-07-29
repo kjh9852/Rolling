@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LoadingSpinner from '../../ui/Loading/LoadingSpinner';
 
 const ImageWrap = styled.div`
   display: contents;
@@ -54,18 +55,9 @@ const CheckingMark = styled.div`
   }
 `;
 
-const LoadingPlaceholder = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const ImageOption = ({ images, selectedImage, onSelect, isLoading }) => {
   if (isLoading) {
-    return <LoadingPlaceholder>Loading...</LoadingPlaceholder>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -76,7 +68,11 @@ const ImageOption = ({ images, selectedImage, onSelect, isLoading }) => {
           selected={selectedImage === image.original}
           onClick={() => onSelect(image)}
         >
-          <img src={image.thumbnail} alt={'Background'} loading='lazy' />
+          <img
+            src={image.thumbnail}
+            alt={`background-${index}`}
+            loading='lazy'
+          />
           <CheckingMark
             selected={selectedImage === image.original}
           ></CheckingMark>
