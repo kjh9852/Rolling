@@ -17,7 +17,7 @@ const Input = styled.input`
   width: 100%;
   height: 50px;
   border: 1px solid
-    ${({ isError }) => (isError ? 'var(--error)' : 'var(--gray300)')};
+    ${({ $isError }) => ($isError ? 'var(--error)' : 'var(--gray300)')};
   border-radius: 8px;
   padding: 12px 16px;
   font-size: 16px;
@@ -51,7 +51,7 @@ function NameInput({ placeholder, onChange, value }) {
         onChange={handleChange}
         onBlur={handleBlur}
         value={value}
-        isError={isError}
+        $isError={isError}
       />
 
       {isError && <ErrorMessage>이름을 입력해주세요.</ErrorMessage>}

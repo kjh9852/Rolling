@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import arrowTop from '../../assets/image/arrow_top.png';
-import arrowDown from '../../assets/image/arrow_down.png';
+import arrowTop from '../../../assets/image/arrow_top.png';
+import arrowDown from '../../../assets/image/arrow_down.png';
 import { useState } from 'react';
 
 const SelectWrapper = styled.div`
@@ -47,7 +47,7 @@ const Option = styled.li`
   }
 `;
 
-function Select({ options, type, onRelationShipSelect, onFontSelect }) {
+function Select({ options, type, onFontSelect, onRelationShipSelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
 

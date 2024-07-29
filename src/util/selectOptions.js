@@ -1,4 +1,4 @@
-export default [
+export const RELATIONSHIP = [
   {
     type: '지인',
     background: '--beige100',
@@ -19,4 +19,11 @@ export default [
     background: '--blue100',
     color: '--blue500',
   },
+];
+
+export const FONT = [
+  'Noto Sans',
+  'Pretendard',
+  '나눔명조',
+  '나눔손글씨 손편지체',
 ];

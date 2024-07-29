@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import profileImages from '../../util/profileImages';
+import profileImages from '../../../util/profileImages';
 
 const InputImageContainer = styled.div`
   display: flex;
@@ -51,10 +51,11 @@ const ImageChoose = styled.img`
   }
 `;
 
+const defaultImage =
+  'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png';
+
 function ProfileImageList({ items, onImageSelect }) {
-  const [selectedSrc, setSelectedSrc] = useState(
-    'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png'
-  );
+  const [selectedSrc, setSelectedSrc] = useState(defaultImage);
 
   const handleImageSelect = (src) => {
     setSelectedSrc(src);
