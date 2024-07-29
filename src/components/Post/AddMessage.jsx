@@ -1,13 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import Select from '../Select/Select';
+import Select from './Select/Select';
 import NameInput from '../Input/NameInput';
-import ContentArea from '../TextArea/ContentArea';
-import ProfileImageList from '../ProfileImageList/ProfileImageList';
+import ContentArea from './TextArea/ContentArea';
+import ProfileImageList from './ProfileImageList/ProfileImageList';
 import PrimaryButton from '../common/PrimaryButton';
 import { postRecipientMessage } from '../../util/api';
 import { useNavigate, useParams } from 'react-router-dom';
 import profileImages from '../../util/profileImages';
+import { RELATIONSHIP, FONT } from '../../util/selectOptions';
+
+const defaultImage =
+  'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png';
+const RELATIONSHIP_OPTIONS = RELATIONSHIP.map((list) => list.type);
+const FONT_OPTIONS = FONT;
 
 const Container = styled.form`
   display: flex;
@@ -93,31 +99,20 @@ const BackButton = styled(PrimaryButton)`
 function AddMessage() {
   const { postId } = useParams();
   const navigate = useNavigate();
-  const relationShipOptions = ['지인', '친구', '동료', '가족'];
-  const fontOptions = [
-    'Noto Sans',
-    'Pretendard',
-    '나눔명조',
-    '나눔손글씨 손편지체',
-  ];
-
   const [profileItem] = useState([profileImages]);
   const [postData, setPostData] = useState({
     sender: '',
-    profileImageURL:
-      'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png',
-    relationship: relationShipOptions[0],
+    profileImageURL: defaultImage,
+    relationship: RELATIONSHIP_OPTIONS[0],
     content: '',
-    font: fontOptions[0],
+    font: FONT_OPTIONS[0],
   });
-
 
   const handleChange = (field, value) => {
     setPostData((prevForm) => ({
       ...prevForm,
       [field]: value,
     }));
-
   };
 
   const handleSubmit = async (e) => {
@@ -128,7 +123,6 @@ function AddMessage() {
       navigate(`/post/${postId}`);
     } catch (error) {
       console.error('메시지 전송 실패:', error);
-      // 사용자에게 오류 알림
       alert('메시지 전송에 실패했습니다. 다시 시도해 주세요.');
     }
   };
@@ -167,7 +161,7 @@ function AddMessage() {
       <InputContainer>
         <Title>상대와의 관계</Title>
         <Select
-          options={relationShipOptions}
+          options={RELATIONSHIP_OPTIONS}
           type='relationship'
           onRelationShipSelect={(selectedRelation) => (
             'relationship', selectedRelation
@@ -184,7 +178,7 @@ function AddMessage() {
       <InputContainer>
         <Title>폰트 선택</Title>
         <Select
-          options={fontOptions}
+          options={FONT_OPTIONS}
           type='font'
           onFontSelect={(selectdFont) => handleChange('font', selectdFont)}
         />
@@ -192,7 +186,7 @@ function AddMessage() {
       <SubmitButton
         className={'AddMessageCommit'}
         type='submit'
-        disabled={active ? false : true}
+        disabled={!active}
       >
         생성하기
       </SubmitButton>
