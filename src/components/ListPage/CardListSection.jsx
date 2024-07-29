@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { PrevButton, NextButton } from './NavigationButton';
 import CardContent from './CardContent';
 import AnimatedCardList from './AnimatedCardList';
-import EllipsisLoading from '../../ui/EllipsisLoading';
+import EllipsisLoading from '../../ui/Loading/EllipsisLoading';
 
 const CardListWrapper = styled.div`
   position: relative;
