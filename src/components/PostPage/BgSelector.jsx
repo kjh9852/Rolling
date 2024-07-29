@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ColorOption from './ColorOption';
 import ImageOption from './ImageOption';
 import { fetchBackgroundImages } from '../../util/api';
+import BACKGROUND_COLOR from '../../util/backgroundColor';
 
 const BgWrap = styled.div`
   width: 100%;
@@ -26,14 +27,20 @@ const Description = styled.p`
 `;
 
 const TabButton = styled.button`
-  background: ${({ active }) =>
-    active === 'true' ? 'var(--white)' : 'var(--gray100)'};
-  border: 2px solid
-    ${({ active }) =>
-      active === 'true' ? 'var(--purple700)' : 'var(--gray100)'};
-  color: ${({ active }) =>
-    active === 'true' ? 'var(--purple700)' : 'var(--gray900)'};
-  font-weight: ${({ active }) => (active === 'true' ? '700' : '400')};
+  ${({ $active }) =>
+    $active
+      ? css`
+          background: var(--white);
+          border: 2px solid var(--purple700);
+          color: var(--purple700);
+          font-weight: 700;
+        `
+      : css`
+          background: var(--gray100);
+          border: 2px solid var(--gray100);
+          color: var(--gray900);
+          font-weight: 400;
+        `}
   width: 120px;
   padding: 10px 20px;
   margin: 0 5px;
@@ -71,7 +78,6 @@ const BgSelector = ({
 }) => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const colors = ['beige', 'purple', 'blue', 'green'];
 
   const preloadImage = (url) => {
     return new Promise((resolve, reject) => {
@@ -120,29 +126,29 @@ const BgSelector = ({
       <Description>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</Description>
       <TabWrap>
         <TabButton
-          active={(checkedTab === 'color').toString()}
+          $active={checkedTab === 'color'}
           onClick={(e) => handleTabClick('color', e)}
         >
           컬러
         </TabButton>
         <TabButton
-          active={(checkedTab === 'image').toString()}
+          $active={checkedTab === 'image'}
           onClick={(e) => handleTabClick('image', e)}
         >
           이미지
         </TabButton>
       </TabWrap>
       <OptionsWrapper>
-        {checkedTab === 'color' &&
-          colors.map((color, index) => (
+        {checkedTab === 'color' ? (
+          BACKGROUND_COLOR.map((color, index) => (
             <ColorOption
               key={index}
-              color={`var(--${color}200)`}
-              selected={selectedColor === color}
-              onClick={() => setSelectedColor(color)}
+              color={`var(${color.background})`}
+              selected={selectedColor === color.type}
+              onClick={() => setSelectedColor(color.type)}
             />
-          ))}
-        {checkedTab === 'image' && (
+          ))
+        ) : (
           <ImageOption
             images={images}
             selectedImage={selectedImage}
