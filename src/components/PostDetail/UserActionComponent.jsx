@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import EmojiPicker from 'emoji-picker-react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { postEmoji } from '../../util/api';
 import EmojiBadge from '../common/EmojiBadge';
 import OutlineButton from '../common/OutlineButton';
@@ -9,6 +9,7 @@ import emojiAddIcon from '../../assets/image/emoji_add_icon.png';
 import shareIcon from '../../assets/image/share_icon.png';
 import arrowIcon from '../../assets/image/arrow_down.png';
 import Toast from '../../ui/Toast';
+
 const ActionContainer = styled.div`
   display: flex;
   gap: 8px;
@@ -63,19 +64,19 @@ const OpenReactionCard = styled.div`
 `;
 const ReactionContainer = styled.ul`
   display: grid;
-  ${({ isColumn }) =>
-    isColumn <= 4
+  ${({ $isColumn }) =>
+    $isColumn <= 4
       ? `
-    grid-template-columns: repeat(${isColumn}, auto);
+    grid-template-columns: repeat(${$isColumn}, auto);
     `
       : `
   grid-template-columns: repeat(4, auto);
    `};
   @media (max-width: 1248px) {
-    ${({ isColumn }) =>
-      isColumn <= 3
+    ${({ $isColumn }) =>
+      $isColumn <= 3
         ? `
-    grid-template-columns: repeat(${isColumn}, auto);
+    grid-template-columns: repeat(${$isColumn}, auto);
     `
         : `
   grid-template-columns: repeat(3, auto);
@@ -199,6 +200,7 @@ export default function UserActionComponent({
   const [isThrottled, setIsThrottled] = useState(false);
   const [isSharedOpen, setIsSharedOpen] = useState(false);
   const [isClipBoard, setIsClipBoard] = useState('');
+
   const handleSharedOpen = () => {
     setIsSharedOpen((prevOpen) => !prevOpen);
   };
@@ -300,7 +302,7 @@ export default function UserActionComponent({
           )}
           {openReaction && (
             <OpenReactionCard>
-              <ReactionContainer isColumn={actionEmoji.results.length}>
+              <ReactionContainer $isColumn={actionEmoji.results.length}>
                 {actionEmoji.results.map((list) => (
                   <EmojiBadge
                     key={list.id}
