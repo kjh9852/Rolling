@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { useLoaderData, Outlet } from 'react-router-dom';
 import { getUser, getReactions } from '../util/api';
-import LoadingSpinner from '../ui/LoadingSpinner';
+import LoadingSpinner from '../ui/Loading/LoadingSpinner';
 import PostDetail from '../components/PostDetail/PostDetail';
 import UserHeader from '../components/PostDetail/UserHeader';
 
