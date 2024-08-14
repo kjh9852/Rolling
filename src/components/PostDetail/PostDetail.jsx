@@ -5,7 +5,7 @@ import Section from '../common/Section';
 import Card from '../common/Card';
 import PrimaryButton from '../common/PrimaryButton';
 import MessageList from './MessageList';
-import LoadingSpinner from '../../ui/LoadingSpinner';
+import LoadingSpinner from '../../ui/Loading/LoadingSpinner';
 import { getUserMessage, deleteMessage, deleteUser } from '../../util/api';
 import BACKGROUND_COLOR from '../../util/backgroundColor';
 
@@ -168,14 +168,15 @@ const ConfirmButton = styled(PrimaryButton)`
 
 const EmptyText = styled.h2`
   font-size: 2.4rem;
-  ${({ userImageBackground }) =>
-    userImageBackground
+  ${({ $userImageBackground }) =>
+    $userImageBackground
       ? css`
           color: var(--white);
-          text-shadow: -1px 0px #000, 0px 1px #000, 1px 0px #000, 0px -1px #000;
+          text-shadow: -1px 0px var(--black), 0px 1px var(--black),
+            1px 0px var(--black), 0px -1px var(--black);
         `
       : css`
-          color: #000;
+          color: var(--black);
         `};
 `;
 
@@ -221,6 +222,7 @@ export default function PostDetail({ userData }) {
       setPostMessage((prevList) =>
         prevList.filter((message) => message.id !== id)
       );
+      navigate({ replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -296,7 +298,7 @@ export default function PostDetail({ userData }) {
             </Link>
           ) : (
             !postMessage.length && (
-              <EmptyText userImageBackground={userData.backgroundImageURL}>
+              <EmptyText $userImageBackground={userData.backgroundImageURL}>
                 삭제할 메세지가 없습니다.
               </EmptyText>
             )
@@ -304,14 +306,8 @@ export default function PostDetail({ userData }) {
 
           {postMessage.map((list) => (
             <MessageList
-              id={list.id}
               key={list.id}
-              sender={list.sender}
-              relationship={list.relationship}
-              content={list.content}
-              createdAt={list.createdAt}
-              profileImageURL={list.profileImageURL}
-              font={list.font}
+              list={list}
               handleDeleteMessage={handleDeleteMessage}
             />
           ))}
