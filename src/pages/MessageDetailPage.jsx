@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Badge from '../components/common/Badge';
 import Card from '../components/common/Card';
 import Modal from '../ui/Modal';
-import RELATION from '../util/relation';
+import { RELATIONSHIP } from '../util/selectOptions';
 import PrimaryButton from '../components/common/PrimaryButton';
 
 const ModalCard = styled(Card)`
@@ -91,14 +91,10 @@ export default function MessageDetailPage() {
     };
   }, []);
 
-  const findRelationShip = RELATION.find(
+  const findRelationShip = RELATIONSHIP.find(
     (list) => list.type === data.relationship
   );
 
-  const spanStyle = {
-    '--background': findRelationShip && `var(${findRelationShip.background})`,
-    '--color': findRelationShip && `var(${findRelationShip.color})`,
-  };
   const convertDate = new Date(data.createdAt).toLocaleDateString('ko-KR');
 
   return (
@@ -112,7 +108,9 @@ export default function MessageDetailPage() {
                 From.
                 <strong>{data.sender}</strong>
               </h2>
-              <Badge style={spanStyle}>{data.relationship}</Badge>
+              <Badge $findRelationShip={findRelationShip}>
+                {data.relationship}
+              </Badge>
             </UserBox>
             <CreateDate>
               <p>{convertDate}</p>
