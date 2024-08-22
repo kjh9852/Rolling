@@ -1,0 +1,15 @@
+.EmojiPickerReact {
+  position: absolute !important;
+  top: 4rem;
+  right: 1rem;
+  --epr-emoji-size: 24px !important;
+  --epr-emoji-gap: 10px;
+  --epr-bg-color: #000;
+}
+
+@media (max-width: 768px) {
+  .EmojiPickerReact {
+    top: 3.5rem;
+    right: -6.3rem;
+  }
+}
