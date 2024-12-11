@@ -1,81 +1,82 @@
-## 💌 Rolling 24.07.10 ~ 24.07.25
-![og_image](https://github.com/user-attachments/assets/36421e71-53b8-4828-81da-bc601f578dc4)
+## 💌 MOVING 24.11.18 ~ 24.12.10
+![1](https://github.com/user-attachments/assets/0efc078d-9ac2-403e-9d17-f92372916268)
+![6](https://github.com/user-attachments/assets/5b290893-8a0f-4b45-b669-efeca481794c)
 
-추억의 롤링 페이퍼를 웹 상에서도 즐길 수 있는 플랫폼인 '롤링'
+영화를 보는 동안 즐거움이 가득한 'MOVING'
 
 ## 🙍‍♂️ 팀원 소개
 |이름|상세 내용|
 |------|---|
-|김정현(팀장)|PostDetail페이지,  MessageDetail페이지, 공통컴포넌트 제작, 코드 리팩토링|
-|엄세환|Landing,List페이지, 회의 내용 정리 |
-|정인재|AddMessage페이지, 회의 내용 정리, 코드 리팩토링|
-|최원혁|AddPost페이지, PPT제작 및 발표, API 요청 로직 모듈화, 코드 리팩토링|
+|장용한|기획, 메인 페이지, 장르별 카테고리 페이지, 검색 페이지 구현|
+|염정훈|기획, 상세 모달 페이지, 동영상 재생페이지|
+|최원혁|기획, 웹디자인 및 와이어프레임, 랜더 페이지|
+
+## 📌 프로젝트 소개
+최신 스트리밍 서비스의 트렌드를 반영하여, 사용자에게 더 나은 경험을 제공하기 위해 설계된 TypeScript 기반의 웹 애플리케이션입니다. 이 프로젝트는 사용자 중심의 직관적인 UI/UX 디자인과 최신 기술을 결합하여, 다양한 콘텐츠를 보다 쉽게 탐색하고 즐길 수 있도록 합니다.
+
 ## 📃 상세 계획
-[노션 상세 계획 링크](https://mud-stranger-c40.notion.site/Codeit_-2ac5dcbb0b8d43818a80422a43ded058)
+[노션 상세 계획 링크](https://www.notion.so/12e2e48b770d805cb0d3ddb022f87f83)
 
-## 💡 User Flow
-![구성](https://github.com/user-attachments/assets/1a5fd59a-ff2a-4e54-aec1-4917b2254196)
+## 📄 배포 사이트
+[배포 사이트 링크](https://moving-18jw.vercel.app/)
 
+## 📚 기술 스택
+<div>
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/REACT-61DAFB?style=flat-square&logo=React&logoColor=black"/>
+<img src="https://img.shields.io/badge/NEXT.js-000000?style=flat-square&logo=nextdotjs&logoColor=white"/>
+<img src="https://img.shields.io/badge/Tailwindcss-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white"/>
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/>
+<img src="https://img.shields.io/badge/figma-F24E1E?style=flat-square&logo=figma&logoColor=black"/>
+<img src="https://img.shields.io/badge/html5-E34F26?style=flat-square&logo=html5&logoColor=black"/>
+<img src="https://img.shields.io/badge/css3-1572B6?style=flat-square&logo=css3&logoColor=black"/>  
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javaScript&logoColor=black"/>    
+</div>
 
 ## 📁 프로젝트 구조
 ```
-src/              
-  ├── assets/     
-  │   └── image/  
-  ├── style/      
-  │   ├── customQuill.css 
-  │   └── GlobalStyle.jsx  
-  ├── components/ 
-  │   ├── common/           - 재사용 가능한 공통 컴포넌트
-  │   ├── LandingPage/      
-  │   ├── ListPage/         
-  │   ├── Post/            
-  │   ├── PostDetail/       
-  │   ├── PostPage/        
-  │   ├── ProfileImageList/ 
-  │   ├── Select/          
-  │   └── TextArea/         
-  ├── pages/      - 라우터에 직접적으로 들어가는 컴포넌트
-  │   ├── AddMessagePage.jsx
-  │   ├── AddPostPage.jsx
-  │   ├── LandingPage.jsx
-  │   ├── ListPage.jsx
-  │   ├── MessageDetailPage.jsx
-  │   └── PostDetailPage.jsx
-  ├── router/    
-  │   └── RootLayout.jsx
-  ├── ui/         - UI 컴포넌트
-  │   ├── Header.jsx
-  │   ├── Loading.jsx
-  │   ├── Modal.jsx
-  │   └── Toast.jsx
-  ├── util/       - 유틸리티 파일
-  │   ├── api.js
-  │   ├── backgroundColor.js
-  │   └── relation.js
-  ├── App.jsx     - 루트 컴포넌트 파일
-  └── index.js    - 진입점 파일
-
-.prettierrc       - Prettier 설정 파일
+├─ 📂.github
+│  └─ 📂ISSUE_TEMPLATE
+│     ├─ Issue_Templage
+│     └─ pull_request_template.md
+├─ .gitignore
+├─ README.md
+├─ next.config.mjs
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  └─ 
+│     └─ 📂icons
+│     └─ 📂images
+└─ 📂src
+├─ 📂apis
+├─ 📂components
+├─ 📂lib
+└─ 📂apis
+└─ 📂store
+└─ 📂fonts
+└─ 📂hook
+└─ 📂utils
+├─ 📂pages
+├─ 📂style
+├─ 📂types
 ```
 
-## ❗ 트러블 슈팅
-![image](https://github.com/user-attachments/assets/9b1210f4-39ba-4840-9bab-2a0153f862dc)
-<br/>
-List페이지에서 과도한 리퀘스트 요청으로 인해 소수의 사람들이 동시에 접속만 해도 서버가 과부하 되는 현상.
-<br/>
-원인 - api에서 어떤 값을 반환하는지 이해를 하지 못해 과도하게 많은 요청으로 api 호출
-<br/>
-해결 - [https://github.com/kjh9852/Rolling/pull/51] e2fc219 커밋
+## 🎞 구현 GIF
+![메인페이지](https://github.com/user-attachments/assets/e8993180-4cf2-4015-af39-64fb356e7f7b)
+![검색](https://github.com/user-attachments/assets/09b019f8-5ef3-4bfa-ab12-897575da5ecc)
+![리뷰 정렬](https://github.com/user-attachments/assets/6f7d654c-8134-4572-898a-2a35ce1f8c0c)
 
-## 😀 좋았던 점
-- PR올렸을때 피드백이 활발해서 좋았습니다. 팀원분들의 PR을 해드릴려고 더 열심히 하게 되었습니다.
-- 개인이 맡은 파트의 진행 상황을 매일 팀 회의 시간에 공유하고 노션에 기록하는것이 정말 좋았습니다.
 
-## 🤔 아쉬운 점
-- PR 확인이 늦게되어 리뷰가 늦고 승인이 그만큼 지체되었습니다.
-- 팀장님에게 과도하게 많은 과제가 맡겨진것 같습니다.
+## 😀 장용한
+- ott 사이트에 관심이 많이 있었는데 직접 구현해보고 어떤 식으로 페이지가 동작하는지 학습할수 있어서 좋았습니다
+- 메인 페이지와 장르/검색 페이지를 만들면서 많은 데이터를 불러올때 성능을 생각하며 구현하다보니 image컴포넌트의 여러 옵션들이나 데이터를 가져오는 방식에 대해 깊게 공부할수 있어서 좋았습니다
 
-## 😄 느낀 점
-- 개발 초기 세팅부터 기록을 위한 플랫폼 선정까지 팀 프로젝트를 하게 되면서 경험해 볼 수 있어서 좋았습니다
-- 협업을 하기 위해 들어가는 시간적인 요소가 많아서 비효율적일수도 있다고 생각했는데, 팀원분들의 잘 짜여진 코드나, 부족한 부분도 캐치가 되면서 혼자서는 놓칠 수도 있는 부분이 케어가 되어서 좋았습니다.
+## 🤔 염정훈
+- 한번쯤 꼭 만들어 보고 싶었던 프로젝트를 원하는 기능과 함꼐 직접 구현해 볼 수 있게 되어서 정말 좋았습니다.
+- 기존에는 페이지 네이션이나 정렬 기능이 완성되어 있고 params만 수정하면 되었지만 이번에는 직접 구현해 볼 수 있는 경험을 해서 좋았습니다.
+
+## 😄 최원혁
+- 팀프로젝트를 할때 경험하지 못했던 기획단계와 디자인까지 무빙 프로젝트를 하게 되면서 경험해 볼 수 있어서 좋았습니다
+- 학원측에서 제공해주는 API가 아닌 직접 다른 사이트의 API를 가져와 작업하게 되어 데이터와 API에 대해서 좀 더 이해할 수 있었습니다.
